@@ -14,8 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.adaper.IntroSliderAdapter;
+import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
+import com.ironcodesoftware.wanderease.ui.delivery.DeliveryActivity;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
@@ -28,8 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
             if(UserLogIn.hasLogin(MainActivity.this)){
-                UserLogIn login = UserLogIn.getLogin(MainActivity.this);
-                gotoActivity(HomeActivity.class);
+                UserLogIn logIn = UserLogIn.getLogin(MainActivity.this);
+                if (logIn.getUser_role().equals(User.DELIVERY)) {
+                    gotoActivity(DeliveryActivity.class);
+                } else if (logIn.getUser_role().equals(User.ADMIN)) {
+                    gotoActivity(AdminActivity.class);
+                }else{
+                    gotoActivity(HomeActivity.class);
+                }
             }else if(isReturningUser()){
                 gotoActivity(LogInActivity.class);
             }else{

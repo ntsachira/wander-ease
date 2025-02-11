@@ -27,6 +27,7 @@ import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
+import com.ironcodesoftware.wanderease.ui.delivery.DeliveryActivity;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 
 import java.util.List;
@@ -87,7 +88,7 @@ public class LoginFragment extends Fragment {
                                     if(logIn.getUser_role().equals(User.USER)){
                                         gotoActivity(HomeActivity.class);
                                     } else if (logIn.getUser_role().equals(User.DELIVERY)) {
-
+                                        gotoActivity(DeliveryActivity.class);
                                     } else if (logIn.getUser_role().equals(User.ADMIN)) {
                                         gotoActivity(AdminActivity.class);
                                     }

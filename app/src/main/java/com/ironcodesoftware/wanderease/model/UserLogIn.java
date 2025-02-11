@@ -1,12 +1,18 @@
 package com.ironcodesoftware.wanderease.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
+import com.ironcodesoftware.wanderease.ui.delivery.DeliveryActivity;
+import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,6 +72,10 @@ public class UserLogIn implements Serializable {
 
     //warning messages
     public static final String ERROR_EMAIL_EMPTY = "Email Cannot be empty";
+    public static final String ERROR_EMAIL_INVALID = "Invalid email address";
+    public static final String ERROR_DISPLAY_NAME_EMPTY = "Name Cannot be empty";
+    public static final String ERROR_MOBILE_EMPTY = "Mobile cannot be empty";
+    public static final String ERROR_MOBILE_INVALID = "Invalid mobile number";
     public static final String ERROR_PASSWORD_EMPTY = "Password Cannot be empty";
     public static final String ERROR_INVALID_CREDENTIALS = "Invalid Email or Password";
 
@@ -74,7 +84,7 @@ public class UserLogIn implements Serializable {
         if(userLog.exists()){
                 ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(userLog));
                 UserLogIn userLogIn = (UserLogIn) objectInputStream.readObject();
-                if(userLogIn.getEmail() != null && userLogIn.getPassword() != null){
+                if(userLogIn.getEmail() != null && userLogIn.getPassword() != null && userLogIn.getUser_role()!= null){
                     return userLogIn;
                 }
         }
@@ -118,18 +128,17 @@ public class UserLogIn implements Serializable {
     public boolean serialize(Context context){
         boolean isSuccess = false;
         File userLog = new File(context.getFilesDir(), context.getString(R.string.user_log));
-        if(userLog.exists() || userLog.mkdir()){
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                        new FileOutputStream(userLog)
-                );
-                objectOutputStream.writeObject(this);
-                objectOutputStream.flush();
-                isSuccess = true;
-            } catch (IOException e) {
-                Log.e(MainActivity.TAG, e.getMessage());
-            }
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                    new FileOutputStream(userLog)
+            );
+            objectOutputStream.writeObject(this);
+            objectOutputStream.flush();
+            isSuccess = true;
+        } catch (IOException e) {
+            Log.e(MainActivity.TAG, e.getMessage());
         }
+
         if(!isSuccess){
             Toast.makeText(
                     context,
@@ -139,5 +148,7 @@ public class UserLogIn implements Serializable {
         }
         return isSuccess;
     }
+
+
 
 }
