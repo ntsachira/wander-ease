@@ -9,7 +9,7 @@
 
     <style name="Theme.WanderEase" parent="Base.Theme.WanderEase" />
 
-    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:screenOrientation">portrait</item>
     </style>

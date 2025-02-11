@@ -8,9 +8,9 @@
 
     <string name="main_returningUser">ReturningUser</string>
 
-<!--    copyright statement-->
+    <!--    copyright statement-->
     <string name="copyright">© 2025 WanderEase</string>
-    <string name="terms_policy" >By signing in or creating an account, you agree with our</string>
+    <string name="terms_policy">By signing in or creating an account, you agree with our</string>
     <string name="terms">Terms &amp; Conditions</string>
     <string name="policy">Privacy Statement</string>
     <string name="and">and</string>

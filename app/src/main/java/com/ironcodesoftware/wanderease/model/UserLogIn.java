@@ -1,25 +1,26 @@
 package com.ironcodesoftware.wanderease.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.Filter;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Source;
+import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class UserLogIn implements Serializable {
 
     private String email;
     private String password;
+    private String user_role;
 
     public UserLogIn() {
     }
@@ -45,12 +46,21 @@ public class UserLogIn implements Serializable {
         this.password = password;
     }
 
+    public String getUser_role() {
+        return user_role;
+    }
+
+    public void setUser_role(String user_role) {
+        this.user_role = user_role;
+    }
+
     private static UserLogIn userLogIn;
 
     //field names
     public static final String EMAIL_FIELD = "email";
     public static final String PASSWORD_FIELD = "password";
     public static final String ACTIVE_STATE_FIELD = "active_state";
+    public static final String USER_ROLE_FIELD = "user_role";
     public static final String USER_COLLECTION = "user";
 
 
@@ -103,6 +113,31 @@ public class UserLogIn implements Serializable {
             userLogIn = new UserLogIn();
         }
         return userLogIn;
+    }
+
+    public boolean serialize(Context context){
+        boolean isSuccess = false;
+        File userLog = new File(context.getFilesDir(), context.getString(R.string.user_log));
+        if(userLog.exists() || userLog.mkdir()){
+            try {
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                        new FileOutputStream(userLog)
+                );
+                objectOutputStream.writeObject(this);
+                objectOutputStream.flush();
+                isSuccess = true;
+            } catch (IOException e) {
+                Log.e(MainActivity.TAG, e.getMessage());
+            }
+        }
+        if(!isSuccess){
+            Toast.makeText(
+                    context,
+                    "Unable to save login",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+        return isSuccess;
     }
 
 }
