@@ -64,6 +64,8 @@ public class UserLogIn implements Serializable {
 
     //field names
     public static final String EMAIL_FIELD = "email";
+    public static final String DISPLAY_NAME_FIELD = "display_name";
+    public static final String MOBILE_FIELD = "mobile";
     public static final String PASSWORD_FIELD = "password";
     public static final String ACTIVE_STATE_FIELD = "active_state";
     public static final String USER_ROLE_FIELD = "user_role";

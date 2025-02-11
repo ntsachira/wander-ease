@@ -61,5 +61,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation("com.google.firebase:firebase-firestore")
 
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
+    implementation("com.google.code.gson:gson:2.12.1")
 }
