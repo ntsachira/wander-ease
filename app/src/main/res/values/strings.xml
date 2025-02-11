@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Wander Ease</string>
+    <string name="app_package">com.ironcodesoftware.wanderease</string>
+    <string name="user_log">userLog.ser</string>
+    <string name="splash">userLog.ser</string>
+    <string name="responseOk">OK</string>
+    <string name="loading">Loading…</string>
+
+    <string name="main_returningUser">ReturningUser</string>
+
+<!--    copyright statement-->
+    <string name="copyright">© 2025 WanderEase</string>
+    <string name="terms_policy" >By signing in or creating an account, you agree with our</string>
+    <string name="terms">Terms &amp; Conditions</string>
+    <string name="policy">Privacy Statement</string>
+    <string name="and">and</string>
+
+    <!--    intro-->
+    <string name="main_explore_products">Explore Your Favourite Shopping Items in the South of Sri Lanka</string>
+    <string name="main_rent_vehicles">Rent Vehicles for Easy Travels</string>
+    <string name="main_book_guides">Plan Your Travels with Tour Guides</string>
+    <string name="main_be_partner">Join Our Partner Program</string>
+    <string name="main_getStarted">Get Started</string>
+    <string name="main_next">Next</string>
+    <string name="main_subtext">Enhance your travelling Experience in Sri Lanka</string>
+
+    <!--    login and signup-->
+    <string name="login_switch_login">Log In</string>
+    <string name="login_switch_signup">Sign Up</string>
+    <string name="login_email">Enter Email Address</string>
+    <string name="login_password">Enter Password</string>
+    <string name="login_goto_register">New user? Register now</string>
+
+    <string name="signup_displayName">Enter Display Name</string>
+    <string name="signup_mobile">Enter Mobile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "854580460667",
+    "project_id": "app-25-f721f",
+    "storage_bucket": "app-25-f721f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854580460667:android:3b429757a630e2811836de",
+        "android_client_info": {
+          "package_name": "com.hdp.app31"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZlwwfnoYRJ1enGSZn7zAW-JHRbaevTqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854580460667:android:8321dc3234460faa1836de",
+        "android_client_info": {
+          "package_name": "com.ironcodesoftware.wanderease"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZlwwfnoYRJ1enGSZn7zAW-JHRbaevTqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

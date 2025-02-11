@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WanderEase" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/primary</item> 
+         <item name="colorSecondary">@color/primary</item> 
+         <item name="android:textColorHighlight">@color/highlight</item>
+    </style>
+
+    <style name="Theme.WanderEase" parent="Base.Theme.WanderEase" />
+
+    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+    <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog"/>
+</resources>
