@@ -1,6 +1,7 @@
 package com.ironcodesoftware.wanderease.ui.login;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
@@ -22,6 +25,7 @@ import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -54,16 +58,17 @@ public class SignUpFragment extends Fragment {
             new Thread(()->{
                 try {
                     Log.i(MainActivity.TAG,user.toString());
-                    String response = new HttpClient()
-                            .post(BuildConfig.HOST_URL + "SignUp", user.toString());
                     Gson gson = new Gson();
+                    String response = new HttpClient()
+                            .post(BuildConfig.HOST_URL + "SignUp",gson.toJson(user));
+                    Log.i(MainActivity.TAG,response);
+
                     JsonObject responseJsonObject = gson.fromJson(response, JsonObject.class);
-                    if(responseJsonObject != null && responseJsonObject.has("status")){
+                    if(responseJsonObject != null && responseJsonObject.has("ok")
+                    && responseJsonObject.get("ok").getAsBoolean()){
                         // TODO:
-                        // check status success
-                        // save user in firebase
-                        // reset text fields
-                        // re direct to home
+                        saveUserToFirestore(view,user);
+
                     }else{
                         view.post(()->{
                             resetLoadingButton(view);
@@ -74,7 +79,7 @@ public class SignUpFragment extends Fragment {
                                     }).show();
                         });
                     }
-                    Log.i(MainActivity.TAG,response);
+
                 } catch (Exception e) {
                     view.post(()->{
                         resetLoadingButton(view);
@@ -88,6 +93,42 @@ public class SignUpFragment extends Fragment {
                 }
             }).start();
         }
+    }
+
+    private void saveUserToFirestore(View view, HashMap<String, String> user) {
+        HashMap<String,Object> userMap = new HashMap<>();
+        userMap.put(UserLogIn.EMAIL_FIELD, user.get(UserLogIn.EMAIL_FIELD));
+        userMap.put(UserLogIn.PASSWORD_FIELD, user.get(UserLogIn.PASSWORD_FIELD));
+        userMap.put(UserLogIn.ACTIVE_STATE_FIELD, User.ACTIVE);
+        userMap.put(UserLogIn.USER_ROLE_FIELD, User.USER);
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(UserLogIn.USER_COLLECTION)
+                .add(userMap)
+                .addOnSuccessListener(document->{
+                    UserLogIn logIn = UserLogIn.getInstance();
+                    logIn.setUser_role(User.USER);
+                    logIn.setEmail(user.get(UserLogIn.EMAIL_FIELD));
+                    logIn.setPassword(user.get(UserLogIn.PASSWORD_FIELD));
+                    logIn.serialize(view.getContext());
+                    view.post(()->{
+                        resetLoadingButton(view);
+                        Toast.makeText(getContext(), "Signup Success", Toast.LENGTH_LONG).show();
+                    });
+                    startActivity(new Intent(getContext(), HomeActivity.class));
+                    getActivity().finish();
+                })
+                .addOnFailureListener(e->{
+                    view.post(()->{
+                        resetLoadingButton(view);
+                        new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
+                                .setMessage("1: Something went Wrong Please check your connection and try again")
+                                .setPositiveButton(R.string.responseOk, (dialog, which) -> {
+                                    dialog.cancel();
+                                }).show();
+                    });
+                    Log.e(MainActivity.TAG,e.getLocalizedMessage());
+                });
     }
 
     private void setLoadingButton(View view) {
