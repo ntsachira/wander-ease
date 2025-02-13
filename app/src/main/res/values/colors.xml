@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#009688</color>
     <color name="highlight">#59009688</color>
+    <color name="navigation_active_indicator">#4E009E8E</color>
 </resources>
