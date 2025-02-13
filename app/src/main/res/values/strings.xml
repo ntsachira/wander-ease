@@ -5,6 +5,8 @@
     <string name="splash">userLog.ser</string>
     <string name="responseOk">OK</string>
     <string name="loading">Loading…</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="upload_image">+ Upload Image</string>
 
     <string name="main_returningUser">ReturningUser</string>
 
@@ -45,6 +47,36 @@
     <string name="home_search_product">Products</string>
     <string name="home_search_vehicleRental">Vehicle Rental</string>
     <string name="home_search_guide">Tour Guides</string>
+
+    <!--    home account-->
+    <string name="account_menu_orders">My Orders</string>
+    <string name="account_menu_reviews">My Reviews</string>
+    <string name="account_menu_messages">My Messages</string>
+    <string name="account_menu_help">Help Ticket</string>
+    <string name="account_menu_text_partner">Partner Program</string>
+    <string name="account_menu_button_sell">List your product or service on Wander Ease</string>
+
+    <!--    partner navigation-->
+    <string name="partner_dashboard">Dashboard</string>
+    <string name="partner_products">Products</string>
+    <string name="partner_services">Services</string>
+    <string name="partner_orders">Orders</string>
+    <string name="partner_bookings">Bookings</string>
+    <string name="partner_Messages">Messages</string>
+    <string name="partner_Help">Help Ticket</string>
+    <string name="partner_add_shortcut">Add a launcher shortcut</string>
+
+<!--    partner products-->
+    <string name="partner_product_AddNew_title">Add New Product</string>
+    <string name="partner_product_vewProduct_list_button">View All Products</string>
+    <string name="partner_product_saveProduct_button">Save Product</string>
+    <string name="product_title">Title</string>
+    <string name="product_price">Price</string>
+    <string name="product_quantity">Quantity</string>
+    <string name="product_spec">Description</string>
+    <string name="product_color">Color</string>
+    <string name="product_category">Category</string>
+
 
     <!--  RegEx-->
     <string name="email_regex">^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$</string>

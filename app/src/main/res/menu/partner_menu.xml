@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/partner_menu_dashboard"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/partner_dashboard" />
+        <item
+            android:id="@+id/partner_menu_products"
+            android:checkable="true"
+            android:icon="@drawable/ic_category"
+            android:title="@string/partner_products" />
+        <item
+            android:id="@+id/partner_menu_services"
+            android:checkable="true"
+            android:icon="@drawable/ic_car_rental"
+            android:title="@string/partner_services" />
+        <item
+            android:id="@+id/partner_menu_orders"
+            android:checkable="true"
+            android:icon="@drawable/ic_orders_box"
+            android:title="@string/partner_orders" />
+        <item
+            android:id="@+id/partner_menu_booking"
+            android:checkable="true"
+            android:icon="@drawable/ic_review_24"
+            android:title="@string/partner_bookings" />
+        <item
+            android:id="@+id/partner_menu_messages"
+            android:checkable="true"
+            android:icon="@drawable/ic_messages"
+            android:title="@string/partner_Messages" />
+        <item
+            android:id="@+id/partner_menu_help"
+            android:checkable="true"
+            android:icon="@drawable/ic_help_center"
+            android:title="@string/partner_Help" />
+    </group>
+</menu>

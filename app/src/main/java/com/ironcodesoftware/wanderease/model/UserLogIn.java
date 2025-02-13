@@ -28,7 +28,17 @@ public class UserLogIn implements Serializable {
     private String password;
     private String user_role;
 
+    private String display_name;
+
     public UserLogIn() {
+    }
+
+    public String getDisplay_name() {
+        return display_name;
+    }
+
+    public void setDisplay_name(String display_name) {
+        this.display_name = display_name;
     }
 
     public UserLogIn(String email, String password) {
