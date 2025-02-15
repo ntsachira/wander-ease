@@ -1,5 +1,6 @@
 package com.ironcodesoftware.wanderease.ui.partner;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -57,11 +58,11 @@ public class PartnerActivity extends AppCompatActivity {
         });
 
         getWindow().setStatusBarColor(getColor(R.color.primary));
+
         setUserDetails();
         MaterialToolbar toolbar = findViewById(R.id.partner_materialToolbar);
         toolbar.setTitleCentered(true);
         toolbar.setTitle(R.string.partner_dashboard);
-        toolbar.setTitleTextColor(getColor(R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             DrawerLayout drawer = findViewById(R.id.partner_drawer);
             drawer.open();
@@ -74,6 +75,7 @@ public class PartnerActivity extends AppCompatActivity {
         });
 
         NavigationView navigationView = findViewById(R.id.partner_navigationView);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

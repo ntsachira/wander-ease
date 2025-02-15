@@ -10,9 +10,11 @@ import okhttp3.Response;
 
 public class HttpClient {
     public static final MediaType JSON = MediaType.get("application/json");
+    public static final MediaType TEXT = MediaType.parse("text/plain");
+    public static final MediaType IMAGE = MediaType.parse("text/plain");
     public static final String END_POINT_OFFLINE = "ERR_NGROK_3200";
 
-    OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient();
 
     public String post(String url, String json) throws IOException {
         RequestBody body = RequestBody.create(json, JSON);
@@ -33,5 +35,9 @@ public class HttpClient {
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
+    }
+
+    public static OkHttpClient getInstance(){
+        return client;
     }
 }

@@ -44,7 +44,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/partner_view_product_list_button" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout2"
+                    android:id="@+id/textInputLayout_Producttitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -64,7 +64,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
+                    android:id="@+id/textInputLayout_product_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -72,7 +72,7 @@
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Producttitle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/new_product_price"
@@ -85,7 +85,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout4"
+                    android:id="@+id/textInputLayout_product_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -111,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:backgroundTint="#3C3C3C"
                     android:drawableRight="@drawable/baseline_chevron_right_24"
                     android:text="@string/partner_product_vewProduct_list_button"
                     android:textAlignment="center"
@@ -126,8 +127,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                    app:layout_constraintStart_toEndOf="@+id/textInputLayout_product_price"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Producttitle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/new_product_quantity"
@@ -140,15 +141,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout5"
+                    android:id="@+id/textInputLayout_product_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/nre_product_category_spinner"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout_product_description">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/new_product_color"
@@ -164,14 +165,16 @@
                     android:id="@+id/nre_product_category_spinner"
                     android:layout_width="0dp"
                     android:layout_height="56dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/spinner_background"
                     android:dropDownSelector="@drawable/baseline_alternate_email_24"
+                    android:popupBackground="@drawable/spinner_popup_background"
                     android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout5"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textInputLayout5" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout_product_color" />
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
@@ -221,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#47FFFFFF"
                             android:text="@string/upload_image"
-                            android:textColor="@color/primary"
+                            android:textColor="#615F5F"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -245,7 +248,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+                    app:layout_constraintTop_toBottomOf="@+id/nre_product_category_spinner" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

@@ -6,6 +6,7 @@
          <item name="colorSecondary">@color/primary</item>
         <item name="colorOnPrimarySurface">@color/primary</item>
          <item name="android:textColorHighlight">@color/highlight</item>
+        <item name="colorSecondaryContainer">@color/navigation_active_indicator</item>
     </style>
 
     <style name="Theme.WanderEase" parent="Base.Theme.WanderEase" />
@@ -15,4 +16,5 @@
         <item name="android:screenOrientation">portrait</item>
     </style>
     <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog"/>
+
 </resources>
