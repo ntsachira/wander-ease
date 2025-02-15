@@ -2,7 +2,10 @@ package com.ironcodesoftware.wanderease.model;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -30,7 +33,6 @@ public class MediaHandler {
                     while ((length = inputStream.read(buffer)) > 0) {
                         outputStream.write(buffer, 0, length);
                     }
-
                     inputStream.close();
                     outputStream.close();
                     if(file.exists()){
@@ -41,7 +43,7 @@ public class MediaHandler {
                 }
             }
         } catch (Exception e) {
-            Log.d(MainActivity.TAG, e.getMessage());
+            Log.e(MainActivity.TAG, e.getMessage());
         }
         return null;
     }

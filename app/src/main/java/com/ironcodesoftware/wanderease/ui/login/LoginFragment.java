@@ -105,7 +105,8 @@ public class LoginFragment extends Fragment {
                                                 .setPositiveButton(R.string.responseOk, (dialog, which) -> {
                                                     dialog.cancel();
                                                 }).show();
-                        Log.e(MainActivity.TAG,error.getLocalizedMessage());
+                        Log.e(MainActivity.TAG,error.getLocalizedMessage(),error);
+
                     });
         }else{
             resetLoadingButton(view);

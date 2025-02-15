@@ -8,6 +8,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="upload_image">+ Upload Image</string>
     <string name="back">Go Back</string>
+    <string name="search">Search by Title…</string>
+    <string name="product_list_empty">Product List Empty</string>
 
     <string name="main_returningUser">ReturningUser</string>
 
@@ -77,6 +79,8 @@
     <string name="product_spec">Description</string>
     <string name="product_color">Color</string>
     <string name="product_category">Category</string>
+    <string name="product_tab_my_products">My Products</string>
+    <string name="product_tab_my_add_products">Add New Product</string>
 
 
     <!--  RegEx-->

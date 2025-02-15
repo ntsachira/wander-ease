@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,7 @@ import java.io.IOException;
 public class PartnerActivity extends AppCompatActivity {
 
     PartnerDashboardFragment dashboardFragment = new PartnerDashboardFragment();
-    PartnerProductFragment productFragment = new PartnerProductFragment();
+    PartnerProductTabFragment productFragment = new PartnerProductTabFragment();
     PartnerServiceFragment serviceFragment = new PartnerServiceFragment();
     PartnerOrderFragment orderFragment = new PartnerOrderFragment();
     PartnerBookingFragment bookingFragment = new PartnerBookingFragment();
@@ -51,17 +53,20 @@ public class PartnerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_partner);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.partner_main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.partner_drawer), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        getWindow().setStatusBarColor(getColor(R.color.primary));
+        getWindow().setStatusBarColor(getColor(R.color.background));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().bringToFront();
 
         setUserDetails();
         MaterialToolbar toolbar = findViewById(R.id.partner_materialToolbar);
         toolbar.setTitleCentered(true);
+
         toolbar.setTitle(R.string.partner_dashboard);
         toolbar.setNavigationOnClickListener(v -> {
             DrawerLayout drawer = findViewById(R.id.partner_drawer);

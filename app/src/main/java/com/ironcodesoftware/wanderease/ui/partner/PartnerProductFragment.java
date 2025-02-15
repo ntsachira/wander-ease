@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -25,6 +26,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +46,8 @@ import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.MediaHandler;
 import com.ironcodesoftware.wanderease.model.Product;
+import com.ironcodesoftware.wanderease.model.User;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
 
 import java.io.File;
@@ -74,7 +79,6 @@ public class PartnerProductFragment extends Fragment {
                     if (uri != null) {
                         selectedImageUri = uri;
                         setSelectedImage(uri);
-
                     } else {
                         Log.d(MainActivity.TAG, "No media selected");
                     }
@@ -115,6 +119,9 @@ public class PartnerProductFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadCategories(view);
+        if(getActivity().getIntent().getStringExtra("product")!=null){
+            loadProductDetails(view);
+        }
         Button buttonUploadImage = view.findViewById(R.id.new_product_button_upload_Image);
         buttonUploadImage.setOnClickListener(v->{
             launceImagePicker();
@@ -128,10 +135,18 @@ public class PartnerProductFragment extends Fragment {
         buttonSaveProduct.setOnClickListener(v->{
             try {
                 saveProduct(view);
-            } catch (FileNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    private void loadProductDetails(View view) {
+        EditText editTextTitle = view.findViewById(R.id.new_product_title);
+        EditText editTextPrice = view.findViewById(R.id.new_product_price);
+        EditText editTextQuantity = view.findViewById(R.id.new_product_quantity);
+        EditText editTextDescription = view.findViewById(R.id.new_product_description);
+        EditText editTextColor = view.findViewById(R.id.new_product_color);
     }
 
     private void loadCategories(View view) {
@@ -170,6 +185,19 @@ public class PartnerProductFragment extends Fragment {
                         }
                         view.post(()->{
                             arrayAdapter.notifyDataSetChanged();
+
+                            if(getActivity().getIntent().getStringExtra("product")!=null){
+                                JsonObject product = gson.fromJson(
+                                        getActivity().getIntent().getStringExtra("product"),
+                                        JsonObject.class);
+
+                                Spinner spinnerCategory = view.findViewById(R.id.nre_product_category_spinner);
+                                spinnerCategory.setSelection(
+                                        Integer.parseInt(categoryMap.get(
+                                                product.get(Product.F_CATEGORY).getAsJsonObject().get("name").getAsString()
+                                        ))
+                                );
+                            }
                         });
                     }
                 }else{
@@ -193,10 +221,11 @@ public class PartnerProductFragment extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void saveProduct(View view) throws FileNotFoundException {
+    private void saveProduct(View view) throws IOException, ClassNotFoundException {
         HashMap<String, String> productDetails = validateProductDetails(view);
         File imageFile = MediaHandler.uriToFile(getContext(), selectedImageUri);
         if(productDetails != null){
+            setLoadingButton(view);
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             productDetails.forEach(builder::addFormDataPart);
 
@@ -208,9 +237,10 @@ public class PartnerProductFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     view.post(()->{
+                        resetLoadingButton(view);
                         Snackbar snackbar = Snackbar.make(
                                 view,
-                                "Something went Wrong, Please try again",
+                                "Something went Wrong, Please try again later",
                                 Snackbar.LENGTH_INDEFINITE
 
                         );
@@ -224,9 +254,14 @@ public class PartnerProductFragment extends Fragment {
 
                 @Override
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    view.post(()->{
+                        resetLoadingButton(view);
+                    });
                     if(response.isSuccessful()){
                         view.post(()->{
                             Toast.makeText(getContext(), "Product Saved", Toast.LENGTH_LONG).show();
+                            resetImage();
+                            resetInput();
                         });
                     }else{
                         view.post(()->{
@@ -249,7 +284,40 @@ public class PartnerProductFragment extends Fragment {
         }
     }
 
-    private HashMap<String, String> validateProductDetails(View view) {
+    private void resetInput(){
+        FragmentActivity view = getActivity();
+        EditText editTextTitle = view.findViewById(R.id.new_product_title);
+        EditText editTextPrice = view.findViewById(R.id.new_product_price);
+        EditText editTextQuantity = view.findViewById(R.id.new_product_quantity);
+        EditText editTextDescription = view.findViewById(R.id.new_product_description);
+        EditText editTextColor = view.findViewById(R.id.new_product_color);
+        Spinner spinnerCategory = view.findViewById(R.id.nre_product_category_spinner);
+
+        editTextTitle.setText("");
+        editTextPrice.setText("");
+        editTextQuantity.setText("");
+        editTextDescription.setText("");
+        editTextColor.setText("");
+        spinnerCategory.setSelection(0, true);
+    }
+
+    private void setLoadingButton(View view) {
+        Button buttonSaveProduct = view.findViewById(R.id.new_product_button_save_product);
+        Animation loadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.load_blink);
+        buttonSaveProduct.startAnimation(loadAnimation);
+        buttonSaveProduct.setText(R.string.loading);
+        buttonSaveProduct.setEnabled(false);
+    }
+
+    private void resetLoadingButton(View view){
+        Button buttonSaveProduct = view.findViewById(R.id.new_product_button_save_product);
+        buttonSaveProduct.clearAnimation();
+        buttonSaveProduct.setText(R.string.partner_product_saveProduct_button);
+        buttonSaveProduct.setEnabled(true);
+        buttonSaveProduct.requestFocus();
+    }
+
+    private HashMap<String, String> validateProductDetails(View view) throws IOException, ClassNotFoundException {
         EditText editTextTitle = view.findViewById(R.id.new_product_title);
         EditText editTextPrice = view.findViewById(R.id.new_product_price);
         EditText editTextQuantity = view.findViewById(R.id.new_product_quantity);
@@ -300,6 +368,7 @@ public class PartnerProductFragment extends Fragment {
             productMap.put(Product.F_DESC, description);
             productMap.put(Product.F_COLOR, color);
             productMap.put(Product.F_CATEGORY, categoryMap.get(category));
+            productMap.put(UserLogIn.EMAIL_FIELD, UserLogIn.getLogin(getContext()).getEmail());
             return productMap;
         }
 

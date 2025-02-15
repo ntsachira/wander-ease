@@ -13,7 +13,11 @@ public interface Product {
     String F_DESC = "spec";
     String F_COLOR = "color";
     String F_CATEGORY ="category";
+    String F_STATE ="active_state";
 
-    
+    enum state{
+        Active,
+        Inactive
+    }
     
 }
