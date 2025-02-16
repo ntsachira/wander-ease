@@ -33,6 +33,11 @@ public class MediaHandler {
                     while ((length = inputStream.read(buffer)) > 0) {
                         outputStream.write(buffer, 0, length);
                     }
+
+                    Bitmap bitmap = BitmapFactory.decodeFileDescriptor(outputStream.getFD());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSLESS,0,outputStream);
+                    }
                     inputStream.close();
                     outputStream.close();
                     if(file.exists()){

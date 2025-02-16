@@ -6,14 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.search.ProductFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/product_list_search_category_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+        android:dropDownSelector="@drawable/baseline_arrow_right"
+        android:paddingLeft="10dp"
+        android:popupBackground="@drawable/spinner_popup_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_list_search_editText" />
+
+    <EditText
+        android:id="@+id/product_list_search_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="@string/search"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/product_list_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_list_search_button" />
+
+    <Button
+        android:id="@+id/product_list_search_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:text="@string/bottom_nav_home"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_list_search_category_spinner" />
+
+    <ImageView
+        android:id="@+id/product_list_empty_imageView"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:src="@drawable/product_not_found"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/product_list_recyclerView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

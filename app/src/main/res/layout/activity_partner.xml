@@ -32,7 +32,7 @@
             android:id="@+id/partner_materialToolbar"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:background="#0E00786E"
+            android:background="@color/background"
             android:minHeight="30dp"
             android:theme="@style/Theme.WanderEase"
             app:buttonGravity="center_vertical"
@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/partner_toolbar_menu"
-            app:navigationIcon="@drawable/baseline_dehaze_24" />
+            app:navigationIcon="@drawable/menu_icon_black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

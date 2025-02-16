@@ -54,8 +54,7 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ProductViewHolder(
-                LayoutInflater.from(parent.getContext())
+        return new ProductViewHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.partner_product_item, parent,false)
         );
     }
@@ -75,8 +74,7 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
         holder.textViewTitle.setText(productJsonObject.get(Product.F_TITLE).getAsString());
         holder.textViewCategory.setText(categoryJsonObject.get("name").getAsString());
         holder.textViewQuantity.setText(String.format("%s Items",productJsonObject.get(Product.F_QTY).getAsInt()));
-        holder.textureViewPrice.setText(String.format("Rs. %s",
-                new DecimalFormat()
+        holder.textureViewPrice.setText(String.format("Rs. %s",new DecimalFormat()
                         .format(Double.parseDouble(productJsonObject.get(Product.F_PRICE).getAsString())))
         );
         holder.textViewColor.setText(productJsonObject.get(Product.F_COLOR).getAsString());
