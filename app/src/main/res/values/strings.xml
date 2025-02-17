@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Wander Ease</string>
     <string name="app_package">com.ironcodesoftware.wanderease</string>
+    <string name="location_field">deliveryLocation</string>
     <string name="user_log">userLog.ser</string>
     <string name="splash">userLog.ser</string>
     <string name="responseOk">OK</string>
@@ -10,6 +11,16 @@
     <string name="back">Go Back</string>
     <string name="search">Enter search key…</string>
     <string name="product_list_empty">Product List Empty</string>
+    <string name="place_order">Place Order</string>
+    <string name="total">Total:</string>
+    <string name="location">Delivery Location:</string>
+    <string name="change_location">Change delivery location</string>
+    <string name="select_location">Select delivery location</string>
+    <string name="confirm_location">Confirm delivery location</string>
+    <string name="checkout">Checkout</string>
+    <string name="total_items">Total Items</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="not_specified">"Not specified"</string>
 
     <string name="main_returningUser">ReturningUser</string>
 
