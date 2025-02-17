@@ -1,24 +1,25 @@
 package com.ironcodesoftware.wanderease.ui.home;
 
+import static com.ironcodesoftware.wanderease.MainActivity.TAG;
+
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.location.LocationRequest;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.renderscript.RenderScript;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -27,31 +28,42 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
-import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.Product;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.model.adaper.OrderItemAdapter;
-import com.ironcodesoftware.wanderease.model.adaper.ProductAdapter;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Request;
-import okhttp3.Response;
+import lk.payhere.androidsdk.PHConfigs;
+import lk.payhere.androidsdk.PHConstants;
+import lk.payhere.androidsdk.PHMainActivity;
+import lk.payhere.androidsdk.PHResponse;
+import lk.payhere.androidsdk.api.PayhereSDK;
+import lk.payhere.androidsdk.model.InitRequest;
+import lk.payhere.androidsdk.model.StatusResponse;
 
 public class CheckoutActivity extends AppCompatActivity {
+
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final int PAYHERE_REQUEST  = 101;
     double orderTotal = 0;
     int totalItems = 0;
+
+    String orderId;
+    JsonArray productArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +84,12 @@ public class CheckoutActivity extends AppCompatActivity {
         String productList = getIntent().getStringExtra("productList");
         Gson gson = new Gson();
         if(productList != null){
-            loadProductList(gson.fromJson(productList, JsonArray.class));
+            productArray = gson.fromJson(productList, JsonArray.class);
+            loadProductList();
             loadDeliveryLocation();
-            loadOrderSummary(gson.fromJson(productList, JsonArray.class));
+            loadOrderSummary();
         }else{
-            Log.e(MainActivity.TAG,"No intent for single product");
+            Log.e(TAG,"No intent for single product");
             finish();
         }
 
@@ -88,9 +101,11 @@ public class CheckoutActivity extends AppCompatActivity {
             if(!sharedPreferences.contains(getString(R.string.location_field))){
                 WanderDialog.build(this, "Please select your delivery location").show();
             }else{
-                // TODO
-                // save order in firebase
-                // proceed to payment
+                try {
+                    proceedToPayment();
+                } catch (IOException | ClassNotFoundException e) {
+                    Log.e(TAG, "Error",e);
+                }
             }
         });
 
@@ -110,18 +125,161 @@ public class CheckoutActivity extends AppCompatActivity {
                 if(locationManager.isLocationEnabled()){
                     startActivity(new Intent(CheckoutActivity.this,DeliveryLocationActivity.class));
                 }else{
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(intent);
+                    AlertDialog.Builder alert = WanderDialog.build(this, "Please turn on device location to continue", "Alert");
+                    alert.setOnCancelListener(dialog -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }).show();
+
                 }
             }
 
         });
     }
 
+    private void proceedToPayment() throws IOException, ClassNotFoundException {
+        orderId = String.valueOf(System.currentTimeMillis());
+        gotoPaymentActivity(orderId);
+    }
 
+    private void saveOrder() throws IOException, ClassNotFoundException {
+        Calendar calendar = Calendar.getInstance();
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.app_package),
+                MODE_PRIVATE);
+        String locationString = sharedPreferences.getString(
+                getString(R.string.location_field),
+                getString(R.string.not_specified));
+        JsonObject locationJson = new Gson().fromJson(locationString, JsonObject.class);
 
-    private void loadOrderSummary(JsonArray itemArray) {
-        for (JsonElement element : itemArray) {
+        HashMap<String,Object> orderMap = new HashMap<>();
+        orderMap.put("orderId", orderId);
+        orderMap.put("location", locationJson.toString());
+        orderMap.put(Order.F_PRICE, orderTotal);
+        orderMap.put(Order.F_STATE, Order.State.Pending.name());
+        orderMap.put(Order.F_DATE, calendar.getTime());
+        orderMap.put(Order.F_BUYER, UserLogIn.getLogin(this).getEmail());
+       orderMap.put("items",productArray.toString());
+
+        HashMap<String,JsonArray> sellerOrderMap = new HashMap<>();
+        for (JsonElement element : productArray) {
+            String sellerEmail = element.getAsJsonObject().get("item").getAsJsonObject().get("seller")
+                    .getAsJsonObject().get("email").getAsString();
+            JsonArray items;
+            if(!sellerOrderMap.containsKey(sellerEmail)){
+                items = new JsonArray();
+                sellerOrderMap.put(sellerEmail,items);
+            }else{
+                items = sellerOrderMap.get(sellerEmail);
+            }
+            items.add(element.getAsJsonObject());
+        }
+
+        firestore.collection("Order").add(orderMap).addOnSuccessListener(document->{
+            saveSellerOrders(sellerOrderMap);
+        }).addOnFailureListener(e->{
+            Log.e(TAG,"Order saving error",e);
+        });
+
+    }
+
+    private void saveSellerOrders(HashMap<String, JsonArray> sellerOrders) {
+        sellerOrders.forEach((key, itemsArray) ->{
+            HashMap<String,Object> sellerOrder = new HashMap<>();
+            sellerOrder.put("order_id", orderId);
+            sellerOrder.put("seller_email",key);
+            sellerOrder.put("status", Order.State.Pending.name());
+            sellerOrder.put("items", itemsArray.toString());
+            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+            firestore.collection("SellerOrder").add(sellerOrder)
+                    .addOnSuccessListener(document->{
+                        runOnUiThread(()->{
+                            Toast.makeText(
+                                    CheckoutActivity.this,
+                                    "Order Saved",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        });
+                        startActivity(new Intent(CheckoutActivity.this,PaymentSuccessActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e->{
+                        Log.e(TAG,"Seller Order saving error",e);
+                    });
+        } );
+    }
+
+    private void gotoPaymentActivity(String orderId) {
+        InitRequest req = new InitRequest();
+        req.setMerchantId("1223792");       // Merchant ID
+        req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
+        req.setAmount(1000.00);             // Final Amount to be charged
+        req.setOrderId(orderId);        // Unique Reference ID
+        req.setItemsDescription("Door bell wireless");  // Item description title
+        req.setCustom1("This is the custom message 1");
+        req.setCustom2("This is the custom message 2");
+        req.getCustomer().setFirstName("Saman");
+        req.getCustomer().setLastName("Perera");
+        req.getCustomer().setEmail("samanp@gmail.com");
+        req.getCustomer().setPhone("+94771234567");
+        req.getCustomer().getAddress().setAddress("No.1, Galle Road");
+        req.getCustomer().getAddress().setCity("Colombo");
+        req.getCustomer().getAddress().setCountry("Sri Lanka");
+
+        Intent intent = new Intent(this, PHMainActivity.class);
+        intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
+        PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
+        startActivityForResult(intent, PAYHERE_REQUEST ); //unique request ID e.g. "11001"
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PAYHERE_REQUEST && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
+            PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT);
+            if (resultCode == Activity.RESULT_OK) {
+                String msg;
+                if (response != null)
+                    if (response.isSuccess()) {
+                        msg = "Activity result:" + response.getData().getMessage();
+                        try {
+                            saveOrder();
+                        } catch (IOException | ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }else
+                        msg = "Result:" + response.getData().getMessage();
+                else
+                    msg = "Result: no response";
+                Log.d(TAG, msg);
+
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                if (response != null) {
+                    WanderDialog.build(this, "Payment cancelled", "Message").setOnCancelListener(dialog -> {
+                        finish();
+                    }).show();
+                }
+                else{
+                    AlertDialog.Builder dialog = WanderDialog.build(this, "Payment cancelled", "Message");
+                    dialog.setOnCancelListener(dialog1 -> {
+                        finish();
+                    }).show();
+
+                }
+
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDeliveryLocation();
+    }
+
+    private void loadOrderSummary() {
+        for (JsonElement element : productArray) {
             JsonObject jsonObject = element.getAsJsonObject();
             int qty = jsonObject.get("qty").getAsInt();
             totalItems += qty;
@@ -140,23 +298,30 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonPlaceOrder.setText(String.format("Total Rs. %s : Place Order",decimalFormat.format(orderTotal)));
 
         TextView textViewLocation = findViewById(R.id.place_order_delivery_location_textView);
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void loadDeliveryLocation() {
+        TextView textViewLocation = findViewById(R.id.place_order_delivery_location_textView);
         SharedPreferences sharedPreferences = getSharedPreferences(
                 getString(R.string.app_package),
                 MODE_PRIVATE);
         if(sharedPreferences.contains(getString(R.string.location_field))){
-            // TODO
-            // set delivery location
+            String locationString = sharedPreferences.getString(
+                    getString(R.string.location_field),
+                    getString(R.string.not_specified));
+            JsonObject locationJson = new Gson().fromJson(locationString, JsonObject.class);
+            textViewLocation.setText(String.format("Lat: %s, Lon: %s",
+                    locationJson.get("lat").getAsString(),locationJson.get("lon").getAsString()));
         }else{
             textViewLocation.setText(R.string.not_specified);
         }
     }
 
-    private void loadDeliveryLocation() {
-    }
-
-    private void loadProductList(JsonArray productListJsonObject) {
+    private void loadProductList() {
         RecyclerView recyclerView = findViewById(R.id.place_order_item_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new OrderItemAdapter(productListJsonObject,this));
+        recyclerView.setAdapter(new OrderItemAdapter(productArray,this));
     }
 }

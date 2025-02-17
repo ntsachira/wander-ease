@@ -74,5 +74,7 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.12.1")
 
+    implementation("com.github.PayHereDevs:payhere-android-sdk:v3.0.17")
+
 
 }

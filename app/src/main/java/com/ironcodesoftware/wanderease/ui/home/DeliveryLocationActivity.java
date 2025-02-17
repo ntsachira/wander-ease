@@ -1,12 +1,15 @@
 package com.ironcodesoftware.wanderease.ui.home;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -22,8 +25,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
 
@@ -48,6 +55,20 @@ public class DeliveryLocationActivity extends AppCompatActivity {
         });
 
         loadMap();
+
+        Button buttonConfirmLocation = findViewById(R.id.delevery_location_save_current_location_button);
+        buttonConfirmLocation.setOnClickListener(v->{
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    getString(R.string.app_package),
+                    MODE_PRIVATE);
+            JsonObject location = new JsonObject();
+            location.addProperty("lat", map.getCameraPosition().target.latitude);
+            location.addProperty("lon", map.getCameraPosition().target.longitude);
+            sharedPreferences.edit()
+                    .putString(getString((R.string.location_field)),location.toString())
+                    .apply();
+            finish();
+        });
     }
 
     private void loadMap() {
@@ -58,7 +79,22 @@ public class DeliveryLocationActivity extends AppCompatActivity {
         supportMapFragment.getMapAsync(googleMap -> {
             map = googleMap;
             setCurrentLocation(googleMap);
+            googleMap.setOnCameraMoveListener(() -> {
+                googleMap.clear();
+                CameraPosition cameraPosition = googleMap.getCameraPosition();
+
+                googleMap.addMarker(
+                        new MarkerOptions().position(cameraPosition.target).title("Selected Location")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_navigation_marker_icon))
+                );
+                LatLng target = googleMap.getCameraPosition().target;
+                TextView textView = findViewById(R.id.delevery_location_current_location_textView);
+                textView.setText(String.format("Lat: %s, Lon: %s", target.latitude, target.longitude));
+
+            });
         });
+
+
     }
 
     private void setCurrentLocation(GoogleMap googleMap) {
@@ -81,15 +117,23 @@ public class DeliveryLocationActivity extends AppCompatActivity {
 
         Location myLocation = locationManager.getLastKnownLocation(LocationManager.FUSED_PROVIDER);
 
-
         if(myLocation != null){
+            TextView textView = findViewById(R.id.delevery_location_current_location_textView);
+            textView.setText(String.format("Lat: %s, Lon: %s", myLocation.getLatitude(), myLocation.getLongitude()));
+            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+            googleMap.addMarker(
+                    new MarkerOptions().position(latLng).title("Selected Location")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_navigation_marker_icon))
+            );
             googleMap.animateCamera(
                     CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
-                                    .target(new LatLng(myLocation.getLatitude(),myLocation.getLongitude()))
+                                    .target(latLng)
                                     .zoom(15).build()
                     )
+
             );
+
         }
 
 

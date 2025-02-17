@@ -56,9 +56,10 @@
                             android:id="@+id/imageView5"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:scaleType="centerCrop"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:drawable/ic_dialog_map" />
+                            app:srcCompat="@drawable/home_maps_location_placeholder_icon" />
 
                         <TextView
                             android:id="@+id/textView16"
@@ -76,6 +77,7 @@
                             android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textColor="#5D5D5D"
+                            android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/textView16"
                             app:layout_constraintTop_toBottomOf="@+id/textView16" />

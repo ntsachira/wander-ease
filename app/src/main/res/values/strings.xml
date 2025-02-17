@@ -21,6 +21,8 @@
     <string name="total_items">Total Items</string>
     <string name="total_amount">Total Amount</string>
     <string name="not_specified">"Not specified"</string>
+    <string name="payment_success">Payment Successful</string>
+    <string name="back_to_home">Back to Home</string>
 
     <string name="main_returningUser">ReturningUser</string>
 
