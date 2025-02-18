@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +61,8 @@ public class ProductFragment extends Fragment {
 
     private void loadProducts(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.product_list_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
         HttpClient.getInstance().newCall(
                 new Request.Builder().url(BuildConfig.HOST_URL+"LoadAllActiveProducts").build()
         ).enqueue(new Callback() {

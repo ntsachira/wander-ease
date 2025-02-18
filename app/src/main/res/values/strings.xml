@@ -23,6 +23,8 @@
     <string name="not_specified">"Not specified"</string>
     <string name="payment_success">Payment Successful</string>
     <string name="back_to_home">Back to Home</string>
+    <string name="empty_orders">No Orders Yet</string>
+    <string name="shop_now">Explore WanderEase</string>
 
     <string name="main_returningUser">ReturningUser</string>
 
@@ -75,6 +77,12 @@
     <string name="account_menu_help">Help Ticket</string>
     <string name="account_menu_text_partner">Partner Program</string>
     <string name="account_menu_button_sell">List your product or service on Wander Ease</string>
+
+<!--    my orders-->
+    <string name="my_orders_completed_orders">Completed</string>
+    <string name="my_orders_to_receive_orders">To Receive</string>
+    <string name="my_orders_to_review_orders">To Review</string>
+    <string name="review">Review</string>
 
     <!--    partner navigation-->
     <string name="partner_dashboard">Dashboard</string>

@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import androidx.core.location.LocationManagerCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,9 +32,21 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.GsonBuildConfig;
+import com.ironcodesoftware.wanderease.BuildConfig;
+import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class DeliveryLocationActivity extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -58,17 +72,71 @@ public class DeliveryLocationActivity extends AppCompatActivity {
 
         Button buttonConfirmLocation = findViewById(R.id.delevery_location_save_current_location_button);
         buttonConfirmLocation.setOnClickListener(v->{
-            SharedPreferences sharedPreferences = getSharedPreferences(
-                    getString(R.string.app_package),
-                    MODE_PRIVATE);
-            JsonObject location = new JsonObject();
-            location.addProperty("lat", map.getCameraPosition().target.latitude);
-            location.addProperty("lon", map.getCameraPosition().target.longitude);
-            sharedPreferences.edit()
-                    .putString(getString((R.string.location_field)),location.toString())
-                    .apply();
-            finish();
+            requestAddress();
         });
+    }
+
+    private void saveLocation(String address) {
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.app_package),
+                MODE_PRIVATE);
+        JsonObject location = new JsonObject();
+        location.addProperty("lat", map.getCameraPosition().target.latitude);
+        location.addProperty("lon", map.getCameraPosition().target.longitude);
+        location.addProperty("address", address);
+        sharedPreferences.edit()
+                .putString(getString((R.string.location_field)),location.toString())
+                .apply();
+        finish();
+    }
+
+    private void requestAddress() {
+        Request request = new Request.Builder().url(
+                String.format("https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&key=%s",
+                        map.getCameraPosition().target.latitude,
+                        map.getCameraPosition().target.longitude,
+                        BuildConfig.MAPS_API_KEY
+                ))
+                .build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(MainActivity.TAG, "Geo location address request failed",e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if(response.isSuccessful()){
+                    JsonObject goeDataJson = new Gson().fromJson(response.body().string(), JsonObject.class);
+                    JsonObject results = goeDataJson.get("results").getAsJsonArray().get(0).getAsJsonObject();
+                    if(isSouthernProvince(results)){
+                        String address = results.get("formatted_address").getAsString();
+                        runOnUiThread(()->{
+                            saveLocation(address);
+                        });
+                    }else{
+                        runOnUiThread(()->{
+                            WanderDialog.build(
+                                    DeliveryLocationActivity.this,
+                                    "Please select a location within South of Sri lanka")
+                                    .show();
+                        });
+                    }
+
+                }
+            }
+        });
+    }
+
+    private boolean isSouthernProvince(JsonObject results) {
+        for (JsonElement element : results.get("address_components").getAsJsonArray()) {
+            JsonObject jsonObject = element.getAsJsonObject();
+            if(jsonObject.get("types").getAsJsonArray().get(0).getAsString().equals("administrative_area_level_1")
+            && jsonObject.get("long_name").getAsString().equals("Southern Province")){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void loadMap() {

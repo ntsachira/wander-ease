@@ -4,7 +4,8 @@ public interface Order {
     enum State{
         Pending,
         Processing,
-        Completed
+        Out_for_Delivery,
+        Delivered
     }
     String F_PRICE = "total_price";
     String F_STATE = "order_status";

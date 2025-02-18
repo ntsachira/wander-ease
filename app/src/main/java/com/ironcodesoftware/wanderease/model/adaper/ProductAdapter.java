@@ -51,8 +51,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         JsonObject productJsonObject = productList.get(position).getAsJsonObject();
         String id = productJsonObject.get("id").getAsString();
         holder.textViewTitle.setText(productJsonObject.get(Product.F_TITLE).getAsString());
+//        holder.textViewTitle.setEl
         holder.textViewQuantity.setText(String.format("%s Items",productJsonObject.get(Product.F_QTY).getAsInt()));
-        holder.textViewPrice.setText(String.format("Rs. %s",new DecimalFormat()
+        holder.textViewPrice.setText(String.format("Rs.%s",new DecimalFormat()
                 .format(Double.parseDouble(productJsonObject.get(Product.F_PRICE).getAsString())))
         );
         holder.textViewColor.setText(String.format("Color: %s",productJsonObject.get(Product.F_COLOR).getAsString()));

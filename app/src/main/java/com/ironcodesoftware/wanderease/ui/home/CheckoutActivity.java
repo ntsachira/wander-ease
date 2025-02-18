@@ -6,6 +6,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,13 +31,16 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ironcodesoftware.wanderease.MainActivity;
+import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.Product;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
@@ -44,6 +49,7 @@ import com.ironcodesoftware.wanderease.model.adaper.OrderItemAdapter;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -51,9 +57,9 @@ import lk.payhere.androidsdk.PHConfigs;
 import lk.payhere.androidsdk.PHConstants;
 import lk.payhere.androidsdk.PHMainActivity;
 import lk.payhere.androidsdk.PHResponse;
-import lk.payhere.androidsdk.api.PayhereSDK;
 import lk.payhere.androidsdk.model.InitRequest;
 import lk.payhere.androidsdk.model.StatusResponse;
+import okhttp3.Request;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -64,6 +70,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
     String orderId;
     JsonArray productArray;
+    private ArrayList<String> orderDocumentIDs;
+    private AlertDialog loadingDialog;
+    private String orderDocumentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +147,10 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void proceedToPayment() throws IOException, ClassNotFoundException {
+        loadingDialog = WanderDialog.loading(this,"Processing...");
+        loadingDialog.show();
         orderId = String.valueOf(System.currentTimeMillis());
-        gotoPaymentActivity(orderId);
+        saveOrder();
     }
 
     private void saveOrder() throws IOException, ClassNotFoundException {
@@ -177,14 +188,20 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         firestore.collection("Order").add(orderMap).addOnSuccessListener(document->{
+            orderDocumentIDs = new ArrayList<>();
+            orderDocumentID = document.getId();
             saveSellerOrders(sellerOrderMap);
         }).addOnFailureListener(e->{
+            runOnUiThread(()->{
+                loadingDialog.cancel();
+            });
             Log.e(TAG,"Order saving error",e);
         });
 
     }
 
     private void saveSellerOrders(HashMap<String, JsonArray> sellerOrders) {
+
         sellerOrders.forEach((key, itemsArray) ->{
             HashMap<String,Object> sellerOrder = new HashMap<>();
             sellerOrder.put("order_id", orderId);
@@ -194,6 +211,8 @@ public class CheckoutActivity extends AppCompatActivity {
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
             firestore.collection("SellerOrder").add(sellerOrder)
                     .addOnSuccessListener(document->{
+                        loadingDialog.cancel();
+                        orderDocumentIDs.add(document.getId());
                         runOnUiThread(()->{
                             Toast.makeText(
                                     CheckoutActivity.this,
@@ -201,22 +220,27 @@ public class CheckoutActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG
                             ).show();
                         });
-                        startActivity(new Intent(CheckoutActivity.this,PaymentSuccessActivity.class));
-                        finish();
+                        gotoPaymentActivity();
                     })
                     .addOnFailureListener(e->{
+                        runOnUiThread(()->{
+                            loadingDialog.cancel();
+                        });
                         Log.e(TAG,"Seller Order saving error",e);
                     });
+            // TODO
+            // send notification messages
+//            firestore.collection("notification").add()
         } );
     }
 
-    private void gotoPaymentActivity(String orderId) {
+    private void gotoPaymentActivity() {
         InitRequest req = new InitRequest();
-        req.setMerchantId("1223792");       // Merchant ID
-        req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
-        req.setAmount(1000.00);             // Final Amount to be charged
-        req.setOrderId(orderId);        // Unique Reference ID
-        req.setItemsDescription("Door bell wireless");  // Item description title
+        req.setMerchantId("1223792");
+        req.setCurrency("LKR");
+        req.setAmount(1000.00);
+        req.setOrderId(orderId);
+        req.setItemsDescription("Door bell wireless");
         req.setCustom1("This is the custom message 1");
         req.setCustom2("This is the custom message 2");
         req.getCustomer().setFirstName("Saman");
@@ -243,33 +267,110 @@ public class CheckoutActivity extends AppCompatActivity {
                 if (response != null)
                     if (response.isSuccess()) {
                         msg = "Activity result:" + response.getData().getMessage();
-                        try {
-                            saveOrder();
-                        } catch (IOException | ClassNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }else
+                        updateStock();
+                    }else {
                         msg = "Result:" + response.getData().getMessage();
-                else
+                    }
+                else {
                     msg = "Result: no response";
+                }
                 Log.d(TAG, msg);
 
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                if (response != null) {
-                    WanderDialog.build(this, "Payment cancelled", "Message").setOnCancelListener(dialog -> {
-                        finish();
-                    }).show();
-                }
-                else{
-                    AlertDialog.Builder dialog = WanderDialog.build(this, "Payment cancelled", "Message");
-                    dialog.setOnCancelListener(dialog1 -> {
-                        finish();
-                    }).show();
-
-                }
-
+                removeOrder();
             }
         }
+    }
+
+    private void removeOrder() {
+        runOnUiThread(()->{
+            loadingDialog = WanderDialog.loading(this,"Processing...");
+            loadingDialog.show();
+        });
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("Order").document(orderDocumentID).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        for (String documentID : orderDocumentIDs) {
+                            firestore.collection("SellerOrder").document(documentID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            runOnUiThread(()->{
+                                                loadingDialog.cancel();
+                                            });
+                                            Log.e(TAG, "Remove order failed",e);
+                                        }
+                                    });
+                        }
+                        runOnUiThread(()->{
+                            loadingDialog.cancel();
+                            WanderDialog.cancel(CheckoutActivity.this, "Payment cancelled")
+                                    .show();
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void updateStock() {
+        runOnUiThread(()->{
+            loadingDialog = WanderDialog.loading(this,"Processing...");
+            loadingDialog.show();
+        });
+        // TODO
+        new Thread(()->{
+            try {
+                String response = new HttpClient().post(
+                        BuildConfig.HOST_URL + "UpdateStock"
+                        , productArray.toString());
+                if(response!=null){
+                    Gson gson = new Gson();
+                    JsonObject responseJson = gson.fromJson(response, JsonObject.class);
+                    // TODO
+                    //check status
+                    runOnUiThread(()->{
+                       AlertDialog alertDialog = WanderDialog.success(
+                               CheckoutActivity.this,
+                               "Order Confirmed");
+                       alertDialog.setCancelable(false);
+                       alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Back to Home",
+                               (dialog, which) -> {
+                                    dialog.cancel();
+                                    startActivity(new Intent(CheckoutActivity.this,
+                                                   HomeActivity.class));
+                                    finish();
+                               });
+                       alertDialog.show();
+                   });
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Update stock failed",e);
+                runOnUiThread(()->{
+                    loadingDialog.cancel();
+                });
+            }
+        }).start();
+
+
     }
 
     @Override
@@ -297,8 +398,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
         buttonPlaceOrder.setText(String.format("Total Rs. %s : Place Order",decimalFormat.format(orderTotal)));
 
-        TextView textViewLocation = findViewById(R.id.place_order_delivery_location_textView);
-
     }
 
     @SuppressLint("CheckResult")
@@ -312,8 +411,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     getString(R.string.location_field),
                     getString(R.string.not_specified));
             JsonObject locationJson = new Gson().fromJson(locationString, JsonObject.class);
-            textViewLocation.setText(String.format("Lat: %s, Lon: %s",
-                    locationJson.get("lat").getAsString(),locationJson.get("lon").getAsString()));
+            textViewLocation.setText(locationJson.get("address").getAsString());
         }else{
             textViewLocation.setText(R.string.not_specified);
         }

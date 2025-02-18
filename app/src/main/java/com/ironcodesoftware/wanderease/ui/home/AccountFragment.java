@@ -24,6 +24,7 @@ import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.ui.home.account.MyOrdersActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 import com.ironcodesoftware.wanderease.ui.partner.PartnerActivity;
 
@@ -50,6 +51,12 @@ public class AccountFragment extends Fragment {
         Button buttonOpenPartnerActivity = view.findViewById(R.id.account_button_open_partner_button);
         buttonOpenPartnerActivity.setOnClickListener(v->{
             startActivity(new Intent(getContext(), PartnerActivity.class));
+        });
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if(item.getItemId() == R.id.account_orders){
+                startActivity(new Intent(getContext(), MyOrdersActivity.class));
+            }
+            return false;
         });
     }
 

@@ -9,7 +9,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_search_tabLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,21 +19,18 @@
             android:id="@+id/home_search_tab_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_category"
             android:text="@string/home_search_product" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/home_search_tab_rental"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_car_rental"
             android:text="@string/home_search_vehicleRental" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/home_search_tab_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_explore"
             android:text="@string/home_search_guide" />
 
     </com.google.android.material.tabs.TabLayout>
