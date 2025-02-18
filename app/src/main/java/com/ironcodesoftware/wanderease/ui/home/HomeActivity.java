@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        getWindow().setStatusBarColor(getColor(R.color.primary));
+        getWindow().setStatusBarColor(getColor(R.color.white));
         BottomNavigationView bottomNavigationView = findViewById(R.id.home_bottomNavigationView);
         bottomNavigationView.setItemActiveIndicatorColor(
                 ColorStateList.valueOf(getColor(R.color.navigation_active_indicator))

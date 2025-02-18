@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.ui.home.account.MyOrdersActivity;
+import com.ironcodesoftware.wanderease.ui.home.account.SettingsActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 import com.ironcodesoftware.wanderease.ui.partner.PartnerActivity;
 
@@ -43,10 +45,13 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavigationView navigationView = view.findViewById(R.id.account_navigationView);
-        TextView textViewUsername = navigationView.getHeaderView(0)
-                .findViewById(R.id.account_navigation_header_textView_username);
         setUserDetails(view);
+        NavigationView navigationView = view.findViewById(R.id.account_navigationView);
+        View headerView = navigationView.getHeaderView(0);
+        ImageButton imageButtonSettings = headerView.findViewById(R.id.account_naviagtion_header_settings_button);
+        imageButtonSettings.setOnClickListener(v->{
+            startActivity(new Intent(getContext(), SettingsActivity.class));
+        });
 
         Button buttonOpenPartnerActivity = view.findViewById(R.id.account_button_open_partner_button);
         buttonOpenPartnerActivity.setOnClickListener(v->{

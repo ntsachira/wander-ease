@@ -34,6 +34,9 @@
     <string name="terms">Terms &amp; Conditions</string>
     <string name="policy">Privacy Statement</string>
     <string name="and">and</string>
+    <string name="language">භාෂාව - Language (English)</string>
+    <string name="policies">Policies</string>
+    <string name="logout">Logout</string>
 
     <!--    intro-->
     <string name="main_explore_products">Explore Your Favourite Shopping Items in the South of Sri Lanka</string>
@@ -77,8 +80,9 @@
     <string name="account_menu_help">Help Ticket</string>
     <string name="account_menu_text_partner">Partner Program</string>
     <string name="account_menu_button_sell">List your product or service on Wander Ease</string>
+    <string name="settings">Settings</string>
 
-<!--    my orders-->
+    <!--    my orders-->
     <string name="my_orders_completed_orders">Completed</string>
     <string name="my_orders_to_receive_orders">To Receive</string>
     <string name="my_orders_to_review_orders">To Review</string>
