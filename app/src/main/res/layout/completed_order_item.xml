@@ -57,14 +57,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/my_order_item_review_button"
+        android:id="@+id/my_order_item_action_button"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="@string/review"
+        android:text="text"
+        android:textSize="12sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/completed_order_item_recyclerView"

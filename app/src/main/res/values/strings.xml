@@ -111,6 +111,32 @@
     <string name="product_tab_my_products">My Products</string>
     <string name="product_tab_my_add_products">Add New Product</string>
 
+    <!--    admin-->
+    <string name="admin_user_management">User Management</string>
+    <string name="admin_delivery_management">Delivery Task Management</string>
+    <string name="admin_Analytics">Analytics</string>
+    <string name="admin_title">WanderEase Admin</string>
+    <string name="admin_profile_information">Profile Information</string>
+    <string name="admin_delivery_to_assign">To assign</string>
+    <string name="admin_delivery_active">Active</string>
+    <string name="admin_delivery_delivered">Delivered</string>
+    <string name="assign">Assign</string>
+    <string name="assign_delivery">Assign Delivery</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_courier">Select Courier</string>
+    <string name="call_courier">Call Courier</string>
+
+    <!--    delivery-->
+    <string name="deliver_title">WanderEase Delivery</string>
+    <string name="deliver_new_tasks">New Tasks</string>
+    <string name="deliver_completed_tasks">Completed Tasks</string>
+    <string name="delivery_messages">Messages</string>
+    <string name="delivery_mark_as_delivered">Mark as Done</string>
+    <string name="call_buyer">Call Buyer</string>
+    <string name="view">View</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="order_id">Order ID:</string>
+
 
     <!--  RegEx-->
     <string name="email_regex">^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$</string>

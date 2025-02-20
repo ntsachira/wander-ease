@@ -7,6 +7,7 @@
         <item name="colorOnPrimarySurface">@color/primary</item>
          <item name="android:textColorHighlight">@color/highlight</item>
         <item name="colorSecondaryContainer">@color/navigation_active_indicator</item>
+        <item name="android:statusBarColor">@color/white</item>
     </style>
 
     <style name="Theme.WanderEase" parent="Base.Theme.WanderEase" />

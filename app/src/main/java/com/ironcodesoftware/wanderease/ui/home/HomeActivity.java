@@ -1,9 +1,14 @@
 package com.ironcodesoftware.wanderease.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,9 +20,16 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.ShakeDetector;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
+import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
+
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private ShakeDetector shakeDetector;
     AccountFragment accountFragment =  new AccountFragment();
     BookingFragment bookingFragment = new BookingFragment();
     CartFragment cartFragment = new CartFragment();
@@ -28,11 +40,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.partner_main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.delivery_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        if(!sharedPreferences.contains("hint")){
+            showHint();
+        }
+
+        initShakeDetector();
+
         getWindow().setStatusBarColor(getColor(R.color.white));
         BottomNavigationView bottomNavigationView = findViewById(R.id.home_bottomNavigationView);
         bottomNavigationView.setItemActiveIndicatorColor(
@@ -46,6 +65,33 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         });
 
+        ImageButton buttonNotification = findViewById(R.id.home_header_notofication_imageButton);
+        buttonNotification.setOnClickListener(v->{
+            startActivity(new Intent(HomeActivity.this,MessagesActivity.class));
+        });
+
+    }
+
+    private void initShakeDetector() {
+        shakeDetector = new ShakeDetector(this) {
+            @Override
+            public void onShake() {
+                recreate();
+            }
+        };
+    }
+
+    private void showHint() {
+        AlertDialog infoDialog = WanderDialog.info(this,
+                "You can shake you phone to reload the content");
+        infoDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Do not show this again",(dialog, which) -> {
+            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("hint", false).apply();
+        });
+        infoDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Ok",(dialog, which) -> {
+            dialog.cancel();
+        });
+        infoDialog.show();
     }
 
 
@@ -82,5 +128,25 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.home_bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         setSelectedFragment(menu.findItem(savedInstanceState.getInt("selectedMenuItemId")));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            if(!UserLogIn.hasLogin(this)){
+                startActivity(new Intent(this, LogInActivity.class));
+                finish();
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        shakeDetector.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shakeDetector.stop();
     }
 }

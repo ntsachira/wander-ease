@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group >
+        <item
+            android:id="@+id/admin_dashboard_menuitem"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/partner_dashboard" />
+        <item
+            android:id="@+id/admin_user_management_menuItem"
+            android:checkable="true"
+            android:icon="@drawable/baseline_people_alt_24"
+            android:title="@string/admin_user_management" />
+        <item
+            android:id="@+id/admin_deleveryManagement_menuItem"
+            android:checkable="true"
+            android:icon="@drawable/baseline_delivery_dining_24"
+            android:title="@string/admin_delivery_management" />
+        <item
+            android:id="@+id/admin_analytics_menuItem"
+            android:checkable="true"
+            android:icon="@drawable/baseline_analytics_24"
+            android:title="@string/admin_Analytics" />
+    </group>
+</menu>

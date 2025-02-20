@@ -32,6 +32,12 @@ import com.ironcodesoftware.wanderease.ui.partner.PartnerActivity;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 
 public class AccountFragment extends Fragment {
 
@@ -91,42 +97,49 @@ public class AccountFragment extends Fragment {
     }
 
     private void requestUserDetails(View view, String email){
-        new Thread(()->{
+
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
-            try {
-                Gson gson = new Gson();
-                String response = new HttpClient().post(
-                        BuildConfig.HOST_URL + "GetProfile",
-                        gson.toJson(jsonObject)
-                );
-                JsonObject responseJson = gson.fromJson(response, JsonObject.class);
-                if(responseJson.has("ok")
-                        && responseJson.get("ok").getAsBoolean()){
-                    String name = responseJson.getAsJsonObject("profile")
-                            .get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
-                    NavigationView navigationView = view.findViewById(R.id.account_navigationView);
-                    TextView textViewUsername = navigationView.getHeaderView(0)
-                            .findViewById(R.id.account_navigation_header_textView_username);
-                    view.post(()->{
-                       textViewUsername.setText(name);
-                    });
-                    try {
-                        UserLogIn login = UserLogIn.getLogin(getContext());
-                        login.setDisplay_name(name);
-                        login.serialize(getContext());
-                    } catch (ClassNotFoundException e) {
-                        Log.e(MainActivity.TAG,e.getLocalizedMessage());
-                    }
-                    Log.i(MainActivity.TAG,response);
-                }else{
-                    promptFailed("2:Profile loading failed");
+            Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
+                    .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
+            HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    promptFailed("1:Profile loading failed");
+                    Log.e(MainActivity.TAG,e.getLocalizedMessage());
                 }
-            } catch (IOException e) {
-                promptFailed("1:Profile loading failed");
-                Log.e(MainActivity.TAG,e.getLocalizedMessage());
-            }
-        }).start();
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    if(response.isSuccessful()){
+                        Gson gson = new Gson();
+                        JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                        if(responseJson.has("ok")
+                                && responseJson.get("ok").getAsBoolean()){
+                            String name = responseJson.getAsJsonObject("profile")
+                                    .get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
+                            NavigationView navigationView = view.findViewById(R.id.account_navigationView);
+                            TextView textViewUsername = navigationView.getHeaderView(0)
+                                    .findViewById(R.id.account_navigation_header_textView_username);
+                            view.post(()->{
+                                textViewUsername.setText(name);
+                            });
+                            try {
+                                UserLogIn login = UserLogIn.getLogin(getContext());
+                                login.setDisplay_name(name);
+                                login.serialize(getContext());
+                            } catch (ClassNotFoundException e) {
+                                Log.e(MainActivity.TAG,e.getLocalizedMessage());
+                            }
+                            Log.i(MainActivity.TAG,response.body().string());
+                        }else{
+                            promptFailed("2:Profile loading failed");
+                        }
+                    }else{
+                        promptFailed("3:Profile loading failed");
+                    }
+                }
+            });
 
     }
 

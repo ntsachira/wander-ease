@@ -60,6 +60,7 @@ import lk.payhere.androidsdk.PHResponse;
 import lk.payhere.androidsdk.model.InitRequest;
 import lk.payhere.androidsdk.model.StatusResponse;
 import okhttp3.Request;
+import okhttp3.Response;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -339,28 +340,34 @@ public class CheckoutActivity extends AppCompatActivity {
         // TODO
         new Thread(()->{
             try {
-                String response = new HttpClient().post(
+                Response response = new HttpClient().post(
                         BuildConfig.HOST_URL + "UpdateStock"
                         , productArray.toString());
-                if(response!=null){
+                if(response.isSuccessful()){
                     Gson gson = new Gson();
-                    JsonObject responseJson = gson.fromJson(response, JsonObject.class);
-                    // TODO
-                    //check status
+                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                    if(responseJson.has("ok") && responseJson.get("ok").getAsBoolean()){
+                        runOnUiThread(()->{
+                            AlertDialog alertDialog = WanderDialog.success(
+                                    CheckoutActivity.this,
+                                    "Order Confirmed");
+                            alertDialog.setCancelable(false);
+                            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Back to Home",
+                                    (dialog, which) -> {
+                                        dialog.cancel();
+                                        startActivity(new Intent(CheckoutActivity.this,
+                                                HomeActivity.class));
+                                        finish();
+                                    });
+                            alertDialog.show();
+                        });
+                    }
+
+                }else{
+                    Log.e(TAG, "Update stock unsuccessful");
                     runOnUiThread(()->{
-                       AlertDialog alertDialog = WanderDialog.success(
-                               CheckoutActivity.this,
-                               "Order Confirmed");
-                       alertDialog.setCancelable(false);
-                       alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Back to Home",
-                               (dialog, which) -> {
-                                    dialog.cancel();
-                                    startActivity(new Intent(CheckoutActivity.this,
-                                                   HomeActivity.class));
-                                    finish();
-                               });
-                       alertDialog.show();
-                   });
+                        loadingDialog.cancel();
+                    });
                 }
             } catch (IOException e) {
                 Log.e(TAG, "Update stock failed",e);

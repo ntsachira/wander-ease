@@ -14,9 +14,10 @@ import androidx.fragment.app.FragmentContainerView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.ShakeDetector;
 
 public class MyOrdersActivity extends AppCompatActivity {
-
+    private ShakeDetector shakeDetector;
     CompletedOrdersFragment completedOrdersFragment = new CompletedOrdersFragment();
     ToReceiveFragment  toReceiveFragment = new ToReceiveFragment();
     ToReviewFragment toReviewFragment = new ToReviewFragment();
@@ -31,6 +32,8 @@ public class MyOrdersActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        initShakeDetector();
 
         loadFragment(new CompletedOrdersFragment());
 
@@ -59,6 +62,15 @@ public class MyOrdersActivity extends AppCompatActivity {
 
     }
 
+    private void initShakeDetector() {
+        shakeDetector = new ShakeDetector(this) {
+            @Override
+            public void onShake() {
+                recreate();
+            }
+        };
+    }
+
     private void loadFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.my_orders_fragment_container_view, fragment).setReorderingAllowed(true)
@@ -75,5 +87,15 @@ public class MyOrdersActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shakeDetector.start();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shakeDetector.stop();
+    }
 }

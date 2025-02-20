@@ -42,21 +42,24 @@ public class WanderDialog{
     }
 
     public static AlertDialog success(Context context,String message){
-        AlertDialog dialog = new AlertDialog.Builder(context).create();
-        View view = LayoutInflater.from(context).inflate(R.layout.loading_dialog, null);
-        ImageView imageView = view.findViewById(R.id.loading_dialog_imageView);
-        imageView.setImageResource(lk.payhere.androidsdk.R.drawable.enabled);
-        TextView textView = view.findViewById(R.id.loading_dialog_textView);
-        textView.setText(message);
-        dialog.setView(view);
-        return dialog;
+        return getSimpleDialog(context,message,lk.payhere.androidsdk.R.drawable.enabled);
     }
 
     public static AlertDialog cancel(Context context,String message){
+        return getSimpleDialog(context, message, lk.payhere.androidsdk.R.drawable.payment_declined_image);
+    }
+    public static AlertDialog confirm(Context context,String message){
+        return getSimpleDialog(context, message,R.drawable.warning_shield_icon);
+    }
+    public static AlertDialog info(Context context,String message){
+        return getSimpleDialog(context, message,R.drawable.info_circle_icon);
+    }
+
+    private static AlertDialog getSimpleDialog(Context context,String message,int iconResourceId){
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         View view = LayoutInflater.from(context).inflate(R.layout.loading_dialog, null);
         ImageView imageView = view.findViewById(R.id.loading_dialog_imageView);
-        imageView.setImageResource(lk.payhere.androidsdk.R.drawable.payment_declined_image);
+        imageView.setImageResource(iconResourceId);
         TextView textView = view.findViewById(R.id.loading_dialog_textView);
         textView.setText(message);
         dialog.setView(view);

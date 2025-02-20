@@ -3,6 +3,7 @@ package com.ironcodesoftware.wanderease.model.adaper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,6 +69,7 @@ public class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAd
         TextView textViewStatus;
         TextView textViewItemCount;
         TextView textViewTotal;
+
         public ToReceiveOrderItemViewHolder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.completed_order_item_recyclerView);

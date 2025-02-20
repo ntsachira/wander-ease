@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 
 public class SignUpFragment extends Fragment {
@@ -59,26 +60,27 @@ public class SignUpFragment extends Fragment {
                 try {
                     Log.i(MainActivity.TAG,user.toString());
                     Gson gson = new Gson();
-                    String response = new HttpClient()
+                    Response response = new HttpClient()
                             .post(BuildConfig.HOST_URL + "SignUp",gson.toJson(user));
-                    Log.i(MainActivity.TAG,response);
+                    if(response.isSuccessful()){
+                        JsonObject responseJsonObject = gson.fromJson(response.body().string(), JsonObject.class);
+                        if(responseJsonObject != null && responseJsonObject.has("ok")
+                                && responseJsonObject.get("ok").getAsBoolean()){
+                            // TODO:
+                            saveUserToFirestore(view,user);
 
-                    JsonObject responseJsonObject = gson.fromJson(response, JsonObject.class);
-                    if(responseJsonObject != null && responseJsonObject.has("ok")
-                    && responseJsonObject.get("ok").getAsBoolean()){
-                        // TODO:
-                        saveUserToFirestore(view,user);
-
-                    }else{
-                        view.post(()->{
-                            resetLoadingButton(view);
-                            new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
-                                    .setMessage(response)
-                                    .setPositiveButton(R.string.responseOk, (dialog, which) -> {
-                                        dialog.cancel();
-                                    }).show();
-                        });
+                        }else{
+                            view.post(()->{
+                                resetLoadingButton(view);
+                                new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
+                                        .setMessage(response.message())
+                                        .setPositiveButton(R.string.responseOk, (dialog, which) -> {
+                                            dialog.cancel();
+                                        }).show();
+                            });
+                        }
                     }
+                    Log.i(MainActivity.TAG,response.body().string());
 
                 } catch (Exception e) {
                     view.post(()->{

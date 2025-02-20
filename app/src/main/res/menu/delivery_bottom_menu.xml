@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/delivery_new_tasks_menuitem"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/baseline_pending_actions_24"
+            android:title="@string/deliver_new_tasks" />
+        <item
+            android:id="@+id/delivery_completed_tasks_menu_item"
+            android:checkable="true"
+            android:icon="@drawable/ic_review_24"
+            android:title="@string/deliver_completed_tasks" />
+        <item
+            android:id="@+id/delivery_messages_menuitem"
+            android:checkable="true"
+            android:icon="@drawable/ic_messages"
+            android:title="@string/delivery_messages" />
+    </group>
+</menu>

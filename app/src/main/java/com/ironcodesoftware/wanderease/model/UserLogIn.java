@@ -107,6 +107,14 @@ public class UserLogIn implements Serializable {
         return getLogin(context) != null;
     }
 
+    public static boolean clear(Context context){
+        File userLog = new File(context.getFilesDir(), context.getString(R.string.user_log));
+        if(userLog.exists()){
+            return userLog.delete();
+        }
+        return false;
+    }
+
 
     public boolean isDataValid(EditText editTextEmail,EditText editTextPassword){
         boolean isValid = true;
@@ -160,6 +168,8 @@ public class UserLogIn implements Serializable {
         }
         return isSuccess;
     }
+
+
 
 
 
