@@ -59,6 +59,7 @@ public class DeliveryNewTaskFragment extends Fragment {
     private void loadOrders(View view) throws IOException, ClassNotFoundException {
         setLoading(view);
         RecyclerView recyclerView = view.findViewById(R.id.delivery_active_task_recyclerView);
+
         recyclerView.bringToFront();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -71,6 +72,7 @@ public class DeliveryNewTaskFragment extends Fragment {
                             List<DocumentSnapshot> documents = value.getDocuments();
 
                             view.post(()->{
+                                recyclerView.setVisibility(View.VISIBLE);
                                 resetLoading(view);
                                 recyclerView.setAdapter(new AdminActiveDeliveryAdapter(
                                         documents, getActivity()) {
@@ -88,7 +90,7 @@ public class DeliveryNewTaskFragment extends Fragment {
                                                             .putExtra(Order.F_LOCATION, document.getString(Order.F_LOCATION))
                                                             .putExtra(Order.F_BUYER, document.getString(Order.F_BUYER))
                                                             .putExtra(Order.F_DATE, document.getDate(Order.F_DATE))
-                                                            .putExtra(Order.F_PRICE, document.getLong(Order.F_PRICE))
+                                                            .putExtra(Order.F_PRICE, document.getDouble(Order.F_PRICE))
                                                             .putExtra("document_id", document.getId())
                                             );
                                         });
@@ -108,6 +110,8 @@ public class DeliveryNewTaskFragment extends Fragment {
     private void showEmptyCard(View view) {
         view.post(()->{
             ConstraintLayout emptyconstraintLayout = view.findViewById(R.id.delivery_new_task_spinner_container);
+            RecyclerView recyclerView = view.findViewById(R.id.delivery_active_task_recyclerView);
+            recyclerView.setVisibility(View.INVISIBLE);
             emptyconstraintLayout.setVisibility(View.VISIBLE);
             ImageView spinner = view.findViewById(R.id.delivery_new_task_spinner);
             spinner.setImageResource(R.drawable.box_empty_icon);

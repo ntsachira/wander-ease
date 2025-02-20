@@ -49,7 +49,9 @@ public class WanderDialog{
         return getSimpleDialog(context, message, lk.payhere.androidsdk.R.drawable.payment_declined_image);
     }
     public static AlertDialog confirm(Context context,String message){
-        return getSimpleDialog(context, message,R.drawable.warning_shield_icon);
+        AlertDialog dialog = getSimpleDialog(context, message, R.drawable.warning_shield_icon);
+        dialog.setCancelable(false);
+        return dialog;
     }
     public static AlertDialog info(Context context,String message){
         return getSimpleDialog(context, message,R.drawable.info_circle_icon);

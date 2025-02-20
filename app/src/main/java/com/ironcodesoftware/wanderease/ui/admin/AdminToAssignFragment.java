@@ -67,6 +67,8 @@ public class AdminToAssignFragment extends Fragment {
 
         Button buttonCancel = view.findViewById(R.id.admin_deliver_assign_cancel_button);
         buttonCancel.setOnClickListener(v->{
+            textView.setText("");
+            textView.dismissDropDown();
             new FlingAnimation(view.findViewById(R.id.slide_down_card), DynamicAnimation.TRANSLATION_Y)
                     .setStartVelocity(-9000f).setFriction(1f).start();
 
@@ -106,6 +108,8 @@ public class AdminToAssignFragment extends Fragment {
         textViewCourier.setOnFocusChangeListener((v, hasFocus) -> {
             if(hasFocus){
                 textViewCourier.showDropDown();
+            }else {
+                textViewCourier.dismissDropDown();
             }
         });
     }
@@ -128,6 +132,7 @@ public class AdminToAssignFragment extends Fragment {
                     List<DocumentSnapshot> documents = value.getDocuments();
 
                     view.post(()->{
+                        recyclerView.setVisibility(View.VISIBLE);
                         resetLoading(view);
                         recyclerView.setAdapter(new AdminToAssignDeliveryAdapter(
                                 documents, getActivity()));
@@ -144,6 +149,8 @@ public class AdminToAssignFragment extends Fragment {
 
     private void showEmptyCard(View view) {
         view.post(()->{
+            RecyclerView recyclerView = view.findViewById(R.id.admin_to_assign_recyclerview);
+            recyclerView.setVisibility(View.INVISIBLE);
             ConstraintLayout emptyconstraintLayout = view.findViewById(R.id.admin_delivery_active_spinner_container);
             emptyconstraintLayout.setVisibility(View.VISIBLE);
             ImageView spinner = view.findViewById(R.id.admin_delivery_active_spinnser);

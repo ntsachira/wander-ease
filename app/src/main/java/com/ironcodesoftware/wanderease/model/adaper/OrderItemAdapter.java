@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonArray;
@@ -28,9 +29,9 @@ import java.text.DecimalFormat;
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemViewHolder> {
 
     JsonArray itemJsonArray;
-    CheckoutActivity activity;
+    AppCompatActivity activity;
 
-    public OrderItemAdapter(JsonArray itemJsonArray, CheckoutActivity activity) {
+    public OrderItemAdapter(JsonArray itemJsonArray, AppCompatActivity activity) {
         this.itemJsonArray = itemJsonArray;
         this.activity = activity;
     }

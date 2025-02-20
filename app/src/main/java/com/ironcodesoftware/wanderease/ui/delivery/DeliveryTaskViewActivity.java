@@ -3,6 +3,7 @@ package com.ironcodesoftware.wanderease.ui.delivery;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -18,6 +19,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,7 +29,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -38,8 +40,10 @@ import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
+import com.ironcodesoftware.wanderease.model.adaper.OrderItemAdapter;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -88,12 +92,52 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
     }
 
     private void setupMarkButton() {
-
-
         Button buttonMark = findViewById(R.id.delivery_taskView_done_button);
 
         buttonMark.setOnClickListener(v->{
+            AlertDialog dialogConfirmation = WanderDialog.confirm(this, String.format("Confirm Order delivery for Order: %s",
+                    getIntent().getStringExtra(Order.F_ID)));
+            dialogConfirmation.setButton(DialogInterface.BUTTON_POSITIVE,"Confirm",(dialog, which) -> {
+                updateOrder();
+                dialog.cancel();
+            });
+            dialogConfirmation.setButton(DialogInterface.BUTTON_NEGATIVE,"Cancel",(dialog, which) -> {
+                dialog.cancel();
+            });
+            dialogConfirmation.show();
+        });
+    }
 
+    private void updateOrder() {
+        AlertDialog loading = WanderDialog.loading(this, "Loading...");
+        loading.show();
+        Gson gson = new Gson();
+        JsonObject requestObject = new JsonObject();
+        requestObject.addProperty(Order.F_ID, getIntent().getStringExtra(Order.F_ID));
+        requestObject.addProperty(Order.F_PRICE, getIntent().getDoubleExtra(Order.F_PRICE,0));
+        requestObject.addProperty(Order.F_STATE, Order.State.Delivered.ordinal());
+        requestObject.add(Order.F_ITEMS, gson.toJsonTree(gson.fromJson(getIntent().getStringExtra(Order.F_ITEMS), JsonArray.class)));
+        requestObject.addProperty(Order.F_BUYER, getIntent().getStringExtra(Order.F_BUYER));
+
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "SaveOrder")
+                .post(RequestBody.create(requestObject.toString(), HttpClient.JSON)).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(MainActivity.TAG,"Order save error",e);
+                runOnUiThread(()->{
+                    loading.cancel();
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to update order", Snackbar.LENGTH_INDEFINITE);
+                    snackbar.setAction("Ok", v -> {
+                        snackbar.dismiss();
+                    }).show();
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+            }
         });
     }
 
@@ -140,7 +184,10 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
                             });
                         }else{
                             runOnUiThread(()->{
-                                Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "3:Failed to load data", Snackbar.LENGTH_INDEFINITE);
+                                Snackbar snackbar = Snackbar.make(
+                                        findViewById(R.id.main),
+                                        "3:Failed to load data",
+                                        Snackbar.LENGTH_INDEFINITE);
                                 snackbar.setAction("Ok", v -> {
                                     snackbar.dismiss();
                                 }).show();
@@ -148,7 +195,10 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
                         }
                     }else{
                         runOnUiThread(()->{
-                            Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "2:Failed to load data", Snackbar.LENGTH_INDEFINITE);
+                            Snackbar snackbar = Snackbar.make(
+                                    findViewById(R.id.main),
+                                    "2:Failed to load data",
+                                    Snackbar.LENGTH_INDEFINITE);
                             snackbar.setAction("Ok", v -> {
                                 snackbar.dismiss();
                             }).show();
@@ -187,6 +237,22 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
     }
 
     private void loadOrderSummary(JsonArray items) {
+        RecyclerView recyclerView = findViewById(R.id.delivery_taskView_items_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new OrderItemAdapter(items,this));
+
+        TextView textViewOrderId = findViewById(R.id.delivery_taskView_orderId_textView);
+        textViewOrderId.setText(getIntent().getStringExtra(Order.F_ID));
+        TextView textViewItemTotal = findViewById(R.id.delivery_taskView_item_totak_textView);
+        int count = 0;
+        for (JsonElement item : items) {
+            count+=item.getAsJsonObject().get("qty").getAsInt();
+        }
+        textViewItemTotal.setText(String.valueOf(count));
+
+        TextView textViewTotalAmount = findViewById(R.id.delivery_taskView_total_amount_textView);
+        textViewTotalAmount.setText(String.format("Rs. %s",
+                new DecimalFormat().format(getIntent().getDoubleExtra(Order.F_PRICE,0))));
     }
 
     private void loadMap(JsonObject location) {

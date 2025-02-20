@@ -115,7 +115,7 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
         AlertDialog loading = WanderDialog.loading(activity, "Processing...");
         activity.runOnUiThread(loading::show);
         HashMap<String, Object> updateMap = new HashMap<>();
-        updateMap.put(Order.F_STATE, Order.State.Delivery_Assigned.name().replace("_", " "));
+        updateMap.put(Order.F_STATE, Order.State.Delivery_Assigned.getName());
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.collection(Order.F_COLLECTION).document(document.getId())
                 .update(updateMap).addOnFailureListener(e->{
@@ -126,11 +126,12 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
                     });
                     Log.e(MainActivity.TAG,"Order update failed",e);
                 }).addOnSuccessListener(task->{
-
+                    // add delivery assign record
                     HashMap<String,Object> deliveryMap = new HashMap<>();
                     deliveryMap.put(Delivery.F_STATUS, Delivery.State.Active.name());
                     deliveryMap.put(Delivery.F_ASSIGNED_ON, Calendar.getInstance().getTime());
                     deliveryMap.put(Delivery.F_ORDER_ID, orderId);
+                    deliveryMap.put(Delivery.F_COURIER, courierEmail);
                     firestore.collection(Delivery.F_COLLECTION).add(deliveryMap)
                             .addOnSuccessListener(documentReference->{
                                 activity.runOnUiThread(()->{
