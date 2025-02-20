@@ -82,7 +82,8 @@ public class DeliveryNewTaskFragment extends Fragment {
 
                                             startActivity(
                                                     new Intent(getContext(),DeliveryTaskViewActivity.class)
-                                                            .putExtra(document.getString(Order.F_ID),document.getString(Order.F_ID))
+                                                            .putExtra(Order.F_ID
+                                                                    ,document.getString(Order.F_ID))
                                                             .putExtra(Order.F_ITEMS, document.getString(Order.F_ITEMS))
                                                             .putExtra(Order.F_LOCATION, document.getString(Order.F_LOCATION))
                                                             .putExtra(Order.F_BUYER, document.getString(Order.F_BUYER))

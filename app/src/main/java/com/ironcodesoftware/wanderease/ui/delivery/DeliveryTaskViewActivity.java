@@ -1,11 +1,18 @@
 package com.ironcodesoftware.wanderease.ui.delivery;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -18,17 +25,32 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.Order;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class DeliveryTaskViewActivity extends AppCompatActivity {
 
+    final int CALL_PERMISSION_REQUEST_CODE = 119;
+    String mobile;
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +88,128 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
     }
 
     private void setupMarkButton() {
+
+
+        Button buttonMark = findViewById(R.id.delivery_taskView_done_button);
+
+        buttonMark.setOnClickListener(v->{
+
+        });
     }
 
+    @SuppressLint("CheckResult")
     private void setupCallButton() {
+        AlertDialog loading = WanderDialog.loading(this, "Loading...");
+        loading.show();
+
+        Button buttonCall = findViewById(R.id.delivery_taskView_call_button);
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty(
+                    UserLogIn.EMAIL_FIELD,getIntent().getStringExtra(Order.F_BUYER));
+            Request request = new Request.Builder().url(BuildConfig.HOST_URL + String.format("GetProfile"))
+                    .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
+            HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.e(MainActivity.TAG,"Profile load error",e);
+                    runOnUiThread(()->{
+                        loading.cancel();
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to load data", Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        }).show();
+                    });
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    runOnUiThread(loading::cancel);
+                    if(response.isSuccessful()){
+                        String responseText = response.body().string();
+                        JsonObject responseJson = new Gson().fromJson(responseText, JsonObject.class);
+                        if(responseJson.has("ok") && responseJson.get("ok").getAsBoolean()){
+                            String mobile = responseJson.get("profile").getAsJsonObject().get("mobile").getAsString();
+                            DeliveryTaskViewActivity.this.mobile = mobile;
+                            runOnUiThread(()->{
+                                buttonCall.setOnClickListener(v -> {
+                                    if(hasCallPermission()){
+                                        callBuyer();
+                                    }
+                                });
+                            });
+                        }else{
+                            runOnUiThread(()->{
+                                Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "3:Failed to load data", Snackbar.LENGTH_INDEFINITE);
+                                snackbar.setAction("Ok", v -> {
+                                    snackbar.dismiss();
+                                }).show();
+                            });
+                        }
+                    }else{
+                        runOnUiThread(()->{
+                            Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "2:Failed to load data", Snackbar.LENGTH_INDEFINITE);
+                            snackbar.setAction("Ok", v -> {
+                                snackbar.dismiss();
+                            }).show();
+                        });
+                    }
+                }
+            });
+
+
+    }
+
+    private boolean hasCallPermission() {
+        if(checkSelfPermission(Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, CALL_PERMISSION_REQUEST_CODE);
+        return false;
+    }
+
+    private void callBuyer() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse(String.format("tel:%s",mobile)));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults, int deviceId) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
+        if(requestCode == CALL_PERMISSION_REQUEST_CODE){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                callBuyer();
+            }else{
+                WanderDialog.cancel(DeliveryTaskViewActivity.this, "Call Permission denied").show();
+            }
+        }
     }
 
     private void loadOrderSummary(JsonArray items) {
     }
 
     private void loadMap(JsonObject location) {
+        TextView textViewAddress = findViewById(R.id.delivery_taskView_delivery_address_textView);
+        textViewAddress.setText(location.get("address").getAsString());
+        LatLng latLng = new LatLng(location.get("lat").getAsDouble(), location.get("lon").getAsDouble());
+        SupportMapFragment mapFragment = new SupportMapFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.delivery_taskView_map_framelayout, mapFragment).commit();
+
+        mapFragment.getMapAsync(googleMap -> {
+            googleMap.animateCamera(
+                    CameraUpdateFactory.newCameraPosition(
+                            new CameraPosition.Builder().target(latLng)
+                                    .zoom(15).build()
+                    )
+            );
+            googleMap.addMarker(
+                    new MarkerOptions().position(latLng).title("Delivery Location")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_navigation_marker_icon))
+            );
+        });
+
 
     }
 }

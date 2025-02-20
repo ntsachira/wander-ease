@@ -35,7 +35,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                app:cardElevation="2dp"
+                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +47,7 @@
                         android:id="@+id/delivery_taskView_map_framelayout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/delivery_taskView_delivery_address_textView"
                         tools:layout_editor_absoluteX="10dp">
@@ -78,6 +79,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
