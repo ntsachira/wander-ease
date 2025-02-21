@@ -21,16 +21,19 @@ import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.JsonArray;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.adaper.ToReceiveOrderAdapter;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -56,48 +59,44 @@ public class ToReceiveFragment extends Fragment {
         setLoading(view);
         RecyclerView recyclerView = view.findViewById(R.id.my_orders_to_receive_orders_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        
+
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.collection("Order")
-                .whereEqualTo("buyer", UserLogIn.getLogin(getContext()).getEmail())
-                .get().addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        QuerySnapshot result = task.getResult();
-                        if(!result.isEmpty()){
-                            List<DocumentSnapshot> documents = result.getDocuments();
-                            view.post(()->{
-                                resetLoading(view);
-                               recyclerView.setAdapter(new ToReceiveOrderAdapter(
-                                       documents, getActivity()));
+                .where(Filter.and(
+                        Filter.equalTo("buyer", UserLogIn.getLogin(getContext()).getEmail()),
+                        Filter.inArray(Order.F_STATE, Arrays.asList(
+                                Order.State.Pending.name(),
+                                Order.State.Processing.name(),
+                                Order.State.Delivery_Assigned.getName()
+                        ))
+                )).addSnapshotListener((value, error) -> {
+                    if(error == null && !value.isEmpty()){
+                        List<DocumentSnapshot> documents = value.getDocuments();
+                        view.post(()->{
+                            resetLoading(view);
+                            recyclerView.setAdapter(new ToReceiveOrderAdapter(
+                                    documents, getActivity()) {
+                                @Override
+                                public void setupActionButton(DocumentSnapshot document, Button actionButton) {
+
+                                }
                             });
-                        }else{
-                            view.post(()->{
-                                resetLoading(view);
-                                showEmptyCard(view);
-                            });
-                        }
+                        });
                     }else{
+                        Log.e(MainActivity.TAG,error!=null?error.getMessage():"Empty orders");
                         view.post(()->{
                             resetLoading(view);
                             showEmptyCard(view);
-                            Snackbar snackbar = Snackbar.make(view,
-                                    "Data loading failed. Please check your connection",
-                                    Snackbar.LENGTH_INDEFINITE);
-                            snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
+                            if(error!=null){
+                                Snackbar snackbar = Snackbar.make(view,
+                                        "Something went wrong. Please try again",
+                                        Snackbar.LENGTH_INDEFINITE);
+                                snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
+                            }
                         });
                     }
-                })
-                .addOnFailureListener(e->{
-                    Log.e(MainActivity.TAG,"Orders failed to load",e);
-                    view.post(()->{
-                        resetLoading(view);
-                        showEmptyCard(view);
-                        Snackbar snackbar = Snackbar.make(view,
-                                "Something went wrong. Please try again",
-                                Snackbar.LENGTH_INDEFINITE);
-                        snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
-                    });
                 });
+
     }
 
     private void showEmptyCard(View view) {

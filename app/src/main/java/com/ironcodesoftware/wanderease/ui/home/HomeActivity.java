@@ -1,17 +1,21 @@
 package com.ironcodesoftware.wanderease.ui.home;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,10 +23,18 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.ShakeDetector;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
+import com.ironcodesoftware.wanderease.model.WanderNotification;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
 import java.io.IOException;
@@ -35,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     CartFragment cartFragment = new CartFragment();
     SavedFragment savedFragment = new SavedFragment();
     SearchFragment searchFragment = new SearchFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +58,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-        if(!sharedPreferences.contains("hint")){
-            showHint();
-        }
+        showHint();
 
         initShakeDetector();
 
@@ -72,6 +82,8 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     private void initShakeDetector() {
         shakeDetector = new ShakeDetector(this) {
             @Override
@@ -82,16 +94,19 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void showHint() {
-        AlertDialog infoDialog = WanderDialog.info(this,
-                "You can shake you phone to reload the content");
-        infoDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Do not show this again",(dialog, which) -> {
-            SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-            sharedPreferences.edit().putBoolean("hint", false).apply();
-        });
-        infoDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Ok",(dialog, which) -> {
-            dialog.cancel();
-        });
-        infoDialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        if(!sharedPreferences.contains("hint")){
+            AlertDialog infoDialog = WanderDialog.info(this,
+                    "You can shake you phone to reload the content");
+            infoDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Do not show this again",(dialog, which) -> {
+                sharedPreferences.edit().putBoolean("hint", false).apply();
+            });
+            infoDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Ok",(dialog, which) -> {
+                dialog.cancel();
+            });
+            infoDialog.show();
+        }
+
     }
 
 

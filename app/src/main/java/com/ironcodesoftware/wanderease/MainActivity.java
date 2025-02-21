@@ -1,37 +1,54 @@
 package com.ironcodesoftware.wanderease;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderNotification;
 import com.ironcodesoftware.wanderease.model.adaper.IntroSliderAdapter;
 import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
 import com.ironcodesoftware.wanderease.ui.delivery.DeliveryActivity;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
+import com.ironcodesoftware.wanderease.ui.home.MessagesActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    public static String TAG = "WanderEaseLog";
+
+    public static final String TAG = "WanderEaseLog";
+    private String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
             if(UserLogIn.hasLogin(MainActivity.this)){
                 UserLogIn logIn = UserLogIn.getLogin(MainActivity.this);
+                email = logIn.getEmail();
+                checkNotifications();
                 if (logIn.getUser_role().equals(User.DELIVERY)) {
                     gotoActivity(DeliveryActivity.class);
                 } else if (logIn.getUser_role().equals(User.ADMIN)) {
@@ -95,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void gotoActivity(Class<? extends AppCompatActivity> activityClass) {
-        startActivity(new Intent(MainActivity.this, activityClass));
+        startActivity(
+                new Intent(MainActivity.this, activityClass)
+                        .putExtra(UserLogIn.EMAIL_FIELD, email));
         finish();
     }
 
@@ -110,4 +129,23 @@ public class MainActivity extends AppCompatActivity {
                 .putString(getString(R.string.main_returningUser), getString(R.string.main_returningUser))
                 .apply();
     }
+
+    private void checkNotifications() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Notification.COLLECTION).where(Filter.and(
+                Filter.equalTo(Notification.F_USER, email),
+                Filter.equalTo(Notification.F_STATUS, Notification.State.Not_Seen.toString())
+        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error == null && !value.isEmpty()){
+                    WanderNotification.notify(MainActivity.this, MessagesActivity.class );
+                }else{
+                    Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");
+                }
+            }
+        });
+    }
+
+
 }

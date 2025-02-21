@@ -28,7 +28,7 @@ public class DeliveryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         loadFragment(new DeliveryNewTaskFragment());
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.delivery_bottomNavigationMenu);

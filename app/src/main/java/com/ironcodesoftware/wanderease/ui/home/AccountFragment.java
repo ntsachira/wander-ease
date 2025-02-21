@@ -131,7 +131,6 @@ public class AccountFragment extends Fragment {
                             } catch (ClassNotFoundException e) {
                                 Log.e(MainActivity.TAG,e.getLocalizedMessage());
                             }
-                            Log.i(MainActivity.TAG,response.body().string());
                         }else{
                             promptFailed("2:Profile loading failed");
                         }

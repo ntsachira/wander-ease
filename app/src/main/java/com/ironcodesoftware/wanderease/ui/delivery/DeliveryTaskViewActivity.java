@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -28,7 +29,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -36,7 +39,9 @@ import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Delivery;
 import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
@@ -44,6 +49,8 @@ import com.ironcodesoftware.wanderease.model.adaper.OrderItemAdapter;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -111,34 +118,99 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
     private void updateOrder() {
         AlertDialog loading = WanderDialog.loading(this, "Loading...");
         loading.show();
-        Gson gson = new Gson();
-        JsonObject requestObject = new JsonObject();
-        requestObject.addProperty(Order.F_ID, getIntent().getStringExtra(Order.F_ID));
-        requestObject.addProperty(Order.F_PRICE, getIntent().getDoubleExtra(Order.F_PRICE,0));
-        requestObject.addProperty(Order.F_STATE, Order.State.Delivered.ordinal());
-        requestObject.add(Order.F_ITEMS, gson.toJsonTree(gson.fromJson(getIntent().getStringExtra(Order.F_ITEMS), JsonArray.class)));
-        requestObject.addProperty(Order.F_BUYER, getIntent().getStringExtra(Order.F_BUYER));
+        HashMap<String,Object> orderUpdates = new HashMap<>();
+        orderUpdates.put(Order.F_STATE, Order.State.Delivered.name());
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Order.F_COLLECTION)
+                .document(getIntent().getStringExtra("document_id"))
+                .update(orderUpdates)
+                .addOnSuccessListener( unused -> {
+                    firestore.collection(Delivery.F_COLLECTION)
+                            .whereEqualTo(Delivery.F_ORDER_ID, getIntent().getStringExtra(Order.F_ID))
+                            .get().addOnCompleteListener(task->{
+                                if(task.isSuccessful()){
+                                    HashMap<String,Object> deliveryUpdates = new HashMap<>();
+                                    deliveryUpdates.put(Delivery.F_STATUS, Delivery.State.Delivered.name());
+                                    firestore.collection(Delivery.F_COLLECTION)
+                                            .document(task.getResult().getDocuments().get(0).getId())
+                                            .update(deliveryUpdates)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    sendNotification();
+                                                    runOnUiThread(()->{
+                                                        loading.cancel();
+                                                        Toast.makeText(
+                                                                        DeliveryTaskViewActivity.this,
+                                                                        "Task updated success",Toast.LENGTH_LONG )
+                                                                .show();
+                                                        finish();
+                                                    });
 
-        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "SaveOrder")
-                .post(RequestBody.create(requestObject.toString(), HttpClient.JSON)).build();
-        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.e(MainActivity.TAG,"Order save error",e);
-                runOnUiThread(()->{
-                    loading.cancel();
-                    Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to update order", Snackbar.LENGTH_INDEFINITE);
-                    snackbar.setAction("Ok", v -> {
-                        snackbar.dismiss();
-                    }).show();
+                                                }
+                                            }).addOnFailureListener(e->{
+                                                Log.e(MainActivity.TAG,"3:Order update error",e);
+                                                runOnUiThread(()->{
+                                                    loading.cancel();
+                                                    Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "3:Failed to update order", Snackbar.LENGTH_INDEFINITE);
+                                                    snackbar.setAction("Ok", v -> {
+                                                        snackbar.dismiss();
+                                                    }).show();
+                                                });
+                                            });
+                                }
+                            })
+                            .addOnFailureListener(e->{
+                                Log.e(MainActivity.TAG,"2:Order update error",e);
+                                runOnUiThread(()->{
+                                    loading.cancel();
+                                    Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "2:Failed to update order", Snackbar.LENGTH_INDEFINITE);
+                                    snackbar.setAction("Ok", v -> {
+                                        snackbar.dismiss();
+                                    }).show();
+                                });
+                            });
+                })
+                .addOnFailureListener(e->{
+                    Log.e(MainActivity.TAG,"1:Order update error",e);
+                    runOnUiThread(()->{
+                        loading.cancel();
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to update order", Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        }).show();
+                    });
                 });
-            }
+    }
 
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-
-            }
-        });
+    private void sendNotification() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        HashMap<String,Object> notificationMap = new HashMap<>();
+        notificationMap.put(Notification.F_MESSAGE, String.format("Order: %s has delivered",
+                getIntent().getStringExtra(Order.F_ID)));
+        notificationMap.put(Notification.F_TIME, Calendar.getInstance().getTime());
+        notificationMap.put(Notification.F_USER,getIntent().getStringExtra(Order.F_BUYER));
+        notificationMap.put(Notification.F_STATUS, Notification.State.Not_Seen.toString());
+        firestore.collection(Notification.COLLECTION)
+                .add(notificationMap)
+                .addOnCompleteListener(task -> {
+                    runOnUiThread(()->{
+                        Toast.makeText(
+                                        DeliveryTaskViewActivity.this,
+                                        "Notification sent",Toast.LENGTH_LONG )
+                                .show();
+                        finish();
+                    });
+                })
+                .addOnFailureListener(e->{
+                    Log.e(MainActivity.TAG,"1:Order update error",e);
+                    runOnUiThread(()->{
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to send notification", Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        }).show();
+                    });
+                });
     }
 
     @SuppressLint("CheckResult")

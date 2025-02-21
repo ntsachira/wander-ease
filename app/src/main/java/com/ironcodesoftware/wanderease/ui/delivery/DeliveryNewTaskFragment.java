@@ -21,16 +21,20 @@ import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Delivery;
 import com.ironcodesoftware.wanderease.model.Order;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.adaper.AdminActiveDeliveryAdapter;
 import com.ironcodesoftware.wanderease.ui.admin.AdminSettingsActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,39 +68,53 @@ public class DeliveryNewTaskFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        firestore.collection("Order").whereEqualTo(Order.F_STATE,Order.State.Delivery_Assigned.getName())
+        firestore.collection(Delivery.F_COLLECTION).where(Filter.and(
+                Filter.equalTo(Delivery.F_STATUS,Delivery.State.Active.name()),
+                Filter.equalTo(Delivery.F_COURIER, UserLogIn.getLogin(getContext()).getEmail())
+                ))
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(!value.isEmpty()){
-                            List<DocumentSnapshot> documents = value.getDocuments();
+                            ArrayList<String> idList = new ArrayList<>();
+                            for (DocumentSnapshot document : value.getDocuments()) {
+                                idList.add(document.getString(Delivery.F_ORDER_ID));
+                            }
 
-                            view.post(()->{
-                                recyclerView.setVisibility(View.VISIBLE);
-                                resetLoading(view);
-                                recyclerView.setAdapter(new AdminActiveDeliveryAdapter(
-                                        documents, getActivity()) {
-                                    @Override
-                                    public void addAction(@NonNull DocumentSnapshot document, Button buttonAction) {
-                                        buttonAction.setVisibility(View.VISIBLE);
-                                        buttonAction.setText(R.string.view);
-                                        buttonAction.setOnClickListener(v -> {
+                            firestore.collection(Order.F_COLLECTION).where(
+                                    Filter.inArray(Order.F_ID, idList)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    List<DocumentSnapshot> documents = value.getDocuments();
+                                    view.post(()->{
+                                        recyclerView.setVisibility(View.VISIBLE);
+                                        resetLoading(view);
+                                        recyclerView.setAdapter(new AdminActiveDeliveryAdapter(
+                                                documents, getActivity()) {
+                                            @Override
+                                            public void addAction(@NonNull DocumentSnapshot document, Button buttonAction) {
+                                                buttonAction.setVisibility(View.VISIBLE);
+                                                buttonAction.setText(R.string.view);
+                                                buttonAction.setOnClickListener(v -> {
 
-                                            startActivity(
-                                                    new Intent(getContext(),DeliveryTaskViewActivity.class)
-                                                            .putExtra(Order.F_ID
-                                                                    ,document.getString(Order.F_ID))
-                                                            .putExtra(Order.F_ITEMS, document.getString(Order.F_ITEMS))
-                                                            .putExtra(Order.F_LOCATION, document.getString(Order.F_LOCATION))
-                                                            .putExtra(Order.F_BUYER, document.getString(Order.F_BUYER))
-                                                            .putExtra(Order.F_DATE, document.getDate(Order.F_DATE))
-                                                            .putExtra(Order.F_PRICE, document.getDouble(Order.F_PRICE))
-                                                            .putExtra("document_id", document.getId())
-                                            );
+                                                    startActivity(
+                                                            new Intent(getContext(),DeliveryTaskViewActivity.class)
+                                                                    .putExtra(Order.F_ID
+                                                                            ,document.getString(Order.F_ID))
+                                                                    .putExtra(Order.F_ITEMS, document.getString(Order.F_ITEMS))
+                                                                    .putExtra(Order.F_LOCATION, document.getString(Order.F_LOCATION))
+                                                                    .putExtra(Order.F_BUYER, document.getString(Order.F_BUYER))
+                                                                    .putExtra(Order.F_DATE, document.getDate(Order.F_DATE))
+                                                                    .putExtra(Order.F_PRICE, document.getDouble(Order.F_PRICE))
+                                                                    .putExtra("document_id", document.getId())
+                                                    );
+                                                });
+                                            }
                                         });
-                                    }
-                                });
+                                    });
+                                }
                             });
+
                         }else{
                             view.post(()->{
                                 resetLoading(view);

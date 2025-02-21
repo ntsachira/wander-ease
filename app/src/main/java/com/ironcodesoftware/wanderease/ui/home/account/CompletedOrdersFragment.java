@@ -20,6 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,11 +31,15 @@ import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.adaper.CompletedOrderAdapter;
+import com.ironcodesoftware.wanderease.model.adaper.ToReceiveOrderAdapter;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -54,73 +61,52 @@ public class CompletedOrdersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadOrders(view);
+        try {
+            loadOrders(view);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadOrders(View view) {
+    private void loadOrders(View view) throws IOException, ClassNotFoundException {
         setLoading(view);
 
         RecyclerView recyclerView = view.findViewById(R.id.completed_orders_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        new Thread(()->{
-            try {
-                Request request = new Request.Builder().url(String.format("%sLoadCompletedOrders?email=%s",
-                        BuildConfig.HOST_URL, UserLogIn.getLogin(getContext()).getEmail())).build();
-                HttpClient.getInstance().newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
-                        Log.e(MainActivity.TAG, "Completed orders loading failed",e);
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("Order")
+                .where(Filter.and(
+                        Filter.equalTo("buyer", UserLogIn.getLogin(getContext()).getEmail()),
+                        Filter.inArray(Order.F_STATE, Arrays.asList(
+                                Order.State.Delivered.name()
+                        ))
+                )).addSnapshotListener((value, error) -> {
+                    if(error == null && !value.isEmpty()){
+                        List<DocumentSnapshot> documents = value.getDocuments();
                         view.post(()->{
                             resetLoading(view);
-                            Snackbar snackbar = Snackbar.make(view, "Data loading failed",
-                                    Snackbar.LENGTH_INDEFINITE);
-                            snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
-                        });
-                    }
+                            recyclerView.setAdapter(new ToReceiveOrderAdapter(
+                                    documents, getActivity()) {
+                                @Override
+                                public void setupActionButton(DocumentSnapshot document, Button actionButton) {
 
-                    @Override
-                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                                }
+                            });
+                        });
+                    }else{
+                        Log.e(MainActivity.TAG,error!=null?error.getMessage():"Empty orders");
                         view.post(()->{
                             resetLoading(view);
-                        });
-                            if(response.isSuccessful()){
-                                JsonObject responseObject = new Gson().fromJson(response.body().string(), JsonObject.class);
-                                JsonArray orders = responseObject.get("orders").getAsJsonArray();
-
-                                view.post(()->{
-                                    if(orders.isEmpty()){
-                                        showEmptyCard(view);
-                                    }else{
-                                        recyclerView.bringToFront();
-                                    }
-                                   recyclerView.setAdapter(
-                                           new CompletedOrderAdapter(
-                                                   orders,
-                                                   getActivity()
-                                           )
-                                   );
-                               });
-                            }else{
-                                Log.e(MainActivity.TAG, response.body().string());
-                                view.post(()->{
-                                    resetLoading(view);
-                                    Snackbar snackbar = Snackbar.make(view,
-                                            "Data loading failed. Please check your connection",
-                                            Snackbar.LENGTH_INDEFINITE);
-                                    snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
-                                });
+                            showEmptyCard(view);
+                            if(error!=null){
+                                Snackbar snackbar = Snackbar.make(view,
+                                        "Something went wrong. Please try again",
+                                        Snackbar.LENGTH_INDEFINITE);
+                                snackbar.setAction("Ok", v -> {snackbar.dismiss();}).show();
                             }
-
-
+                        });
                     }
                 });
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-        }).start();
     }
 
     private void showEmptyCard(View view) {

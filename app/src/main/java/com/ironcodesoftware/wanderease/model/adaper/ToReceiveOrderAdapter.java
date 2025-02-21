@@ -20,7 +20,7 @@ import com.ironcodesoftware.wanderease.R;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAdapter.ToReceiveOrderItemViewHolder> {
+public abstract class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAdapter.ToReceiveOrderItemViewHolder> {
     List<DocumentSnapshot> documentList;
     FragmentActivity activity;
 
@@ -55,12 +55,16 @@ public class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAd
 
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         holder.recyclerView.setAdapter(new MyOrderItemAdapter(jsonArray,activity));
+
+        setupActionButton(document, holder.buttonAction);
     }
 
     @Override
     public int getItemCount() {
         return documentList.size();
     }
+
+    public abstract void setupActionButton(DocumentSnapshot document,Button actionButton);
 
     static class ToReceiveOrderItemViewHolder extends RecyclerView.ViewHolder{
 
@@ -70,6 +74,8 @@ public class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAd
         TextView textViewItemCount;
         TextView textViewTotal;
 
+        Button buttonAction;
+
         public ToReceiveOrderItemViewHolder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.completed_order_item_recyclerView);
@@ -77,6 +83,7 @@ public class ToReceiveOrderAdapter extends RecyclerView.Adapter<ToReceiveOrderAd
             textViewStatus = itemView.findViewById(R.id.completed_order_status_textView);
             textViewItemCount = itemView.findViewById(R.id.completed_order_Item_count_textView);
             textViewTotal = itemView.findViewById(R.id.completed_order_total_amount_textView);
+            buttonAction = itemView.findViewById(R.id.my_order_item_action_button);
         }
     }
 }

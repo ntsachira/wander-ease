@@ -6,6 +6,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,19 +34,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
+import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.Product;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.model.adaper.OrderItemAdapter;
+import com.ironcodesoftware.wanderease.ui.delivery.DeliveryTaskViewActivity;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -59,7 +64,10 @@ import lk.payhere.androidsdk.PHMainActivity;
 import lk.payhere.androidsdk.PHResponse;
 import lk.payhere.androidsdk.model.InitRequest;
 import lk.payhere.androidsdk.model.StatusResponse;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -74,6 +82,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private ArrayList<String> orderDocumentIDs;
     private AlertDialog loadingDialog;
     private String orderDocumentID;
+
+    HashMap<String,JsonArray> sellerOrderMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,9 +239,6 @@ public class CheckoutActivity extends AppCompatActivity {
                         });
                         Log.e(TAG,"Seller Order saving error",e);
                     });
-            // TODO
-            // send notification messages
-//            firestore.collection("notification").add()
         } );
     }
 
@@ -269,6 +276,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     if (response.isSuccess()) {
                         msg = "Activity result:" + response.getData().getMessage();
                         updateStock();
+                        updateNotifications();
                     }else {
                         msg = "Result:" + response.getData().getMessage();
                     }
@@ -280,6 +288,16 @@ public class CheckoutActivity extends AppCompatActivity {
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 removeOrder();
             }
+        }
+    }
+
+    private void updateNotifications() {
+        for (String email : sellerOrderMap.keySet()) {
+            sendNotification(
+                    "You have new product orders",
+                    this,
+                    email
+            );
         }
     }
 
@@ -337,15 +355,24 @@ public class CheckoutActivity extends AppCompatActivity {
             loadingDialog = WanderDialog.loading(this,"Processing...");
             loadingDialog.show();
         });
-        // TODO
-        new Thread(()->{
-            try {
-                Response response = new HttpClient().post(
-                        BuildConfig.HOST_URL + "UpdateStock"
-                        , productArray.toString());
+
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "UpdateStock")
+                .post(RequestBody.create(productArray.toString(), HttpClient.JSON)).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(TAG, "Update stock failed",e);
+                runOnUiThread(()->{
+                    loadingDialog.cancel();
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if(response.isSuccessful()){
                     Gson gson = new Gson();
-                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                    String responseText = response.body().string();
+                    JsonObject responseJson = gson.fromJson(responseText, JsonObject.class);
                     if(responseJson.has("ok") && responseJson.get("ok").getAsBoolean()){
                         runOnUiThread(()->{
                             AlertDialog alertDialog = WanderDialog.success(
@@ -369,13 +396,8 @@ public class CheckoutActivity extends AppCompatActivity {
                         loadingDialog.cancel();
                     });
                 }
-            } catch (IOException e) {
-                Log.e(TAG, "Update stock failed",e);
-                runOnUiThread(()->{
-                    loadingDialog.cancel();
-                });
             }
-        }).start();
+        });
 
 
     }
@@ -428,5 +450,34 @@ public class CheckoutActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.place_order_item_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new OrderItemAdapter(productArray,this));
+    }
+
+    private void sendNotification(String message, Context context,String recipientEmail) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        HashMap<String,Object> notificationMap = new HashMap<>();
+        notificationMap.put(Notification.F_MESSAGE, message);
+        notificationMap.put(Notification.F_TIME, Calendar.getInstance().getTime());
+        notificationMap.put(Notification.F_USER,recipientEmail);
+        notificationMap.put(Notification.F_STATUS, Notification.State.Not_Seen.toString());
+        firestore.collection(Notification.COLLECTION)
+                .add(notificationMap)
+                .addOnCompleteListener(task -> {
+                    runOnUiThread(()->{
+                        Toast.makeText(
+                                        context,
+                                        "Notification sent",Toast.LENGTH_LONG )
+                                .show();
+                        finish();
+                    });
+                })
+                .addOnFailureListener(e->{
+                    Log.e(MainActivity.TAG,"1:Order update error",e);
+                    runOnUiThread(()->{
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to send notification", Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        }).show();
+                    });
+                });
     }
 }

@@ -1,4 +1,4 @@
-package com.ironcodesoftware.wanderease.ui.home;
+package com.ironcodesoftware.wanderease.ui.home.account;
 
 import android.os.Bundle;
 
@@ -9,23 +9,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.ironcodesoftware.wanderease.R;
-import com.ironcodesoftware.wanderease.model.WanderNotification;
 
-public class MessagesActivity extends AppCompatActivity {
+public class ProductReviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_product_review);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        WanderNotification.dismiss(this);
-
-
     }
 }

@@ -66,6 +66,7 @@ public class AdminDeliveryActiveFragment extends Fragment {
                             List<DocumentSnapshot> documents = value.getDocuments();
 
                             view.post(()->{
+                                recyclerView.setVisibility(View.VISIBLE);
                                 resetLoading(view);
                                 recyclerView.setAdapter(new AdminActiveDeliveryAdapter(
                                         documents, getActivity()) {
@@ -91,6 +92,8 @@ public class AdminDeliveryActiveFragment extends Fragment {
 
     private void showEmptyCard(View view) {
         view.post(()->{
+            RecyclerView recyclerView = view.findViewById(R.id.admin_delivery_active_recyclerView);
+            recyclerView.setVisibility(View.INVISIBLE);
             ConstraintLayout emptyconstraintLayout = view.findViewById(R.id.admin_delivery_active_spinner_container);
             emptyconstraintLayout.setVisibility(View.VISIBLE);
             ImageView spinner = view.findViewById(R.id.admin_delivery_active_spinnser);
