@@ -76,5 +76,5 @@ dependencies {
 
     implementation("com.github.PayHereDevs:payhere-android-sdk:v3.0.17")
 
-
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

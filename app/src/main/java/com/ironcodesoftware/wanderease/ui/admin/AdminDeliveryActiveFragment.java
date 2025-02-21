@@ -1,5 +1,9 @@
 package com.ironcodesoftware.wanderease.ui.admin;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,14 +23,12 @@ import android.widget.ImageView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.adaper.AdminActiveDeliveryAdapter;
-import com.ironcodesoftware.wanderease.model.adaper.AdminToAssignDeliveryAdapter;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,6 +36,7 @@ import java.util.List;
 
 public class AdminDeliveryActiveFragment extends Fragment {
 
+    final int CALL_PERMISSION_REQUEST_CODE = 119;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,7 +78,9 @@ public class AdminDeliveryActiveFragment extends Fragment {
                                         buttonAction.setVisibility(View.VISIBLE);
                                         buttonAction.setText(R.string.call_courier);
                                         buttonAction.setOnClickListener(v -> {
-
+                                            if(hasCallPermission()){
+                                                callCourier("");
+                                            }
                                         });
                                     }
                                 });
@@ -89,7 +94,19 @@ public class AdminDeliveryActiveFragment extends Fragment {
                     }
                 });
     }
+    private boolean hasCallPermission() {
+        if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, CALL_PERMISSION_REQUEST_CODE);
+        return false;
+    }
 
+    private void callCourier(String mobile) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse(String.format("tel:%s",mobile)));
+        startActivity(intent);
+    }
     private void showEmptyCard(View view) {
         view.post(()->{
             RecyclerView recyclerView = view.findViewById(R.id.admin_delivery_active_recyclerView);

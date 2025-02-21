@@ -30,6 +30,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.ShakeDetector;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.ui.home.HelpFragment;
 import com.ironcodesoftware.wanderease.ui.home.MessageFragment;
@@ -46,6 +47,7 @@ public class PartnerActivity extends AppCompatActivity {
     PartnerBookingFragment bookingFragment = new PartnerBookingFragment();
     MessageFragment messageFragment = new MessageFragment();
     HelpFragment helpFragment = new HelpFragment();
+    private ShakeDetector shakeDetector;
 
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     @Override
@@ -58,6 +60,8 @@ public class PartnerActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        initShakeDetector();
 
         getWindow().setStatusBarColor(getColor(R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -91,6 +95,15 @@ public class PartnerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initShakeDetector() {
+        shakeDetector = new ShakeDetector(this) {
+            @Override
+            public void onShake() {
+                recreate();
+            }
+        };
     }
 
     private void setUserDetails() {
@@ -186,5 +199,17 @@ public class PartnerActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.partner_navigationView);
         Menu menu = navigationView.getMenu();
         setSelectedFragment(menu.findItem(savedInstanceState.getInt("selectedMenuItem")));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shakeDetector.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shakeDetector.stop();
     }
 }
