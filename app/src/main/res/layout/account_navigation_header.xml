@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/female_person_icon" />
+        app:srcCompat="@drawable/avatar_default_icon" />
 
     <TextView
         android:id="@+id/account_navigation_header_textView_username"

@@ -17,20 +17,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Notification;
+import com.ironcodesoftware.wanderease.model.SQLiteHelper;
 import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderNotification;
 import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
 import com.ironcodesoftware.wanderease.ui.delivery.DeliveryActivity;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
+import com.ironcodesoftware.wanderease.ui.home.MessagesActivity;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -85,6 +105,8 @@ public class LoginFragment extends Fragment {
                         if(task.isSuccessful()){
                             if(authenticate(task.getResult().getDocuments(),logIn,view)){
                                 if(logIn.serialize(view.getContext())){
+                                    requestUserDetails(logIn.getEmail());
+                                    checkNotifications(logIn.getEmail());
                                     if(logIn.getUser_role().equals(User.USER)){
                                         gotoActivity(HomeActivity.class);
                                     } else if (logIn.getUser_role().equals(User.DELIVERY)) {
@@ -111,6 +133,60 @@ public class LoginFragment extends Fragment {
         }else{
             resetLoadingButton(view);
         }
+    }
+
+
+    private void requestUserDetails(String email){
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
+                .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(MainActivity.TAG,e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if(response.isSuccessful()){
+                    Gson gson = new Gson();
+                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                    if(responseJson.has("ok")
+                            && responseJson.get("ok").getAsBoolean()){
+                        JsonObject profile = responseJson.getAsJsonObject("profile");
+                        String name = profile.get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
+                        SQLiteHelper.saveProfile(getContext(), profile);
+                        try {
+                            UserLogIn login = UserLogIn.getLogin(getContext());
+                            login.setDisplay_name(name);
+                            login.serialize(getContext());
+                        } catch (ClassNotFoundException e) {
+                            Log.e(MainActivity.TAG,e.getLocalizedMessage());
+                        }
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void checkNotifications(String email) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Notification.COLLECTION).where(Filter.and(
+                Filter.equalTo(Notification.F_USER, email),
+                Filter.equalTo(Notification.F_STATUS, Notification.State.Not_Seen.toString())
+        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error == null && !value.isEmpty()){
+                    WanderNotification.notify(getContext(), MessagesActivity.class );
+                }else{
+                    Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");
+                }
+            }
+        });
     }
 
     private void gotoActivity(Class<? extends AppCompatActivity> destinationActivityClass) {

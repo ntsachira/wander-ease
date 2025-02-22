@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/single_product_view_toolbar">
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:isIndicator="true"
-                        android:progress="50"
+                        android:progress="0"
                         android:progressTint="#FFC107"
                         app:layout_constraintBottom_toBottomOf="@+id/single_product_view_rating_textView"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -201,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp">
 

@@ -64,7 +64,7 @@ public class AdminDashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         loadData(view);
-        loadUsersCounts(view);
+
     }
 
     private void setOrderStatusChart(View view, HashMap<String, Integer> statusMap) {
@@ -108,7 +108,7 @@ public class AdminDashboardFragment extends Fragment {
     private void loadData(View view) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         HashMap<String,Integer> statusMap = new HashMap<>();
-
+        loadUsersCounts(view);
         TextView textViewOrders = view.findViewById(R.id.adimin_dashboard_total_orders_textView);
         TextView textViewOrdersTime = view.findViewById(R.id.adimin_dashboard_total_orders_time_textView);
         TextView textViewDeliveryPersonTime = view.findViewById(R.id.adimin_dashboard_total_delivery_person_time_textView);

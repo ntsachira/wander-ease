@@ -1,5 +1,6 @@
 package com.ironcodesoftware.wanderease.ui.home.search;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,30 +10,44 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.Product;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.ui.home.CheckoutActivity;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class SingleProductActivity extends AppCompatActivity {
 
+    JsonObject productJsonObject;
+    UserLogIn login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +60,11 @@ public class SingleProductActivity extends AppCompatActivity {
             return insets;
         });
 
+        try {
+            login = UserLogIn.getLogin(this);
+        } catch (IOException | ClassNotFoundException e) {
+            finish();
+        }
         Toolbar toolbar = findViewById(R.id.single_product_view_toolbar);
         toolbar.setNavigationOnClickListener(v -> {
             finish();
@@ -53,7 +73,7 @@ public class SingleProductActivity extends AppCompatActivity {
         String singleProduct = getIntent().getStringExtra("singleProduct");
         if(singleProduct != null){
             Gson gson = new Gson();
-            JsonObject productJsonObject = gson.fromJson(singleProduct, JsonObject.class);
+            productJsonObject = gson.fromJson(singleProduct, JsonObject.class);
             loadProduct(productJsonObject);
         }else{
             Log.e(MainActivity.TAG,"No intent for single product");
@@ -75,6 +95,69 @@ public class SingleProductActivity extends AppCompatActivity {
             openCheckout();
         });
 
+        Button buttonAddCart = findViewById(R.id.single_product_view_addto_cart_button);
+        buttonAddCart.setOnClickListener(v -> {
+            addToCart();
+        });
+
+    }
+
+    private void addToCart() {
+        AlertDialog loading = WanderDialog.loading(this, "Adding to cart...");
+        loading.show();
+        TextView editTextQuantity = findViewById(R.id.single_product_quantity_editTextNumber);
+        String id = productJsonObject.get("id").getAsString();
+        Request request = new Request.Builder().url(
+                BuildConfig.HOST_URL + String.format("AddToCart?id=%s&qty=%s&email=%s",
+                        id,editTextQuantity.getText().toString(),login.getEmail())
+        ).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(()->{
+                    loading.cancel();
+                    Snackbar snackbar = Snackbar.make(
+                            findViewById(R.id.main),
+                            "Something went Wrong, Please try again later",
+                            Snackbar.LENGTH_INDEFINITE
+
+                    );
+                    snackbar.setAction("Ok", v -> {
+                        snackbar.dismiss();
+                    });
+                    snackbar.show();
+                });
+                Log.e(MainActivity.TAG, "add to cart failed");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                runOnUiThread(loading::cancel);
+                if(response.isSuccessful()){
+                    runOnUiThread(()->{
+                        Toast.makeText(
+                                SingleProductActivity.this,
+                                "Product added to cart successfully",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
+                }else{
+                    runOnUiThread(()->{
+                        Snackbar snackbar = Snackbar.make(
+                                findViewById(R.id.main),
+                                "Request failed, Server error",
+                                Snackbar.LENGTH_INDEFINITE
+
+                        );
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        });
+                        snackbar.show();
+                    });
+                    Log.e(MainActivity.TAG, response.message());
+                }
+            }
+        });
     }
 
     private void openCheckout() {

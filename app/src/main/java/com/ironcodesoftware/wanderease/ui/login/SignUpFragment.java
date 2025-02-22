@@ -16,16 +16,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.User;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderNotification;
 import com.ironcodesoftware.wanderease.ui.home.HomeActivity;
+import com.ironcodesoftware.wanderease.ui.home.MessagesActivity;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -66,7 +73,7 @@ public class SignUpFragment extends Fragment {
                         JsonObject responseJsonObject = gson.fromJson(response.body().string(), JsonObject.class);
                         if(responseJsonObject != null && responseJsonObject.has("ok")
                                 && responseJsonObject.get("ok").getAsBoolean()){
-                            // TODO:
+
                             saveUserToFirestore(view,user);
 
                         }else{
@@ -117,6 +124,7 @@ public class SignUpFragment extends Fragment {
                         resetLoadingButton(view);
                         Toast.makeText(getContext(), "Signup Success", Toast.LENGTH_LONG).show();
                     });
+                    checkNotifications(logIn.getEmail());
                     startActivity(new Intent(getContext(), HomeActivity.class));
                     getActivity().finish();
                 })
@@ -133,6 +141,22 @@ public class SignUpFragment extends Fragment {
                 });
     }
 
+    private void checkNotifications(String email) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Notification.COLLECTION).where(Filter.and(
+                Filter.equalTo(Notification.F_USER, email),
+                Filter.equalTo(Notification.F_STATUS, Notification.State.Not_Seen.toString())
+        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error == null && !value.isEmpty()){
+                    WanderNotification.notify(getContext(), MessagesActivity.class );
+                }else{
+                    Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");
+                }
+            }
+        });
+    }
     private void setLoadingButton(View view) {
         Button buttonSignUp = view.findViewById(R.id.signup_button_signup);
         Button buttonSwitchLogin = getActivity().findViewById(R.id.login_switch_button_login);

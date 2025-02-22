@@ -83,7 +83,7 @@ public class AccountFragment extends Fragment {
                 }else{
                     Log.d(MainActivity.TAG,"Test1");
                     textViewUsername.setText(login.getEmail());
-                    requestUserDetails(view, login.getEmail());
+                    //requestUserDetails(view, login.getEmail());
                 }
             }else{
                 gotoLogin();
@@ -125,7 +125,7 @@ public class AccountFragment extends Fragment {
                                 textViewUsername.setText(name);
                             });
                             try {
-                                UserLogIn login = UserLogIn.getLogin(getContext());
+                                UserLogIn login = UserLogIn.getLogin(view.getContext());
                                 login.setDisplay_name(name);
                                 login.serialize(getContext());
                             } catch (ClassNotFoundException e) {

@@ -14,7 +14,7 @@ public class HttpClient {
     public static final MediaType IMAGE = MediaType.parse("text/plain");
     public static final String END_POINT_OFFLINE = "ERR_NGROK_3200";
 
-    private final OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient();
 
 
     public Response post(String url, String json) throws IOException {
@@ -40,6 +40,6 @@ public class HttpClient {
 
     public static OkHttpClient getInstance(){
 
-        return new OkHttpClient();
+        return client;
     }
 }

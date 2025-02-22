@@ -58,25 +58,6 @@ public class PartnerProductListFragment extends Fragment {
             Log.d(MainActivity.TAG,e.getLocalizedMessage(),e);
         }
 
-        RecyclerView recyclerView = view.findViewById(R.id.partner_product_recyclerView);
-
-        recyclerView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                if(event.getResult()){
-                    if(productsLoaded){
-                        try {
-                            productsLoaded = false;
-                            loadProducts(view);
-
-                        } catch (IOException | ClassNotFoundException e) {
-                            Log.d(MainActivity.TAG,"Recycle fling",e);
-                        }
-                    }
-                }
-                return true;
-            }
-        });
     }
 
     private void loadProducts(View view) throws IOException, ClassNotFoundException {
@@ -118,7 +99,6 @@ public class PartnerProductListFragment extends Fragment {
                     view.post(()->{
                         ImageView imageViewEmptyProduct = view.findViewById(R.id.partner_no_products_imageView);
                         TextView textViewCount = view.findViewById(R.id.partner_product_cout_textView);
-                        productsLoaded = true;
                         if(!productList.isEmpty()){
                             imageViewEmptyProduct.setVisibility(View.INVISIBLE);
                             textViewCount.setText(String.format("Product List (%s)", productList.size()));

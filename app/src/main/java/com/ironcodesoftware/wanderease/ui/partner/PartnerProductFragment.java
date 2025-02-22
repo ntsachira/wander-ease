@@ -224,7 +224,7 @@ public class PartnerProductFragment extends Fragment {
     private void saveProduct(View view) throws IOException, ClassNotFoundException {
         HashMap<String, String> productDetails = validateProductDetails(view);
         File imageFile = MediaHandler.uriToFile(getContext(), selectedImageUri);
-        if(productDetails != null){
+        if(productDetails != null && imageFile!=null){
             setLoadingButton(view);
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             productDetails.forEach(builder::addFormDataPart);

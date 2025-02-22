@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,7 +26,10 @@ public class MessagesActivity extends AppCompatActivity {
         });
 
         WanderNotification.dismiss(this);
-
+        Toolbar toolbar = findViewById(R.id.message_toolbar);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
     }
 }

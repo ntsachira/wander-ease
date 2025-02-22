@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             if(UserLogIn.hasLogin(MainActivity.this)){
                 UserLogIn logIn = UserLogIn.getLogin(MainActivity.this);
-                email = logIn.getEmail();
-                checkNotifications();
+
                 if (logIn.getUser_role().equals(User.DELIVERY)) {
                     gotoActivity(DeliveryActivity.class);
                 } else if (logIn.getUser_role().equals(User.ADMIN)) {
@@ -130,22 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 .apply();
     }
 
-    private void checkNotifications() {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        firestore.collection(Notification.COLLECTION).where(Filter.and(
-                Filter.equalTo(Notification.F_USER, email),
-                Filter.equalTo(Notification.F_STATUS, Notification.State.Not_Seen.toString())
-        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error == null && !value.isEmpty()){
-                    WanderNotification.notify(MainActivity.this, MessagesActivity.class );
-                }else{
-                    Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");
-                }
-            }
-        });
-    }
+
 
 
 }

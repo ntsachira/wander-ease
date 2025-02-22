@@ -184,7 +184,7 @@ public class CheckoutActivity extends AppCompatActivity {
         orderMap.put(Order.F_BUYER, UserLogIn.getLogin(this).getEmail());
        orderMap.put("items",productArray.toString());
 
-        HashMap<String,JsonArray> sellerOrderMap = new HashMap<>();
+        sellerOrderMap = new HashMap<>();
         for (JsonElement element : productArray) {
             String sellerEmail = element.getAsJsonObject().get("item").getAsJsonObject().get("seller")
                     .getAsJsonObject().get("email").getAsString();
