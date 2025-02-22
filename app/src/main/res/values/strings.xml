@@ -113,6 +113,9 @@
     <string name="product_tab_my_products">My Products</string>
     <string name="product_tab_my_add_products">Add New Product</string>
 
+    <!--    partner orders-->
+    <string name="partner_order_tab_New_orders">New Orders</string>
+
     <!--    admin-->
     <string name="admin_user_management">User Management</string>
     <string name="admin_delivery_management">Delivery Task Management</string>

@@ -78,6 +78,7 @@ public class CartFragment extends Fragment {
         startActivity(
                 new Intent(getContext(),CheckoutActivity.class)
                         .putExtra("productList", cartArray.toString())
+                        .putExtra("cart", true)
         );
     }
 
@@ -87,7 +88,7 @@ public class CartFragment extends Fragment {
                 new ItemTouchHelper.Callback() {
                     @Override
                     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                        return makeMovementFlags(0, ItemTouchHelper.LEFT);
+                        return makeMovementFlags(0, ItemTouchHelper.RIGHT);
                     }
 
                     @Override
@@ -97,12 +98,15 @@ public class CartFragment extends Fragment {
 
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                        String productId = cartArray.get(viewHolder.getAdapterPosition()).getAsJsonObject()
+                        int adapterPosition = viewHolder.getAdapterPosition();
+                        String productId = cartArray.get(adapterPosition).getAsJsonObject()
                                 .get("item").getAsJsonObject().get("id").getAsString();
                         Log.d(MainActivity.TAG,productId);
 
                         removeFromCart(view,productId);
-
+                        cartArray.remove(adapterPosition);
+                        view.post(recyclerView.getAdapter()::notifyDataSetChanged);
+                        setButtonText(view);
                     }
                 }
         );
@@ -137,7 +141,7 @@ public class CartFragment extends Fragment {
                     view.post(()->{
                         Toast.makeText(getContext(), "Removed from cart successfully",
                                 Toast.LENGTH_LONG).show();
-                        loadCart(view);
+//                        loadCart(view);
                     });
                 }else{
                     view.post(()->{
@@ -240,8 +244,13 @@ public class CartFragment extends Fragment {
                 orderTotal += (price*qty);
             }
             Button buttonCheckout = view.findViewById(R.id.cart_proceed_to_checkout_button);
-            buttonCheckout.setEnabled(true);
-            buttonCheckout.setText(String.format("Total Rs. %s : Checkout Now", new DecimalFormat().format(orderTotal)));
+            if(orderTotal == 0){
+                buttonCheckout.setEnabled(false);
+                buttonCheckout.setText("No cart items available");
+            }else {
+                buttonCheckout.setEnabled(true);
+                buttonCheckout.setText(String.format("Total Rs. %s : Checkout Now", new DecimalFormat().format(orderTotal)));
+            }
         });
     }
 

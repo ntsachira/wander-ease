@@ -85,6 +85,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
     HashMap<String,JsonArray> sellerOrderMap;
 
+    UserLogIn logIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,11 @@ public class CheckoutActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        try {
+            logIn = UserLogIn.getLogin(this);
+        } catch (IOException | ClassNotFoundException e) {
+         finish();
+        }
 
         Toolbar toolbar = findViewById(R.id.order_checkout_toolbar);
         toolbar.setNavigationOnClickListener(v -> {
@@ -277,6 +284,9 @@ public class CheckoutActivity extends AppCompatActivity {
                         msg = "Activity result:" + response.getData().getMessage();
                         updateStock();
                         updateNotifications();
+                        if(getIntent().hasExtra("cart")){
+                            clearCart();
+                        }
                     }else {
                         msg = "Result:" + response.getData().getMessage();
                     }
@@ -289,6 +299,15 @@ public class CheckoutActivity extends AppCompatActivity {
                 removeOrder();
             }
         }
+    }
+
+    private void clearCart() {
+        JsonObject requestJson = new JsonObject();
+        requestJson.addProperty("email", logIn.getEmail());
+        for (JsonElement element : productArray) {
+            JsonObject item = element.getAsJsonObject().get("item").getAsJsonObject();
+        }
+
     }
 
     private void updateNotifications() {
