@@ -37,8 +37,10 @@ import com.ironcodesoftware.wanderease.model.UserLogIn;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -74,7 +76,15 @@ public class PartnerDashboardFragment extends Fragment {
             ArrayList<PieEntry> pieEntries = new ArrayList<>();
             ArrayList<LegendEntry> legendEntries = new ArrayList<>();
             ArrayList<Integer> colorList = new ArrayList<>();
+            colorList.addAll(Arrays.asList(
+                    getActivity().getColor(R.color.c3),
+                    getActivity().getColor(R.color.c5),
+                    getActivity().getColor(R.color.c1),
+                    getActivity().getColor(R.color.c4)
+            ));
+            AtomicInteger count = new AtomicInteger();
             map.forEach((category, value) -> {
+
                 Random random = new Random();
                 int color = Color.rgb(
                         random.nextInt(256),
@@ -83,9 +93,10 @@ public class PartnerDashboardFragment extends Fragment {
                 );
                 pieEntries.add(new PieEntry(value));
                 legendEntries.add(new LegendEntry(
-                        category, Legend.LegendForm.CIRCLE,13,Float.NaN,null,color
+                        category, Legend.LegendForm.CIRCLE,13,Float.NaN,null,colorList.get(count.get())
                 ));
-                colorList.add(color);
+//                colorList.add(color);
+                count.getAndIncrement();
             });
 
             pieChart.setDescription(null);
@@ -99,6 +110,7 @@ public class PartnerDashboardFragment extends Fragment {
             legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
             legend.setTextSize(10);
             legend.setCustom(legendEntries);
+
 
             PieDataSet pieDataSet = new PieDataSet(pieEntries,"");
             pieDataSet.setColors(colorList);
@@ -117,6 +129,14 @@ public class PartnerDashboardFragment extends Fragment {
             ArrayList<PieEntry> pieEntries = new ArrayList<>();
             ArrayList<LegendEntry> legendEntries = new ArrayList<>();
             ArrayList<Integer> colorList = new ArrayList<>();
+            colorList.addAll(Arrays.asList(
+                    getActivity().getColor(R.color.c3),
+                    getActivity().getColor(R.color.c2),
+                    getActivity().getColor(R.color.c1),
+                    getActivity().getColor(R.color.c4),
+                    getActivity().getColor(R.color.c6)
+            ));
+            AtomicInteger count = new AtomicInteger();
             map.forEach((category, value) -> {
                 Random random = new Random();
                 int color = Color.rgb(
@@ -126,9 +146,9 @@ public class PartnerDashboardFragment extends Fragment {
                 );
                 pieEntries.add(new PieEntry(value));
                 legendEntries.add(new LegendEntry(
-                        category, Legend.LegendForm.CIRCLE,13,Float.NaN,null,color
+                        category, Legend.LegendForm.CIRCLE,13,Float.NaN,null,colorList.get(count.get())
                 ));
-                colorList.add(color);
+                count.getAndIncrement();
             });
 
             PieChart pieChart = view.findViewById(R.id.partner_dashboard_categoryChart);

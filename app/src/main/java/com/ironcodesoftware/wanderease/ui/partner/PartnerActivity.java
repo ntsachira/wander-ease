@@ -62,10 +62,8 @@ public class PartnerActivity extends AppCompatActivity {
         });
 
         initShakeDetector();
-
+        loadFragment(new PartnerDashboardFragment());
         getWindow().setStatusBarColor(getColor(R.color.background));
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().getDecorView().bringToFront();
 
         setUserDetails();
         MaterialToolbar toolbar = findViewById(R.id.partner_materialToolbar);

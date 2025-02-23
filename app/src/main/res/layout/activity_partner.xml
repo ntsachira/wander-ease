@@ -23,7 +23,6 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/partner_main_fragmentContainerView"
-                android:name="com.ironcodesoftware.wanderease.ui.partner.PartnerDashboardFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>

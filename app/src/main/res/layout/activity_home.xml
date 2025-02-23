@@ -24,9 +24,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/home_bottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
+        android:background="@drawable/background_simple"
         android:foregroundTint="#009688"
-        app:backgroundTint="@color/white"
+        app:itemPaddingBottom="10dp"
+        app:itemPaddingTop="8dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

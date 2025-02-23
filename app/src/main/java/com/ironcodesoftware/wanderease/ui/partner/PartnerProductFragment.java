@@ -385,9 +385,6 @@ public class PartnerProductFragment extends Fragment {
         }else {
             requestPermissions(new String[]{Manifest.permission.ACCESS_MEDIA_LOCATION}, 100);
         }
-
-
-
     }
 
     private boolean checkMediaPermissions() {

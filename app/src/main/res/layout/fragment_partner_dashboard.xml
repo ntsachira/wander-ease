@@ -20,21 +20,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/dashboard_card_background">
+                    android:background="@drawable/dashboard_card_background"
+                    android:clipToOutline="true">
 
                     <ImageView
                         android:id="@+id/imageView6"
@@ -75,22 +78,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/we"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="4dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="#FFFFFF"
                     app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardElevation="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_card_background">
+                        android:background="@drawable/dashboard_card_background"
+                        android:clipToOutline="true">
 
                         <TextView
                             android:id="@+id/textView21"
@@ -130,17 +135,18 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="#FFFFFF"
                     app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardElevation="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_card_background">
+                        android:background="@drawable/dashboard_card_background"
+                        android:clipToOutline="true">
 
                         <TextView
                             android:id="@+id/textView23"
@@ -182,14 +188,18 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="290dp"
+                android:layout_marginBottom="8dp"
+                android:clipToPadding="true"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="0dp"
+                app:contentPadding="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/dashboard_card_background"
+                    android:clipToOutline="true">
 
                     <TextView
                         android:id="@+id/textView25"
@@ -220,14 +230,15 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="290dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/dashboard_card_background"
+                    android:clipToOutline="true">
 
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/partner_dashboard_order_status_chart"

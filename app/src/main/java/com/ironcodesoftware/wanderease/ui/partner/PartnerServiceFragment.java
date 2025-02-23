@@ -49,9 +49,5 @@ public class PartnerServiceFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadFragment(new PartnerVehicleRentalFragment());
-    }
+
 }

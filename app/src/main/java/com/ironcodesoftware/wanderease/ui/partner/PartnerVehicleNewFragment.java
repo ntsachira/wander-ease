@@ -4,21 +4,27 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,9 +33,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.MediaHandler;
+import com.ironcodesoftware.wanderease.model.Vehicle;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
+
+import java.io.File;
 
 
 public class PartnerVehicleNewFragment extends Fragment {
@@ -37,6 +48,33 @@ public class PartnerVehicleNewFragment extends Fragment {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean permissionDenied;
     private GoogleMap map;
+    private Uri selectedImageUri;
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pickMedia = registerForActivityResult(
+                new ActivityResultContracts.PickVisualMedia(),
+                uri -> {
+                    if (uri != null) {
+                        selectedImageUri = uri;
+                        setSelectedImage(uri);
+                    } else {
+                        Log.d(MainActivity.TAG, "No media selected");
+                    }
+                });
+    }
+
+    private void setSelectedImage(Uri uri) {
+        Log.d(MainActivity.TAG, "Selected URI: " + uri);
+        ImageView imageView = getView().findViewById(R.id.partner_vehicle_new_imageView);
+        imageView.setImageURI(uri);
+        Button buttonUploadImage = getView().findViewById(R.id.partner_vehicle_new_upload_image_button);
+        buttonUploadImage.setVisibility(View.INVISIBLE);
+        ImageButton buttonClose = getView().findViewById(R.id.partner_vehicle_new_delete_imageButton);
+        buttonClose.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +93,78 @@ public class PartnerVehicleNewFragment extends Fragment {
            Log.e(MainActivity.TAG, "Hena awl");
        }
 
+       setupButtons(view);
 
+       setupSpinners(view);
+
+    }
+
+    private void setupSpinners(View view) {
+        AutoCompleteTextView textViewType = view.findViewById(R.id.partner_vehicle_new_vehicle_Type_spinner);
+        textViewType.setAdapter(new ArrayAdapter<String>(
+                getContext(),
+                R.layout.single_spinner_item,
+                Vehicle.VEHICLE_TYPES
+        ));
+        textViewType.setOnClickListener(v -> {
+            textViewType.showDropDown();
+        });
+        AutoCompleteTextView textViewGearMode = view.findViewById(R.id.partner_vehicle_new_gear_mode_spinner);
+        textViewGearMode.setAdapter(new ArrayAdapter<String>(
+                getContext(),
+                R.layout.single_spinner_item,
+                Vehicle.GEAR_MODES
+        ));
+        textViewGearMode.setOnClickListener(v -> {
+            textViewGearMode.showDropDown();
+        });
+        AutoCompleteTextView textViewAvailability = view.findViewById(R.id.partner_vehicle_new_availability_input);
+        textViewAvailability.setAdapter(new ArrayAdapter<String>(
+                getContext(),
+                R.layout.single_spinner_item,
+                Vehicle.STATUS_LIST
+        ));
+        textViewAvailability.setOnClickListener(v -> {
+            textViewAvailability.showDropDown();
+        });
+    }
+
+    private void setupButtons(View view) {
+        Button buttonSelectImage = view.findViewById(R.id.partner_vehicle_new_upload_image_button);
+        buttonSelectImage.setOnClickListener(v -> {
+            launceImagePicker();
+        });
+        ImageButton buttonResetImage = view.findViewById(R.id.partner_vehicle_new_delete_imageButton);
+        buttonResetImage.setOnClickListener(v -> {
+            resetImage(view);
+        });
+        Button buttonSave = view.findViewById(R.id.partner_vehicle_new_save_vehicle_button);
+        buttonSave.setOnClickListener(v -> {
+            saveVehicle(view);
+        });
+    }
+
+    private void saveVehicle(View view) {
+        JsonObject productDetails = validateProductDetails(view);
+        File imageFile = MediaHandler.uriToFile(getContext(), selectedImageUri);
+        if(productDetails != null && imageFile!=null){
+
+        }
+    }
+
+    private JsonObject validateProductDetails(View view) {
+        return null;
+    }
+
+    private void resetImage(View view) {
+    }
+
+    private void launceImagePicker() {
+            pickMedia.launch(
+                    new PickVisualMediaRequest.Builder()
+                            .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                            .build()
+            );
     }
 
     private void loadMap(View view) {
