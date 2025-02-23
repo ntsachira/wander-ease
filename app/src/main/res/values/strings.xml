@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Wander Ease</string>
-    <string name="app_package">com.ironcodesoftware.wanderease</string>
-    <string name="location_field">deliveryLocation</string>
-    <string name="user_log">userLog.ser</string>
-    <string name="splash">userLog.ser</string>
+    <string name="app_package" translatable="false">com.ironcodesoftware.wanderease</string>
+    <string name="location_field" translatable="false">deliveryLocation</string>
+    <string name="user_log" translatable="false">userLog.ser</string>
+    <string name="splash" translatable="false">userLog.ser</string>
     <string name="responseOk">OK</string>
-    <string name="loading">Loading…</string>
+    <string name="loading" translatable="false">Loading…</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="upload_image">+ Upload Image</string>
     <string name="back">Go Back</string>
@@ -115,6 +115,20 @@
 
     <!--    partner orders-->
     <string name="partner_order_tab_New_orders">New Orders</string>
+    <string name="mark_as_completed">Mark as Completed</string>
+
+    <!--    partner services-->
+    <string name="my_vehicles">My Vehicles</string>
+    <string name="add_new_vehicles">Add New Vehicle</string>
+    <string name="my_tour_guides">My Guides</string>
+    <string name="add_new_tour_guide">Add New Guide</string>
+    <string name="vehicle_type">Vehicle Type</string>
+    <string name="gear_mode">Gear Mode</string>
+    <string name="highlights">Highlights</string>
+    <string name="price_per_day">Price per day</string>
+    <string name="availability">Availability</string>
+    <string name="pickup_location">Pickup Location</string>
+    <string name="save_vehicle">Save Vehicle</string>
 
     <!--    admin-->
     <string name="admin_user_management">User Management</string>

@@ -138,30 +138,34 @@ public class CheckoutActivity extends AppCompatActivity {
 
         Button buttonSelectLocation = findViewById(R.id.place_order_select_location_button);
         buttonSelectLocation.setOnClickListener(v->{
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                        },
-                        LOCATION_PERMISSION_REQUEST_CODE);
-                return;
-            }
-            LocationManager locationManager = getSystemService(LocationManager.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                if(locationManager.isLocationEnabled()){
-                    startActivity(new Intent(CheckoutActivity.this,DeliveryLocationActivity.class));
-                }else{
-                    AlertDialog.Builder alert = WanderDialog.build(this, "Please turn on device location to continue", "Alert");
-                    alert.setOnCancelListener(dialog -> {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
-                    }).show();
-
-                }
-            }
+            selectLocation();
 
         });
+    }
+
+    private void selectLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    },
+                    LOCATION_PERMISSION_REQUEST_CODE);
+            return;
+        }
+        LocationManager locationManager = getSystemService(LocationManager.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if(locationManager.isLocationEnabled()){
+                startActivity(new Intent(CheckoutActivity.this,DeliveryLocationActivity.class));
+            }else{
+                AlertDialog.Builder alert = WanderDialog.build(this, "Please turn on device location to continue", "Alert");
+                alert.setOnCancelListener(dialog -> {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }).show();
+
+            }
+        }
     }
 
     private void proceedToPayment() throws IOException, ClassNotFoundException {

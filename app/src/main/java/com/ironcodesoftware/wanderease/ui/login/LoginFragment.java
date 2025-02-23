@@ -162,7 +162,7 @@ public class LoginFragment extends Fragment {
                             UserLogIn login = UserLogIn.getLogin(getContext());
                             login.setDisplay_name(name);
                             login.serialize(getContext());
-                        } catch (ClassNotFoundException e) {
+                        } catch (Exception e) {
                             Log.e(MainActivity.TAG,e.getLocalizedMessage());
                         }
                     }
