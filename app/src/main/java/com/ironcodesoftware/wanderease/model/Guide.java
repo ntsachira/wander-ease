@@ -1,5 +1,7 @@
 package com.ironcodesoftware.wanderease.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +17,11 @@ public interface Guide {
         Surfing_and_Beach_Tours,
         City_and_Shopping_Tours;
 
-
+        @NonNull
+        @Override
+        public String toString() {
+            return this.name().replace("_", " ");
+        }
     }
     List<String> STATUS_LIST = Arrays.asList(
             State.Available.name(),
@@ -23,10 +29,10 @@ public interface Guide {
     );
 
     List<String> TOUR_TYPES = Arrays.asList(
-            Type.Cultural_and_Heritage_Tours.name(),
-            Type.Wildlife_and_Adventure_Tours.name(),
-            Type.Food_and_Market_Tours.name(),
-            Type.Surfing_and_Beach_Tours.name(),
-            Type.City_and_Shopping_Tours.name()
+            Type.Cultural_and_Heritage_Tours.toString(),
+            Type.Wildlife_and_Adventure_Tours.toString(),
+            Type.Food_and_Market_Tours.toString(),
+            Type.Surfing_and_Beach_Tours.toString(),
+            Type.City_and_Shopping_Tours.toString()
     );
 }

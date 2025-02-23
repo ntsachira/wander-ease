@@ -129,6 +129,8 @@
     <string name="availability">Availability</string>
     <string name="pickup_location">Pickup Location</string>
     <string name="save_vehicle">Save Vehicle</string>
+    <string name="price_per_hour">Price per Hour</string>
+    <string name="bio">Bio</string>
 
     <!--    admin-->
     <string name="admin_user_management">User Management</string>

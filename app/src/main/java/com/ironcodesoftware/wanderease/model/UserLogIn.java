@@ -6,8 +6,12 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.ui.admin.AdminActivity;
@@ -21,6 +25,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class UserLogIn implements Serializable {
 
@@ -169,7 +179,41 @@ public class UserLogIn implements Serializable {
         return isSuccess;
     }
 
+    public void requestUserDetails(Context context,String email){
 
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
+                .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(MainActivity.TAG,e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if(response.isSuccessful()){
+                    Gson gson = new Gson();
+                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                    if(responseJson.has("ok")
+                            && responseJson.get("ok").getAsBoolean()){
+                        JsonObject profile = responseJson.getAsJsonObject("profile");
+                        String name = profile.get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
+                        SQLiteHelper.saveProfile(context, profile);
+                        try {
+                            UserLogIn login = UserLogIn.getLogin(context);
+                            login.setDisplay_name(name);
+                            login.serialize(context);
+                        } catch (Exception e) {
+                            Log.e(MainActivity.TAG,e.getMessage());
+                        }
+                    }
+                }
+            }
+        });
+
+    }
 
 
 

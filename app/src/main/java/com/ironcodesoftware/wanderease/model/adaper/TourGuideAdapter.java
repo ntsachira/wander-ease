@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Guide;
+
+import java.text.DecimalFormat;
 
 public abstract class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAdapter.TourGuideViewHolder> {
 
@@ -36,11 +39,13 @@ public abstract class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAda
     public void onBindViewHolder(@NonNull TourGuideViewHolder holder, int position) {
         JsonObject jsonObject = tourGuideArray.get(position).getAsJsonObject();
 
-        holder.textViewTitle.setText("");
-        holder.textViewType.setText("");
-        holder.textViewExperience.setText("");
-        holder.textViewPrice.setText("");
-        holder.textViewBio.setText("");
+        holder.textViewTitle.setText(jsonObject.get("title").getAsString());
+        holder.textViewType.setText(Guide.TOUR_TYPES.get(jsonObject.get("type").getAsInt()));
+        holder.textViewExperience.setText(String.format("Experience: %s Years",
+                jsonObject.get("experience").getAsInt()));
+        holder.textViewPrice.setText(String.format("Rs. %s",
+                new DecimalFormat().format(jsonObject.get("price").getAsDouble())));
+        holder.textViewBio.setText(jsonObject.get("bio").getAsString());
 
         onCardClick(jsonObject, holder.card);
 

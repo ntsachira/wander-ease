@@ -38,7 +38,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -61,35 +65,14 @@ public class SignUpFragment extends Fragment {
 
     private void signup(View view) {
         HashMap<String,String> user = validateUserInput(view);
+        Gson gson = new Gson();
         if(user != null){
             setLoadingButton(view);
-            new Thread(()->{
-                try {
-                    Log.i(MainActivity.TAG,user.toString());
-                    Gson gson = new Gson();
-                    Response response = new HttpClient()
-                            .post(BuildConfig.HOST_URL + "SignUp",gson.toJson(user));
-                    if(response.isSuccessful()){
-                        JsonObject responseJsonObject = gson.fromJson(response.body().string(), JsonObject.class);
-                        if(responseJsonObject != null && responseJsonObject.has("ok")
-                                && responseJsonObject.get("ok").getAsBoolean()){
-
-                            saveUserToFirestore(view,user);
-
-                        }else{
-                            view.post(()->{
-                                resetLoadingButton(view);
-                                new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
-                                        .setMessage(response.message())
-                                        .setPositiveButton(R.string.responseOk, (dialog, which) -> {
-                                            dialog.cancel();
-                                        }).show();
-                            });
-                        }
-                    }
-                    Log.i(MainActivity.TAG,response.body().string());
-
-                } catch (Exception e) {
+            Request request = new Request.Builder().url(BuildConfig.HOST_URL + "SignUp")
+                    .post(RequestBody.create(gson.toJson(user), HttpClient.JSON)).build();
+            HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     view.post(()->{
                         resetLoadingButton(view);
                         new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
@@ -100,7 +83,23 @@ public class SignUpFragment extends Fragment {
                     });
                     Log.e(MainActivity.TAG,e.getLocalizedMessage());
                 }
-            }).start();
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    if(response.isSuccessful()){
+                        saveUserToFirestore(view,user);
+                    }else{
+                        view.post(()->{
+                            resetLoadingButton(view);
+                            new AlertDialog.Builder(getContext()).setTitle("SignUp Failed")
+                                    .setMessage("Connection failed. no Server response")
+                                    .setPositiveButton(R.string.responseOk, (dialog, which) -> {
+                                        dialog.cancel();
+                                    }).show();
+                        });
+                    }
+                }
+            });
         }
     }
 
@@ -119,6 +118,7 @@ public class SignUpFragment extends Fragment {
                     logIn.setUser_role(User.USER);
                     logIn.setEmail(user.get(UserLogIn.EMAIL_FIELD));
                     logIn.setPassword(user.get(UserLogIn.PASSWORD_FIELD));
+                    logIn.setDisplay_name(user.get(UserLogIn.DISPLAY_NAME_FIELD));
                     logIn.serialize(view.getContext());
                     view.post(()->{
                         resetLoadingButton(view);

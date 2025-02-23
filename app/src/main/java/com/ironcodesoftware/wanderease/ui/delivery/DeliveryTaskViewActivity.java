@@ -137,7 +137,9 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    sendNotification();
+                                                    sendNotification(getIntent().getStringExtra(Order.F_BUYER),
+                                                            String.format("Order: %s has delivered",
+                                                                    getIntent().getStringExtra(Order.F_ID)));
                                                     runOnUiThread(()->{
                                                         loading.cancel();
                                                         Toast.makeText(
@@ -183,13 +185,12 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
                 });
     }
 
-    private void sendNotification() {
+    private void sendNotification(String email,String message) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         HashMap<String,Object> notificationMap = new HashMap<>();
-        notificationMap.put(Notification.F_MESSAGE, String.format("Order: %s has delivered",
-                getIntent().getStringExtra(Order.F_ID)));
+        notificationMap.put(Notification.F_MESSAGE, message);
         notificationMap.put(Notification.F_TIME, Calendar.getInstance().getTime());
-        notificationMap.put(Notification.F_USER,getIntent().getStringExtra(Order.F_BUYER));
+        notificationMap.put(Notification.F_USER,email);
         notificationMap.put(Notification.F_STATUS, Notification.State.Not_Seen.toString());
         firestore.collection(Notification.COLLECTION)
                 .add(notificationMap)
@@ -205,7 +206,9 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
                 .addOnFailureListener(e->{
                     Log.e(MainActivity.TAG,"1:Order update error",e);
                     runOnUiThread(()->{
-                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "1:Failed to send notification", Snackbar.LENGTH_INDEFINITE);
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.main),
+                                "1:Failed to send notification",
+                                Snackbar.LENGTH_INDEFINITE);
                         snackbar.setAction("Ok", v -> {
                             snackbar.dismiss();
                         }).show();

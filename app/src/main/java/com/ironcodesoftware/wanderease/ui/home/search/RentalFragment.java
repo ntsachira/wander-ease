@@ -66,7 +66,7 @@ public class RentalFragment extends Fragment {
     private void loadOrders(View view) {
         setLoading(view);
 
-        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "LoadVehicles?email=" + login.getEmail()).build();
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "LoadVehicles").build();
         HttpClient.getInstance().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {

@@ -21,6 +21,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -38,6 +40,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;

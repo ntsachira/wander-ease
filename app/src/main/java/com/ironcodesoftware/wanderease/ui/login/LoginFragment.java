@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
                         if(task.isSuccessful()){
                             if(authenticate(task.getResult().getDocuments(),logIn,view)){
                                 if(logIn.serialize(view.getContext())){
-                                    requestUserDetails(logIn.getEmail());
+                                    logIn.requestUserDetails(getContext(),logIn.getEmail());
                                     checkNotifications(logIn.getEmail());
                                     if(logIn.getUser_role().equals(User.USER)){
                                         gotoActivity(HomeActivity.class);
@@ -136,41 +136,6 @@ public class LoginFragment extends Fragment {
     }
 
 
-    private void requestUserDetails(String email){
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
-        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
-                .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
-        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.e(MainActivity.TAG,e.getLocalizedMessage());
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()){
-                    Gson gson = new Gson();
-                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
-                    if(responseJson.has("ok")
-                            && responseJson.get("ok").getAsBoolean()){
-                        JsonObject profile = responseJson.getAsJsonObject("profile");
-                        String name = profile.get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
-                        SQLiteHelper.saveProfile(getContext(), profile);
-                        try {
-                            UserLogIn login = UserLogIn.getLogin(getContext());
-                            login.setDisplay_name(name);
-                            login.serialize(getContext());
-                        } catch (Exception e) {
-                            Log.e(MainActivity.TAG,e.getLocalizedMessage());
-                        }
-                    }
-                }
-            }
-        });
-
-    }
 
     private void checkNotifications(String email) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -190,7 +155,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void gotoActivity(Class<? extends AppCompatActivity> destinationActivityClass) {
-        startActivity(new Intent(getActivity(),destinationActivityClass));
+        startActivity(new Intent(getContext(),destinationActivityClass));
         getActivity().finish();
     }
 

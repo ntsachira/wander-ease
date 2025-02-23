@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
@@ -27,8 +28,10 @@ import com.google.gson.JsonElement;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.Delivery;
+import com.ironcodesoftware.wanderease.model.Notification;
 import com.ironcodesoftware.wanderease.model.Order;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
+import com.ironcodesoftware.wanderease.ui.delivery.DeliveryTaskViewActivity;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -134,6 +137,7 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
                     deliveryMap.put(Delivery.F_COURIER, courierEmail);
                     firestore.collection(Delivery.F_COLLECTION).add(deliveryMap)
                             .addOnSuccessListener(documentReference->{
+                                sendNotification(courierEmail, String.format("You have new delivery task for the order: %s",orderId));
                                 activity.runOnUiThread(()->{
                                     loading.cancel();
                                     Toast.makeText(
@@ -161,6 +165,28 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
         return documentList.size();
     }
 
+    private void sendNotification(String email,String message) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        HashMap<String,Object> notificationMap = new HashMap<>();
+        notificationMap.put(Notification.F_MESSAGE, message);
+        notificationMap.put(Notification.F_TIME, Calendar.getInstance().getTime());
+        notificationMap.put(Notification.F_USER,email);
+        notificationMap.put(Notification.F_STATUS, Notification.State.Not_Seen.toString());
+        firestore.collection(Notification.COLLECTION)
+                .add(notificationMap)
+                .addOnCompleteListener(task -> {
+                    activity.runOnUiThread(()->{
+                        Toast.makeText(
+                                        activity,
+                                        "Notification sent",Toast.LENGTH_LONG )
+                                .show();
+
+                    });
+                })
+                .addOnFailureListener(e->{
+                    Log.e(MainActivity.TAG,"1:Order update error",e);
+                });
+    }
     static class AdminToAssignDeliveryItemViewHolder extends RecyclerView.ViewHolder{
 
         RecyclerView recyclerView;

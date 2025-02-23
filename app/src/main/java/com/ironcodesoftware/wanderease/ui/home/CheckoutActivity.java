@@ -290,6 +290,9 @@ public class CheckoutActivity extends AppCompatActivity {
                         updateNotifications();
                         if(getIntent().hasExtra("cart")){
                             clearCart();
+                            Log.d(TAG,"cart found");
+                        }else{
+                            Log.d(TAG,"No cart found");
                         }
                     }else {
                         msg = "Result:" + response.getData().getMessage();
@@ -308,9 +311,54 @@ public class CheckoutActivity extends AppCompatActivity {
     private void clearCart() {
         JsonObject requestJson = new JsonObject();
         requestJson.addProperty("email", logIn.getEmail());
+        ArrayList<String> idList = new ArrayList<>();
         for (JsonElement element : productArray) {
             JsonObject item = element.getAsJsonObject().get("item").getAsJsonObject();
+            idList.add(item.get("id").getAsString());
         }
+
+        requestJson.add("idList", new Gson().toJsonTree(idList));
+
+        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "ClearCart")
+                .post(RequestBody.create(requestJson.toString(), HttpClient.JSON))
+                .build();
+
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(()->{
+                    Snackbar snackbar = Snackbar.make(
+                            findViewById(R.id.main),
+                            "Failed to update cart.",
+                            Snackbar.LENGTH_INDEFINITE
+
+                    );
+                    snackbar.setAction("Ok", v -> {
+                        snackbar.dismiss();
+                    });
+                    snackbar.show();
+                });
+                Log.e(MainActivity.TAG, "Cart clearing failed",e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if(!response.isSuccessful()){
+                    runOnUiThread(()->{
+                        Snackbar snackbar = Snackbar.make(
+                                findViewById(R.id.main),
+                                "Failed to update cart. Server error",
+                                Snackbar.LENGTH_INDEFINITE
+
+                        );
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        });
+                        snackbar.show();
+                    });
+                }
+            }
+        });
 
     }
 
@@ -408,6 +456,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                         startActivity(new Intent(CheckoutActivity.this,
                                                 HomeActivity.class));
                                         finish();
+
                                     });
                             alertDialog.show();
                         });
@@ -490,7 +539,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                         context,
                                         "Notification sent",Toast.LENGTH_LONG )
                                 .show();
-                        finish();
+
                     });
                 })
                 .addOnFailureListener(e->{

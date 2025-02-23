@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import com.ironcodesoftware.wanderease.model.ShakeDetector;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.ui.home.HelpFragment;
 import com.ironcodesoftware.wanderease.ui.home.MessageFragment;
+import com.ironcodesoftware.wanderease.ui.home.account.SettingsActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
 import java.io.IOException;
@@ -82,6 +84,12 @@ public class PartnerActivity extends AppCompatActivity {
         });
 
         NavigationView navigationView = findViewById(R.id.partner_navigationView);
+
+        View headerView = navigationView.getHeaderView(0);
+        ImageButton settingsButton = headerView.findViewById(R.id.partner_account_settings_imageButton);
+        settingsButton.setOnClickListener(v->{
+            startActivity(new Intent(PartnerActivity.this, SettingsActivity.class));
+        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

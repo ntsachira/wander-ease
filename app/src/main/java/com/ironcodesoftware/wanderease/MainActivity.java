@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             if(UserLogIn.hasLogin(MainActivity.this)){
                 UserLogIn logIn = UserLogIn.getLogin(MainActivity.this);
-
+                checkNotifications(logIn.getEmail());
                 if (logIn.getUser_role().equals(User.DELIVERY)) {
                     gotoActivity(DeliveryActivity.class);
                 } else if (logIn.getUser_role().equals(User.ADMIN)) {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage(),e);
         }
 
 
@@ -128,7 +128,22 @@ public class MainActivity extends AppCompatActivity {
                 .putString(getString(R.string.main_returningUser), getString(R.string.main_returningUser))
                 .apply();
     }
-
+    private void checkNotifications(String email) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Notification.COLLECTION).where(Filter.and(
+                Filter.equalTo(Notification.F_USER, email),
+                Filter.equalTo(Notification.F_STATUS, Notification.State.Not_Seen.toString())
+        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error == null && !value.isEmpty()){
+                    WanderNotification.notify(MainActivity.this, MessagesActivity.class );
+                }else{
+                    Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");
+                }
+            }
+        });
+    }
 
 
 
