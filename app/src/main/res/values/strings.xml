@@ -27,32 +27,32 @@
     <string name="shop_now">Explore WanderEase</string>
     <string name="mark_as_read">Mark as read</string>
     <string name="no_new_messages">No New Messages</string>
-    <string name="language_change_confirmation_message">No New Messages</string>
+    <string name="language_change_confirmation_message">Do you want to change your display language to Sinhala</string>
 
-    <string name="main_returningUser">ReturningUser</string>
+    <string name="main_returningUser" translatable="false">ReturningUser</string>
 
     <!--    copyright statement-->
-    <string name="copyright">© 2025 WanderEase</string>
+    <string name="copyright" translatable="false">© 2025 WanderEase</string>
     <string name="terms_policy">By signing in or creating an account, you agree with our</string>
     <string name="terms">Terms &amp; Conditions</string>
     <string name="policy">Privacy Statement</string>
     <string name="and">and</string>
     <string name="language">භාෂාව - Language (English)</string>
     <string name="policies">Policies</string>
-    <string name="logout">Logout</string>
+    <string name="logout" translatable="false">Logout</string>
 
     <!--    intro-->
-    <string name="main_explore_products">Explore Your Favourite Shopping Items in the South of Sri Lanka</string>
-    <string name="main_rent_vehicles">Rent Vehicles for Easy Travels</string>
-    <string name="main_book_guides">Plan Your Travels with Tour Guides</string>
-    <string name="main_be_partner">Join Our Partner Program</string>
-    <string name="main_getStarted">Get Started</string>
-    <string name="main_next">Next</string>
-    <string name="main_subtext">Enhance your travelling Experience in Sri Lanka</string>
+    <string name="main_explore_products" translatable="false">Explore Your Favourite Shopping Items in the South of Sri Lanka</string>
+    <string name="main_rent_vehicles" translatable="false">Rent Vehicles for Easy Travels</string>
+    <string name="main_book_guides" translatable="false">Plan Your Travels with Tour Guides</string>
+    <string name="main_be_partner" translatable="false">Join Our Partner Program</string>
+    <string name="main_getStarted" translatable="false">Get Started</string>
+    <string name="main_next" translatable="false">Next</string>
+    <string name="main_subtext" translatable="false">Enhance your travelling Experience in Sri Lanka</string>
 
     <!--    login and signup-->
-    <string name="login_switch_login">Log In</string>
-    <string name="login_switch_signup">Sign Up</string>
+    <string name="login_switch_login" translatable="false">Log In</string>
+    <string name="login_switch_signup" translatable="false">Sign Up</string>
     <string name="login_email">Enter Email Address</string>
     <string name="login_password">Enter Password</string>
     <string name="login_goto_register">New user? Register now</string>
@@ -92,7 +92,7 @@
     <string name="review">Review</string>
 
     <!--    partner navigation-->
-    <string name="partner_dashboard">Dashboard</string>
+    <string name="partner_dashboard" translatable="false">Dashboard</string>
     <string name="partner_products">Products</string>
     <string name="partner_services">Services</string>
     <string name="partner_orders">Orders</string>
@@ -139,7 +139,7 @@
     <string name="admin_Analytics">Analytics</string>
     <string name="admin_title">WanderEase Admin</string>
     <string name="admin_profile_information">Profile Information</string>
-    <string name="admin_delivery_to_assign">To assign</string>
+    <string name="admin_delivery_to_assign">To Assign</string>
     <string name="admin_delivery_active">Active</string>
     <string name="admin_delivery_delivered">Delivered</string>
     <string name="assign">Assign</string>
@@ -149,7 +149,7 @@
     <string name="call_courier">Call Courier</string>
 
     <!--    delivery-->
-    <string name="deliver_title">WanderEase Delivery</string>
+    <string name="deliver_title" translatable="false">WanderEase Delivery</string>
     <string name="deliver_new_tasks">New Tasks</string>
     <string name="deliver_completed_tasks">Completed Tasks</string>
     <string name="delivery_messages">Messages</string>
@@ -171,9 +171,9 @@
 
 
     <!--  RegEx-->
-    <string name="email_regex">^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$</string>
-    <string name="mobile_regex">^07[01245678]{1}[0-9]{7}$</string>
+    <string name="email_regex" translatable="false">^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$</string>
+    <string name="mobile_regex" translatable="false">^07[01245678]{1}[0-9]{7}$</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

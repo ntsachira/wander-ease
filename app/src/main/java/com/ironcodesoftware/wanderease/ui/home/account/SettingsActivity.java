@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -81,20 +83,25 @@ public class SettingsActivity extends AppCompatActivity {
     private void openLanguageDialog() {
         SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
         String lang = sharedPreferences.getString("lang", "e");
-        AlertDialog confirm = WanderDialog.confirm(SettingsActivity.this, "");
+        AlertDialog confirm = WanderDialog.confirm(SettingsActivity.this, getString(R.string.language_change_confirmation_message));
         if(lang.equals("e")){
-            confirm.setMessage(getString(R.string.language_change_confirmation_message));
             confirm.setButton(DialogInterface.BUTTON_POSITIVE,"YES",(dialog, which) -> {
-
+                LocaleListCompat appLocale = LocaleListCompat.forLanguageTags("si");
+                AppCompatDelegate.setApplicationLocales(appLocale);
+                sharedPreferences.edit().putString("lang", "s").apply();
+                recreate();
             });
         }else{
-            confirm.setMessage(getString(R.string.language_change_confirmation_message));
             confirm.setButton(DialogInterface.BUTTON_POSITIVE,"YES",(dialog, which) -> {
-
+                LocaleListCompat appLocale = LocaleListCompat.forLanguageTags("en");
+                AppCompatDelegate.setApplicationLocales(appLocale);
+                sharedPreferences.edit().putString("lang", "e").apply();
+                recreate();
             });
         }
         confirm.setButton(DialogInterface.BUTTON_NEGATIVE,"No",(dialog, which) -> {
 
         });
+        confirm.show();
     }
 }
