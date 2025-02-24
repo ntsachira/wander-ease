@@ -60,10 +60,10 @@ public class RentalFragment extends Fragment {
         } catch (IOException | ClassNotFoundException e) {
             getActivity().finish();
         }
-        loadOrders(view);
+        loadVehicles(view);
     }
 
-    private void loadOrders(View view) {
+    private void loadVehicles(View view) {
         setLoading(view);
 
         Request request = new Request.Builder().url(BuildConfig.HOST_URL + "LoadVehicles").build();

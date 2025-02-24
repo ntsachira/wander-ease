@@ -27,16 +27,16 @@ public class AdminUserManagementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadFragment();
+        loadFragment(new AdminUserFragment());
 
         TabLayout tabLayout = view.findViewById(R.id.admin_user_tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition()== 1){
-                    loadFragment();
+                    loadFragment(new AdminNewCourierFragment());
                 }else{
-                    loadFragment();
+                    loadFragment(new AdminUserFragment());
                 }
             }
 
