@@ -11,7 +11,7 @@
         android:id="@+id/settings_toolbar"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@drawable/background_simple"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"

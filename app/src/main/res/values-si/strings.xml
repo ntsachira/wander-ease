@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wander Ease</string>
+    <string name="responseOk">හරි</string>
+    <string name="loading">පූරණය වෙමින්...</string>
+    <string name="edit_profile">පැතිකඩ සංස්කරණය කරන්න</string>
+    <string name="upload_image">+ රූපය උඩුගත කරන්න</string>
+    <string name="back">ආපසු යන්න</string>
+    <string name="search">සෙවුම් යතුර ඇතුළත් කරන්න...</string>
+    <string name="product_list_empty">නිෂ්පාදන ලැයිස්තුව හිස්</string>
+    <string name="place_order">ඇණවුම තබන්න</string>
+    <string name="total">එකතුව:</string>
+    <string name="location">බෙදාහැරීමේ ස්ථානය:</string>
+    <string name="change_location">බෙදාහැරීමේ ස්ථානය වෙනස් කරන්න</string>
+    <string name="select_location">බෙදාහැරීමේ ස්ථානය තෝරන්න</string>
+    <string name="confirm_location">බෙදාහැරීමේ ස්ථානය තහවුරු කරන්න</string>
+    <string name="total_items">මුළු අයිතම</string>
+    <string name="total_amount">මුලු වටිනාකම</string>
+    <string name="not_specified">විශේෂයෙන් දක්වා නැති</string>
+    <string name="payment_success">ගෙවීම සාර්ථකයි</string>
+    <string name="back_to_home">මුල් තිරයට ආපසු</string>
+    <string name="empty_orders">තවම ඇණවුම් නැත</string>
+    <string name="shop_now">WanderEase ගවේෂණය කරන්න</string>
+    <string name="mark_as_read">කියවූ ලෙස සලකුණු කරන්න</string>
+    <string name="copyright">නව පණිවිඩ නැත</string>
+</resources>

@@ -1,14 +1,15 @@
 package com.ironcodesoftware.wanderease.ui.home.account;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -22,6 +23,7 @@ import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
 import java.io.PipedOutputStream;
+import java.util.Arrays;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -35,6 +37,8 @@ public class SettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        getWindow().setStatusBarColor(getColor(R.color.white));
 
         Toolbar toolbar = findViewById(R.id.settings_toolbar);
         toolbar.setNavigationOnClickListener(v->{
@@ -63,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         });
 
+
     }
 
     private void logout() {
@@ -74,7 +79,22 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void openLanguageDialog() {
-        new AlertDialog.Builder(this).setTitle("Message")
-                .setMessage(getPackageName()).show();
+        SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+        String lang = sharedPreferences.getString("lang", "e");
+        AlertDialog confirm = WanderDialog.confirm(SettingsActivity.this, "");
+        if(lang.equals("e")){
+            confirm.setMessage(getString(R.string.language_change_confirmation_message));
+            confirm.setButton(DialogInterface.BUTTON_POSITIVE,"YES",(dialog, which) -> {
+
+            });
+        }else{
+            confirm.setMessage(getString(R.string.language_change_confirmation_message));
+            confirm.setButton(DialogInterface.BUTTON_POSITIVE,"YES",(dialog, which) -> {
+
+            });
+        }
+        confirm.setButton(DialogInterface.BUTTON_NEGATIVE,"No",(dialog, which) -> {
+
+        });
     }
 }

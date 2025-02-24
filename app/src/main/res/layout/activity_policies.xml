@@ -7,4 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.account.PoliciesActivity">
 
+    <WebView
+        android:id="@+id/policy_webview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/policy_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/background_simple"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/actionModeCloseDrawable"
+        app:title="@string/policy" />
 </androidx.constraintlayout.widget.ConstraintLayout>
