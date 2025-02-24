@@ -21,8 +21,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.Filter;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -40,7 +38,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -84,14 +81,7 @@ public class SingleProductActivity extends AppCompatActivity {
         }
 
 
-        ImageButton buttonDecreaseQuantity = findViewById(R.id.single_product_decrease_quantity_imageButton);
-        buttonDecreaseQuantity.setOnClickListener(v->{
-            TextView editTextQuantity = findViewById(R.id.single_product_quantity_editTextNumber);
-            int qty = Integer.parseInt(editTextQuantity.getText().toString());
-            if(qty > 1){
-                editTextQuantity.setText(String.valueOf(qty-1));
-            }
-        });
+        setupQuantitySelector();
 
         Button buttonBuyNow = findViewById(R.id.single_product_view_butNow_button);
         buttonBuyNow.setOnClickListener(v->{
@@ -103,6 +93,79 @@ public class SingleProductActivity extends AppCompatActivity {
             addToCart();
         });
 
+        ImageButton buttonAddFavourites = findViewById(R.id.single_product_view_favourites_imageButton);
+        buttonAddFavourites.setOnClickListener(v->{
+            addToFavourites();
+        });
+
+    }
+
+    private void addToFavourites() {
+        AlertDialog loading = WanderDialog.loading(this, "Adding to favourites...");
+        loading.show();
+        String id = productJsonObject.get("id").getAsString();
+        Request request = new Request.Builder().url(
+                BuildConfig.HOST_URL + String.format("AddToFavourites?id=%s&email=%s",
+                        id,login.getEmail())
+        ).build();
+        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(()->{
+                    loading.cancel();
+                    Snackbar snackbar = Snackbar.make(
+                            findViewById(R.id.main),
+                            "Something went Wrong, Please try again later",
+                            Snackbar.LENGTH_INDEFINITE
+
+                    );
+                    snackbar.setAction("Ok", v -> {
+                        snackbar.dismiss();
+                    });
+                    snackbar.show();
+                });
+                Log.e(MainActivity.TAG, "add to favourites failed");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                runOnUiThread(loading::cancel);
+                if(response.isSuccessful()){
+                    runOnUiThread(()->{
+                        Toast.makeText(
+                                SingleProductActivity.this,
+                                "Product added to favourites successfully",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
+                }else{
+                    runOnUiThread(()->{
+                        Snackbar snackbar = Snackbar.make(
+                                findViewById(R.id.main),
+                                "Request failed, Server error",
+                                Snackbar.LENGTH_INDEFINITE
+
+                        );
+                        snackbar.setAction("Ok", v -> {
+                            snackbar.dismiss();
+                        });
+                        snackbar.show();
+                    });
+                    Log.e(MainActivity.TAG, response.message());
+                }
+            }
+        });
+    }
+
+    private void setupQuantitySelector() {
+        ImageButton buttonDecreaseQuantity = findViewById(R.id.single_product_decrease_quantity_imageButton);
+        buttonDecreaseQuantity.setOnClickListener(v->{
+            TextView editTextQuantity = findViewById(R.id.single_product_quantity_editTextNumber);
+            int qty = Integer.parseInt(editTextQuantity.getText().toString());
+            if(qty > 1){
+                editTextQuantity.setText(String.valueOf(qty-1));
+            }
+        });
     }
 
     private void addToCart() {

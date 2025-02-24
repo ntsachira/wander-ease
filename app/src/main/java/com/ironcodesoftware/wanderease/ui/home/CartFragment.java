@@ -62,7 +62,7 @@ public class CartFragment extends Fragment {
         try {
             logIn = UserLogIn.getLogin(getContext());
         } catch (IOException | ClassNotFoundException e) {
-
+            getActivity().finish();
         }
 
         loadCart(view);
