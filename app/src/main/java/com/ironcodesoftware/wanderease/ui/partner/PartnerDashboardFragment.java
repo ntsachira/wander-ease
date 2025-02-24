@@ -130,11 +130,11 @@ public class PartnerDashboardFragment extends Fragment {
             ArrayList<LegendEntry> legendEntries = new ArrayList<>();
             ArrayList<Integer> colorList = new ArrayList<>();
             colorList.addAll(Arrays.asList(
-                    getActivity().getColor(R.color.c3),
+                    getActivity().getColor(R.color.c6),
                     getActivity().getColor(R.color.c2),
                     getActivity().getColor(R.color.c1),
                     getActivity().getColor(R.color.c4),
-                    getActivity().getColor(R.color.c6)
+                    getActivity().getColor(R.color.c3)
             ));
             AtomicInteger count = new AtomicInteger();
             map.forEach((category, value) -> {

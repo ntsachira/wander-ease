@@ -152,11 +152,11 @@
                 <FrameLayout
                     android:id="@+id/frameLayout"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
-                    android:background="@drawable/image_background"
+                    android:background="@drawable/dashboard_card_background"
                     android:clipChildren="true"
                     android:clipToOutline="true"
                     android:clipToPadding="true"
@@ -169,9 +169,10 @@
                         android:id="@+id/new_product_imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/dashboard_card_background"
                         android:clipToOutline="true"
                         android:cropToPadding="true"
-                        android:scaleType="fitCenter"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/empty_image"
                         app:srcCompat="@drawable/empty_image" />
 

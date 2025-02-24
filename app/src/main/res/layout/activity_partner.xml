@@ -31,7 +31,7 @@
             android:id="@+id/partner_materialToolbar"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:background="@color/background"
+            android:background="@color/white"
             android:minHeight="30dp"
             android:theme="@style/Theme.WanderEase"
             app:buttonGravity="center_vertical"

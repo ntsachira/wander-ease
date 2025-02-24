@@ -34,12 +34,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAdapter.ProductViewHolder> {
+public abstract class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAdapter.ProductViewHolder> {
 
     JsonArray productList;
 
@@ -64,13 +60,9 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
         JsonObject productJsonObject = productList.get(position).getAsJsonObject();
         JsonObject categoryJsonObject = productJsonObject.get(Product.F_CATEGORY).getAsJsonObject();
         boolean activeStatus = productJsonObject.get(Product.F_STATE).getAsInt() == Product.state.Active.ordinal();
-        holder.stateSwitch.setChecked(activeStatus);
-        holder.stateSwitch.setText(activeStatus?"Active":"Inactive");
-        holder.editButton.setOnClickListener(v -> {
-            activity.getIntent().putExtra("product", productJsonObject.toString());
-            TabLayout tabLayout = activity.findViewById(R.id.partner_product_tabLayout);
-            tabLayout.selectTab(tabLayout.getTabAt(1));
-        });
+
+        setEditButton(holder.editButton, productJsonObject);
+
         holder.textViewTitle.setText(productJsonObject.get(Product.F_TITLE).getAsString());
         holder.textViewCategory.setText(categoryJsonObject.get("name").getAsString());
         holder.textViewQuantity.setText(String.format("%s Items",productJsonObject.get(Product.F_QTY).getAsInt()));
@@ -79,6 +71,7 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
         );
         holder.textViewColor.setText(productJsonObject.get(Product.F_COLOR).getAsString());
 
+        setStatusIndicator(holder.textViewStatus,holder.stateSwitch,activeStatus);
 
         new Thread(()->{
             try {
@@ -103,6 +96,8 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
         return productList.size();
     }
 
+    public abstract void setStatusIndicator(TextView textViewStatus, Switch statusSwitch, boolean activeStatus);
+    public abstract void setEditButton(ImageButton button, JsonObject product);
     static class ProductViewHolder extends RecyclerView.ViewHolder{
 
         Switch stateSwitch;
@@ -113,6 +108,7 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
         TextView textureViewPrice;
         TextView textViewColor;
         ImageView imageViewProduct;
+        TextView textViewStatus;
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             stateSwitch = itemView.findViewById(R.id.product_state_switch);
@@ -123,6 +119,7 @@ public class PartnerProductAdapter extends RecyclerView.Adapter<PartnerProductAd
             textureViewPrice = itemView.findViewById(R.id.partner_product_card_price_textView);
             textViewColor = itemView.findViewById(R.id.partner_product_card_color_textView);
             imageViewProduct = itemView.findViewById(R.id.partner_product_card_imageView);
+            textViewStatus = itemView.findViewById(R.id.partner_product_card_active_status_textView);
         }
     }
 }

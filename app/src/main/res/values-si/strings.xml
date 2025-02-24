@@ -76,6 +76,7 @@
     <string name="product_category">ප්‍රවර්ගය</string>
     <string name="product_tab_my_products">මගේ නිෂ්පාදන</string>
     <string name="product_tab_my_add_products">නව නිෂ්පාදනයක් එක් කරන්න</string>
+    <string name="update_product_quantity">අයිතම ප්‍රමාණය යාවත්කාලීන කරන්න</string>
     <string name="partner_order_tab_New_orders">නව ඇණවුම්</string>
     <string name="mark_as_completed">සම්පූර්ණ ලෙස සලකුණු කරන්න</string>
     <string name="my_vehicles">මගේ වාහන</string>

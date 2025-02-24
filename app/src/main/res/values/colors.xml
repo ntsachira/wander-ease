@@ -12,7 +12,9 @@
     <color name="c2">#00BCD4</color>
     <color name="c3">#009688</color>
     <color name="c4">#4CAF50</color>
-    <color name="c5">#FF9800</color>
+    <color name="c5">#9C27B0</color>
     <color name="c6">#3F51B5</color>
+    <color name="red_badge">#1AFF5722</color>
+    <color name="inactive">#646464</color>
 
 </resources>

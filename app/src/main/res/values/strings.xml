@@ -113,6 +113,7 @@
     <string name="product_category">Category</string>
     <string name="product_tab_my_products">My Products</string>
     <string name="product_tab_my_add_products">Add New Product</string>
+    <string name="update_product_quantity">Update Product Quantity</string>
 
     <!--    partner orders-->
     <string name="partner_order_tab_New_orders">New Orders</string>
@@ -147,6 +148,9 @@
     <string name="cancel">Cancel</string>
     <string name="select_courier">Select Courier</string>
     <string name="call_courier">Call Courier</string>
+    <string name="users" translatable="false">Users</string>
+    <string name="add_courier" translatable="false">Add new Courier</string>
+
 
     <!--    delivery-->
     <string name="deliver_title" translatable="false">WanderEase Delivery</string>
@@ -167,7 +171,6 @@
 
     <string name="total_users">Total Users</string>
     <string name="total_couriers">Total Delivery Personnel</string>
-
 
 
     <!--  RegEx-->

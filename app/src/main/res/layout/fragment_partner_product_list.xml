@@ -6,31 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".ui.partner.PartnerProductListFragment">
 
-    <ImageView
-        android:id="@+id/partner_no_products_imageView"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/round_corners"
-        android:clipToOutline="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/product_not_found"
-        android:visibility="visible"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/partner_no_products_imageView_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/partner_product_editText" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/partner_no_products_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corners"
+            android:clipToOutline="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/spinner_circle"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
         android:id="@+id/circularRevealCoordinatorLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/partner_product_cout_textView">
+        app:layout_constraintTop_toBottomOf="@+id/partner_product_editText">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/partner_product_recyclerView"
@@ -46,8 +56,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_border_background"
-        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:background="@drawable/payment_option_back"
+        android:drawableLeft="@drawable/search_icon"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/search"
@@ -57,22 +67,22 @@
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/partner_product_search_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/partner_product_cout_textView"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/partner_product_search_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/product_list_empty"
-        android:textSize="16sp"
+        android:backgroundTint="#ECEFF2"
+        android:text="@string/bottom_nav_home"
+        android:textColor="@color/primary"
         android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/partner_product_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/partner_product_editText" />
+        app:layout_constraintTop_toTopOf="@+id/partner_product_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
