@@ -1,6 +1,7 @@
 package com.ironcodesoftware.wanderease.ui.admin;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +28,27 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.ironcodesoftware.wanderease.BuildConfig;
+import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
+import com.ironcodesoftware.wanderease.model.Delivery;
+import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.Order;
+import com.ironcodesoftware.wanderease.model.SQLiteHelper;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.model.adaper.AdminActiveDeliveryAdapter;
 
 import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class AdminDeliveryActiveFragment extends Fragment {
@@ -78,9 +95,8 @@ public class AdminDeliveryActiveFragment extends Fragment {
                                         buttonAction.setVisibility(View.VISIBLE);
                                         buttonAction.setText(R.string.call_courier);
                                         buttonAction.setOnClickListener(v -> {
-                                            if(hasCallPermission()){
-                                                callCourier("");
-                                            }
+
+                                            getCourierMobile(view,document.getString(Order.F_ID));
                                         });
                                     }
                                 });
@@ -94,6 +110,49 @@ public class AdminDeliveryActiveFragment extends Fragment {
                     }
                 });
     }
+
+    private void getCourierMobile(View view,String orderId) {
+        AlertDialog loading = WanderDialog.loading(getContext());
+        view.post(loading::show);
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection(Delivery.F_COLLECTION)
+                .whereEqualTo(Delivery.F_ORDER_ID, orderId)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        String email = task.getResult().getDocuments().get(0).getString(Delivery.F_COURIER);
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
+                        Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
+                                .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
+                        HttpClient.getInstance().newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                                Log.e(MainActivity.TAG,e.getLocalizedMessage(),e);
+                                view.post(loading::cancel);
+                            }
+
+                            @Override
+                            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                                view.post(loading::cancel);
+                                if(response.isSuccessful()){
+                                    Gson gson = new Gson();
+                                    JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
+                                    if(responseJson.has("ok")
+                                            && responseJson.get("ok").getAsBoolean()){
+                                        JsonObject profile = responseJson.getAsJsonObject("profile");
+                                        callCourier(profile.get(UserLogIn.MOBILE_FIELD).getAsString());
+                                    }
+                                }
+                            }
+                        });
+                    }else{
+                        view.post(loading::cancel);
+                    }
+                }).addOnFailureListener(e->{
+                    view.post(loading::cancel);
+                } );
+    }
+
     private boolean hasCallPermission() {
         if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE)== PackageManager.PERMISSION_GRANTED){
             return true;
@@ -103,9 +162,11 @@ public class AdminDeliveryActiveFragment extends Fragment {
     }
 
     private void callCourier(String mobile) {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse(String.format("tel:%s",mobile)));
-        startActivity(intent);
+        if(hasCallPermission()){
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(String.format("tel:%s",mobile)));
+            startActivity(intent);
+        }
     }
     private void showEmptyCard(View view) {
         view.post(()->{

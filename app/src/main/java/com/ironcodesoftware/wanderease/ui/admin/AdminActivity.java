@@ -91,6 +91,9 @@ public class AdminActivity extends AppCompatActivity {
         } else if (itemId == R.id.admin_analytics_menuItem) {
             loadFragment(new AdminAnalyticsFragment());
             toolbar.setTitle(R.string.admin_Analytics);
+        }else if(itemId == R.id.admin_product_confirmation){
+            loadFragment(new ProductConfirmationFragment());
+            toolbar.setTitle(R.string.partner_products);
         }else{
             toolbar.setTitle(R.string.partner_dashboard);
             loadFragment(new AdminDashboardFragment());

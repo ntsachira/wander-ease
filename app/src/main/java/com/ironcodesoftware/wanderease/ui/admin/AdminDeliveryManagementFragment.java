@@ -62,11 +62,7 @@ public class AdminDeliveryManagementFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadFragment(new AdminToAssignFragment());
-    }
+
 
     private void loadFragment(Fragment fragment) {
         getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)

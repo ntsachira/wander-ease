@@ -143,9 +143,7 @@ public class AdminDashboardFragment extends Fragment {
                 });
     }
 
-    private void setTotalOrders(View view, int size) {
 
-    }
 
     private void setPieChart(HashMap<String, Integer> map, PieChart pieChart, String centerLabel){
         if(!map.isEmpty()){

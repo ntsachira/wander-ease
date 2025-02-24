@@ -9,6 +9,11 @@
             android:icon="@drawable/ic_dashboard"
             android:title="@string/partner_dashboard" />
         <item
+            android:id="@+id/admin_product_confirmation"
+            android:checkable="true"
+            android:icon="@drawable/baseline_pending_actions_24"
+            android:title="@string/partner_products" />
+        <item
             android:id="@+id/admin_user_management_menuItem"
             android:checkable="true"
             android:icon="@drawable/baseline_people_alt_24"
