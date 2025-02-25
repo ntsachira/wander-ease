@@ -46,7 +46,10 @@
     <string name="no_reviews">තවමත් සමාලෝචන නැත</string>
     <string name="reviews">විචාර</string>
     <string name="buy_now">දැන් මිලදී ගන්න</string>
+    <string name="contact_owner">හිමිකරු අමතන්න</string>
     <string name="add_to_cart">Cart ඒකට එක් කරන්න</string>
+    <string name="book_now">දැන්ම වෙන්කරවා ගන්න</string>
+    <string name="pay_at_facility">(පහසුකමේදී ගෙවන්න)</string>
     <string name="account_menu_orders">මගේ ඇණවුම්</string>
     <string name="account_menu_reviews">මගේ සමාලෝචන</string>
     <string name="account_menu_messages">මගේ පණිවිඩ</string>
@@ -92,6 +95,7 @@
     <string name="save_vehicle">වාහනය සුරකින්න</string>
     <string name="price_per_hour">පැයකට මිල</string>
     <string name="bio">ජෛව දත්ත</string>
+    <string name="submit">ඉදිරිපත් කරන්න</string>
     <string name="admin_user_management">පරිශීලක කළමනාකරණය</string>
     <string name="admin_delivery_management">බෙදා හැරීමේ කාර්ය කළමනාකරණය</string>
     <string name="admin_Analytics">විශ්ලේෂණ</string>
@@ -120,4 +124,10 @@
     <string name="order_status">ඇණවුම් තත්ත්වය</string>
     <string name="total_users">මුළු පරිශීලකයින්</string>
     <string name="total_couriers">මුළු බෙදාහැරීමේ කාර්ය මණ්ඩලය</string>
+    <string name="experience">අත්දැකීම්</string>
+    <string name="type">වර්ගය</string>
+    <string name="save_guide">මාර්ගෝපදේශය සුරකින්න</string>
+    <string name="area">ප්රදේශය</string>
+    <string name="subject">විෂය</string>
+    <string name="copy">පිටපත් කරන්න</string>
 </resources>

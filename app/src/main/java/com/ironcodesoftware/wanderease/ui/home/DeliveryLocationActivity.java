@@ -147,6 +147,7 @@ public class DeliveryLocationActivity extends AppCompatActivity {
         supportMapFragment.getMapAsync(googleMap -> {
             map = googleMap;
             setCurrentLocation(googleMap);
+
             googleMap.setOnCameraMoveListener(() -> {
                 googleMap.clear();
                 CameraPosition cameraPosition = googleMap.getCameraPosition();
@@ -160,6 +161,7 @@ public class DeliveryLocationActivity extends AppCompatActivity {
                 textView.setText(String.format("Lat: %s, Lon: %s", target.latitude, target.longitude));
 
             });
+
         });
 
 
@@ -180,6 +182,7 @@ public class DeliveryLocationActivity extends AppCompatActivity {
             return;
         }
         googleMap.setMyLocationEnabled(true);
+
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         LocationManager locationManager = getSystemService(LocationManager.class);
 
@@ -192,6 +195,7 @@ public class DeliveryLocationActivity extends AppCompatActivity {
             googleMap.addMarker(
                     new MarkerOptions().position(latLng).title("Selected Location")
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_navigation_marker_icon))
+                            .draggable(true)
             );
             googleMap.animateCamera(
                     CameraUpdateFactory.newCameraPosition(

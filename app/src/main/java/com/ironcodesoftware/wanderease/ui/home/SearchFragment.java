@@ -61,25 +61,29 @@ public class SearchFragment extends Fragment {
     }
 
     private void loadFragment(Fragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction()
+        getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                 .replace(R.id.home_search_fragmentContainer, fragment)
                 .commit();
     }
 
     private void toggleTab(int position){
         if(position== 1){
-            loadFragment(rentalFragment);
+            loadFragment(new RentalFragment());
         } else if (position== 2) {
-            loadFragment(guideFragment);
+            loadFragment(new GuideFragment());
         }else{
-            loadFragment(productFragment);
+            loadFragment(new ProductFragment());
+            getActivity().getIntent().putExtra("searchTab", 0);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadFragment(new ProductFragment());
+        int searchTab = getActivity().getIntent().getIntExtra("searchTab", 0);
+        toggleTab(searchTab);
+        TabLayout tabLayout = getActivity().findViewById(R.id.home_search_tabLayout);
+        tabLayout.selectTab(tabLayout.getTabAt(searchTab));
     }
 
     @Override
@@ -87,6 +91,10 @@ public class SearchFragment extends Fragment {
         super.onSaveInstanceState(outState);
         TabLayout tabLayout = getActivity().findViewById(R.id.home_search_tabLayout);
         outState.putInt("tab", tabLayout.getSelectedTabPosition());
+        getActivity().getIntent().putExtra("searchTab", tabLayout.getSelectedTabPosition());
     }
+
+
+
 
 }

@@ -58,7 +58,9 @@ public abstract class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter
                 new DecimalFormat().format(jsonObject.get("pricePerDay").getAsDouble())));
         holder.textViewHighlights.setText(jsonObject.get("highlights").getAsString());
 
-        onCardClick(jsonObject, holder.card);
+        holder.card.setOnClickListener(v -> {
+            onCardClick(jsonObject, holder.card);
+        });
 
         new Thread(()->{
             try {

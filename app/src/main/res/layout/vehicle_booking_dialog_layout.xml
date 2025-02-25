@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="25dp"
+    android:paddingTop="20dp"
+    android:paddingRight="25dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_booking_details"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/vehicle_booking_calendarView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/payment_option_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/start_date"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+    <EditText
+        android:id="@+id/vehicle_booking_days_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/payment_option_back"
+        android:editable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/days"
+        android:inputType="number"
+        android:padding="10dp"
+        android:text="1"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/booking_days_decrement_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+    <TextView
+        android:id="@+id/textView54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/days"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle_booking_calendarView" />
+
+    <ImageView
+        android:id="@+id/booking_days_decrement_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/payment_option_back"
+        android:elevation="2dp"
+        android:translationY="-2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vehicle_booking_days_editText"
+        app:layout_constraintEnd_toStartOf="@+id/vehicle_booking_days_increment_imageView"
+        app:layout_constraintTop_toTopOf="@+id/vehicle_booking_days_editText"
+        app:layout_constraintVertical_bias="0.625"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
+    <ImageView
+        android:id="@+id/vehicle_booking_days_increment_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/payment_option_back"
+        android:elevation="2dp"
+        android:translationY="-2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vehicle_booking_days_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vehicle_booking_days_editText"
+        app:srcCompat="@drawable/baseline_keyboard_arrow_right_24" />
+
+    <Button
+        android:id="@+id/vehicle_booking_cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#00646464"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="@string/cancel"
+        android:textAllCaps="true"
+        android:textColor="@color/inactive"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/vehicle_booking_positive_button"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle_booking_days_editText"
+        app:rippleColor="#949494" />
+
+    <Button
+        android:id="@+id/vehicle_booking_positive_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#00FFFFFF"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="@string/book_now"
+        android:textAllCaps="true"
+        android:textColor="#009688"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle_booking_days_editText"
+        app:rippleColor="#A6A6A6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

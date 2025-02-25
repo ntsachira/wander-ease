@@ -30,5 +30,13 @@ public interface Vehicle {
             State.Unavailable.name()
     );
 
+    String F_START_DATE = "start_date";
+    String F_DAYS = "DAYS";
+    String F_TOTAL_PRICE = "total_price";
+    String F_RENTAL_STATUS = "rental_status";
+    String F_CREATED_DATE = "created_date";
+    String F_REVIEW_STATUS = "review_status";
+    String F_VEHICLE = "vehicle";
+    String F_USER = "renter";
 
 }

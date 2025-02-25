@@ -60,6 +60,7 @@ public class SingleProductActivity extends AppCompatActivity {
             return insets;
         });
 
+        getWindow().setStatusBarColor(getColor(R.color.white));
         try {
             login = UserLogIn.getLogin(this);
         } catch (IOException | ClassNotFoundException e) {

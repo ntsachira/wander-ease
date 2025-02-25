@@ -35,4 +35,5 @@ public interface Guide {
             Type.Surfing_and_Beach_Tours.toString(),
             Type.City_and_Shopping_Tours.toString()
     );
+
 }
