@@ -73,7 +73,7 @@ public class DeliveryTaskViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         Toolbar toolbar = findViewById(R.id.delivery_task_view_activity_toolbar);
         toolbar.setNavigationOnClickListener(v -> {
             finish();

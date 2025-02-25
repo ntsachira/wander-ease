@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WanderEase" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/primary</item> 
-         <item name="colorSecondary">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/primary</item>
         <item name="colorOnPrimarySurface">@color/primary</item>
-         <item name="android:textColorHighlight">@color/highlight</item>
+        <item name="android:textColorHighlight">@color/highlight</item>
         <item name="colorSecondaryContainer">@color/navigation_active_indicator</item>
         <item name="android:statusBarColor">@color/white</item>
     </style>
@@ -15,6 +15,7 @@
     <style name="Theme.WanderEase.Splash" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowBackground">@color/primary</item>
     </style>
-    <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog"/>
+
+    <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog" />
 
 </resources>

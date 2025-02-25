@@ -62,7 +62,7 @@ public class DeliveryLocationActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         Toolbar toolbar = findViewById(R.id.deleiver_location_toolbar);
         toolbar.setNavigationOnClickListener(v->{
             finish();

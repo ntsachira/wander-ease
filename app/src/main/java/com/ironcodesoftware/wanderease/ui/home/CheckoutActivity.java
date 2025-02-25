@@ -102,7 +102,7 @@ public class CheckoutActivity extends AppCompatActivity {
         } catch (IOException | ClassNotFoundException e) {
          finish();
         }
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         Toolbar toolbar = findViewById(R.id.order_checkout_toolbar);
         toolbar.setNavigationOnClickListener(v -> {
             finish();

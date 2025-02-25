@@ -22,5 +22,6 @@ public class ProductReviewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        getWindow().setStatusBarColor(getColor(R.color.white));
     }
 }

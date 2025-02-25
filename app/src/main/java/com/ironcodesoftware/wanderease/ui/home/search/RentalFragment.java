@@ -1,5 +1,6 @@
 package com.ironcodesoftware.wanderease.ui.home.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -150,8 +151,9 @@ public class RentalFragment extends Fragment {
 
         recyclerView.setAdapter(new VehicleAdapter(jsonArray,getActivity()) {
             @Override
-            public void onCardClick(JsonObject jsonObject, ConstraintLayout card) {
-
+            public void onCardClick(JsonObject vehicleJson, ConstraintLayout card) {
+                startActivity(new Intent(getContext(),SingleVehicleActivity.class)
+                        .putExtra("vehicle", vehicleJson.toString()));
             }
         });
     }

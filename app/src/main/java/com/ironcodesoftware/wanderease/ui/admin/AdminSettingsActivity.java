@@ -30,7 +30,7 @@ public class AdminSettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         Button buttonLogout = findViewById(R.id.admin_settings_logout_button);
         buttonLogout.setOnClickListener(v->{
             android.app.AlertDialog dialog = WanderDialog.confirm(this, "Are you sure you want to log out?");

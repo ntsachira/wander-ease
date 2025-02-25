@@ -34,7 +34,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         });
 
         initShakeDetector();
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         loadFragment(new CompletedOrdersFragment());
 
         Toolbar toolbar = findViewById(R.id.my_orders_toolbar);

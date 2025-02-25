@@ -9,7 +9,7 @@
         <item name="colorSecondaryContainer">@color/navigation_active_indicator</item>
     </style>
 
-    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.Light.NoActionBar">
-    </style>
-    <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog"/>
+    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.Light.NoActionBar"></style>
+
+    <style name="Theme.WanderEase.AlertDialog" parent="ThemeOverlay.Material3.Dialog" />
 </resources>

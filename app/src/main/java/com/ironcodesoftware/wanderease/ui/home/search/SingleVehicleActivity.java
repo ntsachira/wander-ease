@@ -1,8 +1,6 @@
-package com.ironcodesoftware.wanderease.ui.home;
+package com.ironcodesoftware.wanderease.ui.home.search;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,24 +8,31 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.R;
 
-public class PaymentSuccessActivity extends AppCompatActivity {
+public class SingleVehicleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_payment_success);
+        setContentView(R.layout.activity_single_vehicle);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        getWindow().setStatusBarColor(getColor(R.color.white));
-        Button buttonBack = findViewById(R.id.success_screen_backHome_button);
-        buttonBack.setOnClickListener(v->{
-            startActivity(new Intent(PaymentSuccessActivity.this, HomeActivity.class));
-        });
+
+        if(!getIntent().hasExtra("vehicle")){
+            finish();
+        }
+
+        Gson gson = new Gson();
+        JsonObject vehicle = gson.fromJson(getIntent().getStringExtra("vehicle"), JsonObject.class);
+
+
+
     }
 }

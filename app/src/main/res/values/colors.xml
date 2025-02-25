@@ -6,6 +6,7 @@
     <color name="highlight">#59009688</color>
     <color name="background">#FFFFFF</color>
     <color name="navigation_active_indicator">#3D00B8A5</color>
+    <color name="button_background_light">#ECEFF2</color>
 
 <!--    chart colors-->
     <color name="c1">#2196F3</color>

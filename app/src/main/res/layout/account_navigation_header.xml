@@ -12,11 +12,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_border_background"
+        android:clipToOutline="true"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_default_icon" />
+        app:srcCompat="@color/button_background_light" />
 
     <TextView
         android:id="@+id/account_navigation_header_textView_username"
@@ -39,8 +41,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_corners"
         android:scaleType="centerCrop"
-        android:tint="#009688"
-        app:layout_constraintBottom_toBottomOf="@+id/account_navigation_profile_imageView"
+        android:tint="@color/inactive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/account_navigation_profile_imageView"
         app:srcCompat="@drawable/settings_gear_options_icon" />
@@ -63,4 +64,20 @@
         app:layout_constraintBottom_toBottomOf="@+id/account_navigation_profile_imageView"
         app:layout_constraintStart_toStartOf="@+id/account_navigation_header_textView_username"
         app:layout_constraintTop_toBottomOf="@+id/account_navigation_header_textView_username" />
+
+    <TextView
+        android:id="@+id/account_navigation_header_letter_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_border_background"
+        android:fontFamily="@font/londrina_sketch_regular"
+        android:gravity="center"
+        android:text="S"
+        android:textColor="@color/inactive"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/account_navigation_profile_imageView"
+        app:layout_constraintEnd_toEndOf="@+id/account_navigation_profile_imageView"
+        app:layout_constraintStart_toStartOf="@+id/account_navigation_profile_imageView"
+        app:layout_constraintTop_toTopOf="@+id/account_navigation_profile_imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

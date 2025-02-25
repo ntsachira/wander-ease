@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -25,6 +26,8 @@ import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
+import com.ironcodesoftware.wanderease.ui.home.account.HelpActivity;
 import com.ironcodesoftware.wanderease.ui.home.account.MyOrdersActivity;
 import com.ironcodesoftware.wanderease.ui.home.account.SettingsActivity;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
@@ -65,25 +68,38 @@ public class AccountFragment extends Fragment {
         });
         navigationView.setNavigationItemSelectedListener(item -> {
             if(item.getItemId() == R.id.account_orders){
-                startActivity(new Intent(getContext(), MyOrdersActivity.class));
+               gotoActivity(MyOrdersActivity.class);
+            } else if (item.getItemId() == R.id.account_messages) {
+                gotoActivity(MessagesActivity.class);
+            } else if (item.getItemId() == R.id.account_reviews) {
+                WanderDialog.info(getContext(), "This feature is not available yet").show();
+            } else if (item.getItemId() == R.id.account_help) {
+                gotoActivity(HelpActivity.class);
             }
             return false;
         });
     }
 
+    private void gotoActivity(Class<? extends AppCompatActivity> activityClass) {
+        startActivity(new Intent(getContext(), activityClass));
+    }
+
     private void setUserDetails(View view) {
         try {
             NavigationView navigationView = view.findViewById(R.id.account_navigationView);
-            TextView textViewUsername = navigationView.getHeaderView(0)
+            View headerView = navigationView.getHeaderView(0);
+            TextView textViewUsername = headerView
                     .findViewById(R.id.account_navigation_header_textView_username);
+            TextView textViewLetter = headerView.findViewById(R.id.account_navigation_header_letter_textView);
+
             if(UserLogIn.hasLogin(getContext())){
                 UserLogIn login = UserLogIn.getLogin(getContext());
                 if(login.getDisplay_name()!=null){
                     textViewUsername.setText(login.getDisplay_name());
+                    textViewLetter.setText(String.valueOf(login.getDisplay_name().charAt(0)));
                 }else{
                     Log.d(MainActivity.TAG,"Test1");
                     textViewUsername.setText(login.getEmail());
-                    //requestUserDetails(view, login.getEmail());
                 }
             }else{
                 gotoLogin();
@@ -96,61 +112,8 @@ public class AccountFragment extends Fragment {
         }
     }
 
-    private void requestUserDetails(View view, String email){
 
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty(UserLogIn.EMAIL_FIELD, email);
-            Request request = new Request.Builder().url(BuildConfig.HOST_URL + "GetProfile")
-                    .post(RequestBody.create(jsonObject.toString(), HttpClient.JSON)).build();
-            HttpClient.getInstance().newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    promptFailed("1:Profile loading failed");
-                    Log.e(MainActivity.TAG,e.getLocalizedMessage());
-                }
 
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if(response.isSuccessful()){
-                        Gson gson = new Gson();
-                        JsonObject responseJson = gson.fromJson(response.body().string(), JsonObject.class);
-                        if(responseJson.has("ok")
-                                && responseJson.get("ok").getAsBoolean()){
-                            String name = responseJson.getAsJsonObject("profile")
-                                    .get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
-                            NavigationView navigationView = view.findViewById(R.id.account_navigationView);
-                            TextView textViewUsername = navigationView.getHeaderView(0)
-                                    .findViewById(R.id.account_navigation_header_textView_username);
-                            view.post(()->{
-                                textViewUsername.setText(name);
-                            });
-                            try {
-                                UserLogIn login = UserLogIn.getLogin(view.getContext());
-                                login.setDisplay_name(name);
-                                login.serialize(getContext());
-                            } catch (ClassNotFoundException e) {
-                                Log.e(MainActivity.TAG,e.getLocalizedMessage());
-                            }
-                        }else{
-                            promptFailed("2:Profile loading failed");
-                        }
-                    }else{
-                        promptFailed("3:Profile loading failed");
-                    }
-                }
-            });
-
-    }
-
-    void promptFailed(String message){
-        getView().post(()->{
-            Snackbar snackbar = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG);
-            snackbar.setAction("Dismiss", v->{
-                snackbar.dismiss();
-            });
-            snackbar.show();
-        });
-    }
 
     private void gotoLogin(){
         startActivity(new Intent(getContext(), LogInActivity.class));

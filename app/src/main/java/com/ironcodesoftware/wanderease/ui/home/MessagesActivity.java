@@ -24,7 +24,7 @@ public class MessagesActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getWindow().setStatusBarColor(getColor(R.color.white));
         WanderNotification.dismiss(this);
         Toolbar toolbar = findViewById(R.id.message_toolbar);
         toolbar.setNavigationOnClickListener(v -> {
