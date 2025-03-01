@@ -25,15 +25,19 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.SellerOrder;
+import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.adaper.AdminActiveDeliveryAdapter;
 import com.ironcodesoftware.wanderease.model.adaper.PartnerOrderAdapter;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 
 public class PartnerNewOrdersFragment extends Fragment {
 
+
+    private UserLogIn login;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +49,11 @@ public class PartnerNewOrdersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        try {
+            login = UserLogIn.getLogin(getContext());
+        } catch (IOException | ClassNotFoundException e) {
+            getActivity().finish();
+        }
         loadOrders(view);
     }
 
@@ -56,10 +64,14 @@ public class PartnerNewOrdersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseFirestore.getInstance().collection(SellerOrder.F_COLLECTION)
-                .where(Filter.inArray(SellerOrder.F_STATE, Arrays.asList(
-                        SellerOrder.State.Pending.name(),
-                        SellerOrder.State.Processing.name()
-                ))).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .where(Filter.and(
+                        Filter.inArray(SellerOrder.F_STATE, Arrays.asList(
+                                        SellerOrder.State.Pending.name(),
+                                        SellerOrder.State.Processing.name()
+                                )
+                        ),
+                        Filter.equalTo(SellerOrder.F_SELLER, login.getEmail())
+                        )).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(error == null && !value.isEmpty()){

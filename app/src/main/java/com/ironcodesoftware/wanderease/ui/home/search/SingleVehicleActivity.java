@@ -41,12 +41,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.AddressRequest;
+import com.ironcodesoftware.wanderease.model.Order;
+import com.ironcodesoftware.wanderease.model.SQLiteHelper;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
 import com.ironcodesoftware.wanderease.model.Vehicle;
 import com.ironcodesoftware.wanderease.model.WanderDialog;
@@ -58,6 +61,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class SingleVehicleActivity extends AppCompatActivity {
@@ -146,12 +150,39 @@ public class SingleVehicleActivity extends AppCompatActivity {
             int days = Integer.parseInt(editTextDays.getText().toString());
             String date = dateFormat.format(calendar.getTime());
             HashMap<String,Object> bookingMap = new HashMap<>();
-
+            JsonObject profile = SQLiteHelper.getProfile(SingleVehicleActivity.this);
             bookingMap.put(Vehicle.F_START_DATE, date);
             bookingMap.put(Vehicle.F_DAYS, days);
             bookingMap.put(Vehicle.F_VEHICLE, vehicle.toString());
-            bookingMap.put(Vehicle.F_USER, );
-            bookingMap.get()
+            bookingMap.put(Vehicle.F_USER, profile.get("email").getAsString());
+            bookingMap.put(Vehicle.F_RENTAL_STATUS, Order.State.Pending.name());
+            bookingMap.put(Vehicle.F_CREATED_DATE, dateFormat.format(new Date()));
+            bookingMap.put(Vehicle.F_REVIEW_STATUS, Order.State.Pending.name());
+
+
+            android.app.AlertDialog loading = WanderDialog.loading(SingleVehicleActivity.this);
+            loading.show();
+            FirebaseFirestore.getInstance().collection("booking")
+                    .add(bookingMap)
+                    .addOnSuccessListener(documentReference -> {
+                        v.post(()->{
+                            loading.cancel();
+                            WanderDialog.success(SingleVehicleActivity.this,
+                                            "Booking saved successfully")
+                                    .show();
+                            dialog.cancel();
+                        });
+                    })
+                    .addOnFailureListener(e->{
+                        v.post(()->{
+                            loading.cancel();
+                            WanderDialog.cancel(SingleVehicleActivity.this,
+                                            "Failed to save booking")
+                                    .show();
+                            dialog.cancel();
+                        });
+                    });
+
         });
         dialog.show();
 

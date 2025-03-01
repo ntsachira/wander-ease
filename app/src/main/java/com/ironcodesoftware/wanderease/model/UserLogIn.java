@@ -200,7 +200,7 @@ public class UserLogIn implements Serializable {
                             && responseJson.get("ok").getAsBoolean()){
                         JsonObject profile = responseJson.getAsJsonObject("profile");
                         String name = profile.get(UserLogIn.DISPLAY_NAME_FIELD).getAsString();
-                        SQLiteHelper.saveProfile(context, profile);
+                        SQLiteHelper.saveProfile(context, profile,email);
                         try {
                             UserLogIn login = UserLogIn.getLogin(context);
                             login.setDisplay_name(name);

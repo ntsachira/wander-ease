@@ -145,7 +145,7 @@ public class LoginFragment extends Fragment {
         )).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error == null && !value.isEmpty()){
+                if(error == null && !value.isEmpty() && getContext() != null){
                     WanderNotification.notify(getContext(), MessagesActivity.class );
                 }else{
                     Log.e(MainActivity.TAG, error!=null?error.getMessage():"No new notifications");

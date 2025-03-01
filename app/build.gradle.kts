@@ -28,14 +28,14 @@ android {
             buildConfigField(
                 "String",
                 "HOST_URL",
-                "\"https://hopefully-exciting-buzzard.ngrok-free.app/WanderEase/\""
+                "\"https://oriented-promptly-bee.ngrok-free.app/WanderEase/\""
             )
         }
         debug {
             buildConfigField(
                 "String",
                 "HOST_URL",
-                "\"https://hopefully-exciting-buzzard.ngrok-free.app/WanderEase/\""
+                "\"https://oriented-promptly-bee.ngrok-free.app/WanderEase/\""
             )
         }
     }

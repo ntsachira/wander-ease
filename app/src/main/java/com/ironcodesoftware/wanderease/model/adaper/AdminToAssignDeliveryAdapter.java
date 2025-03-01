@@ -143,7 +143,7 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
                                     Toast.makeText(
                                             activity,
                                                     "Delivery assignment success",
-                                                    Toast.LENGTH_LONG)
+                                                    Toast.LENGTH_SHORT)
                                             .show();
                                     new FlingAnimation(activity.findViewById(R.id.slide_down_card), DynamicAnimation.TRANSLATION_Y)
                                             .setStartVelocity(-9000f).setFriction(1f).start();
@@ -178,7 +178,7 @@ public class AdminToAssignDeliveryAdapter extends RecyclerView.Adapter<AdminToAs
                     activity.runOnUiThread(()->{
                         Toast.makeText(
                                         activity,
-                                        "Notification sent",Toast.LENGTH_LONG )
+                                        "Notification sent",Toast.LENGTH_SHORT )
                                 .show();
 
                     });
