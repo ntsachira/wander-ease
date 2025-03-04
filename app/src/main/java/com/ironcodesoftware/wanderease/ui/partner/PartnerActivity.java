@@ -1,6 +1,9 @@
 package com.ironcodesoftware.wanderease.ui.partner;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +37,7 @@ import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.ShakeDetector;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.ui.home.HelpFragment;
 import com.ironcodesoftware.wanderease.ui.home.MessageFragment;
 import com.ironcodesoftware.wanderease.ui.home.account.SettingsActivity;
@@ -63,6 +68,7 @@ public class PartnerActivity extends AppCompatActivity {
             return insets;
         });
 
+        initOnBackPressDispatcher(this);
         initShakeDetector();
         loadFragment(new PartnerDashboardFragment());
         getWindow().setStatusBarColor(getColor(R.color.white));
@@ -115,12 +121,16 @@ public class PartnerActivity extends AppCompatActivity {
     private void setUserDetails() {
         try {
             NavigationView navigationView = findViewById(R.id.partner_navigationView);
-            TextView textViewUsername = navigationView.getHeaderView(0)
+            View headerView = navigationView.getHeaderView(0);
+            TextView textViewUsername = headerView
                     .findViewById(R.id.partner_navigation_header_textView_username);
+            TextView textViewLetter = headerView.findViewById(R.id.partner_naviagtion_header_letter_textView);
+
             if(UserLogIn.hasLogin(this)){
                 UserLogIn login = UserLogIn.getLogin(this);
                 if(login.getDisplay_name()!=null){
                     textViewUsername.setText(login.getDisplay_name());
+                    textViewLetter.setText(login.getDisplay_name().substring(0, 1));
                 }else{
                     textViewUsername.setText(login.getEmail());
                 }
@@ -217,5 +227,32 @@ public class PartnerActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         shakeDetector.stop();
+    }
+    private void initOnBackPressDispatcher(Context context) {
+        getOnBackPressedDispatcher().addCallback(this,new OnBackPressedCallback(true){
+            @Override
+            public void handleOnBackPressed() {
+
+                if(isTaskRoot()){
+                   showExitConfirmation();
+                }else{
+                    finish();
+                }
+            }
+            private void showExitConfirmation() {
+                AlertDialog confirm = WanderDialog.confirm(
+                        context,
+                        "Are you sure you want to exit?");
+                confirm.setButton(
+                        DialogInterface.BUTTON_POSITIVE,
+                        "Yes",
+                        (dialog, which) -> finishAffinity());
+                confirm.setButton(
+                        DialogInterface.BUTTON_NEGATIVE,
+                        "No",
+                        (dialog, which) -> dialog.dismiss());
+                confirm.show();
+            }
+        });
     }
 }

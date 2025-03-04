@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -31,7 +32,6 @@ import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
-import com.ironcodesoftware.wanderease.model.Product;
 import com.ironcodesoftware.wanderease.model.adaper.ProductAdapter;
 
 import java.io.IOException;
@@ -63,6 +63,30 @@ public class ProductFragment extends Fragment {
         Button buttonSearch = view.findViewById(R.id.product_list_search_button);
         buttonSearch.setOnClickListener(v->{
             loadProducts(view);
+        });
+
+        setupSearchBar(view);
+    }
+
+    private void setupSearchBar(View view) {
+        EditText editTextSearch = view.findViewById(R.id.product_list_search_editText);
+        editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().trim().isEmpty()){
+                    loadProducts(view);
+                }
+            }
         });
     }
 

@@ -1,5 +1,8 @@
 package com.ironcodesoftware.wanderease.ui.admin;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,7 +29,9 @@ import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
+import com.ironcodesoftware.wanderease.model.ShakeDetector;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
+import com.ironcodesoftware.wanderease.model.WanderDialog;
 import com.ironcodesoftware.wanderease.ui.login.LogInActivity;
 
 import java.io.IOException;
@@ -38,6 +44,8 @@ import okhttp3.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
+    private ShakeDetector shakeDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +57,8 @@ public class AdminActivity extends AppCompatActivity {
             return insets;
         });
         getWindow().setStatusBarColor(getColor(R.color.white));
-
+        initShakeDetector();
+        initOnBackPressDispatcher(this);
         loadFragment(new AdminDashboardFragment());
 
         Toolbar toolbar = findViewById(R.id.admin_toolbar);
@@ -78,6 +87,15 @@ public class AdminActivity extends AppCompatActivity {
             drawerLayout.close();
             return true;
         });
+    }
+
+    private void initShakeDetector() {
+        shakeDetector = new ShakeDetector(this) {
+            @Override
+            public void onShake() {
+                recreate();
+            }
+        };
     }
 
     private void setSelectedItem(int itemId) {
@@ -158,13 +176,14 @@ public class AdminActivity extends AppCompatActivity {
     }
     void promptFailed(String message){
         runOnUiThread(()->{
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.delivery_main), message, Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.delivery_main), message, Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction("Dismiss", v->{
                 snackbar.dismiss();
             });
             snackbar.show();
         });
     }
+
 
     @Override
     protected void onResume() {
@@ -177,5 +196,35 @@ public class AdminActivity extends AppCompatActivity {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        shakeDetector.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shakeDetector.stop();
+    }
+
+    private void initOnBackPressDispatcher(Context context) {
+        getOnBackPressedDispatcher().addCallback(this,new OnBackPressedCallback(true){
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmation();
+            }
+            private void showExitConfirmation() {
+                AlertDialog confirm = WanderDialog.confirm(
+                        context,
+                        "Are you sure you want to exit?");
+                confirm.setButton(
+                        DialogInterface.BUTTON_POSITIVE,
+                        "Yes",
+                        (dialog, which) -> finishAffinity());
+                confirm.setButton(
+                        DialogInterface.BUTTON_NEGATIVE,
+                        "No",
+                        (dialog, which) -> dialog.dismiss());
+                confirm.show();
+            }
+        });
     }
 }

@@ -9,22 +9,25 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/admin_user_tabLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/background_simple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabInlineLabel="true">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/admin_user_list_tabitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:icon="@drawable/baseline_people_alt_24"
             android:text="@string/users" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/admin_user_add_courier_tabitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:icon="@drawable/baseline_delivery_dining_24"
             android:text="@string/add_courier" />
 
     </com.google.android.material.tabs.TabLayout>

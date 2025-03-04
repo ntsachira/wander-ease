@@ -61,7 +61,7 @@ public class AdminNewCourierFragment extends Fragment {
         if(user != null){
             AlertDialog loading = WanderDialog.loading(getContext());
             loading.show();
-            Request request = new Request.Builder().url(BuildConfig.HOST_URL + "SignUp")
+            Request request = new Request.Builder().url(BuildConfig.HOST_URL + "SignUpDelivery")
                     .post(RequestBody.create(gson.toJson(user), HttpClient.JSON)).build();
             HttpClient.getInstance().newCall(request).enqueue(new Callback() {
                 @Override
@@ -101,7 +101,7 @@ public class AdminNewCourierFragment extends Fragment {
         userMap.put(UserLogIn.EMAIL_FIELD, user.get(UserLogIn.EMAIL_FIELD));
         userMap.put(UserLogIn.PASSWORD_FIELD, user.get(UserLogIn.PASSWORD_FIELD));
         userMap.put(UserLogIn.ACTIVE_STATE_FIELD, User.ACTIVE);
-        userMap.put(UserLogIn.USER_ROLE_FIELD, User.USER);
+        userMap.put(UserLogIn.USER_ROLE_FIELD, User.DELIVERY);
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.collection(UserLogIn.USER_COLLECTION)

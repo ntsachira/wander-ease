@@ -8,13 +8,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="1dp"
-        app:cardUseCompatPadding="true"
+        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/watchlist_item_constraintLayout"

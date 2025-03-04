@@ -22,7 +22,7 @@
         android:id="@+id/help_ticket_toolbar"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@drawable/background_simple"
+        android:background="@color/background"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"

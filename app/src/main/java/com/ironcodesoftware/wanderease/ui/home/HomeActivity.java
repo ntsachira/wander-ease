@@ -3,6 +3,7 @@ package com.ironcodesoftware.wanderease.ui.home;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
         showHint();
-
+        initOnBackPressDispatcher(this);
         initShakeDetector();
 
         getWindow().setStatusBarColor(getColor(R.color.white));
@@ -97,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
         if(!sharedPreferences.contains("hint")){
             AlertDialog infoDialog = WanderDialog.info(this,
-                    "You can shake you phone to reload the content");
+                    "You can shake your phone to reload the content");
             infoDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Do not show this again",(dialog, which) -> {
                 sharedPreferences.edit().putBoolean("hint", false).apply();
             });
@@ -163,5 +165,27 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         shakeDetector.stop();
+    }
+    private void initOnBackPressDispatcher(Context context) {
+        getOnBackPressedDispatcher().addCallback(this,new OnBackPressedCallback(true){
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmation();
+            }
+            private void showExitConfirmation() {
+                AlertDialog confirm = WanderDialog.confirm(
+                        context,
+                        "Are you sure you want to exit?");
+                confirm.setButton(
+                        DialogInterface.BUTTON_POSITIVE,
+                        "Yes",
+                        (dialog, which) -> finishAffinity());
+                confirm.setButton(
+                        DialogInterface.BUTTON_NEGATIVE,
+                        "No",
+                        (dialog, which) -> dialog.dismiss());
+                confirm.show();
+            }
+        });
     }
 }

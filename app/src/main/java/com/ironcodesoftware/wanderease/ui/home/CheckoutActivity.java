@@ -273,7 +273,7 @@ public class CheckoutActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PHMainActivity.class);
         intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
         PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
-        startActivityForResult(intent, PAYHERE_REQUEST ); //unique request ID e.g. "11001"
+        startActivityForResult(intent, PAYHERE_REQUEST );
     }
 
     @Override
@@ -370,6 +370,10 @@ public class CheckoutActivity extends AppCompatActivity {
                     email
             );
         }
+        sendNotification(
+                "You have new Orders to Assign Delivery",
+                this,
+                "admin@wanderease.com");
     }
 
     private void removeOrder() {

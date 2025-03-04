@@ -87,8 +87,6 @@ public class LoginFragment extends Fragment {
         EditText editTextEmail = view.findViewById(R.id.login_editText_email);
         EditText editTextPassword = view.findViewById(R.id.login_editText_Password);
 
-        WifiManager wifiManager = getActivity().getSystemService(WifiManager.class);
-        ConnectivityManager connectivityManager = getActivity().getSystemService(ConnectivityManager.class);
 
         UserLogIn logIn = UserLogIn.getInstance();
         if(logIn.isDataValid(editTextEmail,editTextPassword)){

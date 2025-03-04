@@ -169,7 +169,7 @@
     <string name="select_courier">Select Courier</string>
     <string name="call_courier">Call Courier</string>
     <string name="users" translatable="false">Users</string>
-    <string name="add_courier" translatable="false">Add new Courier</string>
+    <string name="add_courier" translatable="false">New Courier</string>
     <string name="no_bookings" translatable="false">No bookings yet</string>
 
 

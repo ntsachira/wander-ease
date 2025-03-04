@@ -17,5 +17,6 @@
     <color name="c6">#3F51B5</color>
     <color name="red_badge">#1AFF5722</color>
     <color name="inactive">#646464</color>
+    <color name="profile_Back">#7FE0E0E0</color>
 
 </resources>

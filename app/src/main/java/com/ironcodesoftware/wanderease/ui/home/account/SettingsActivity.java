@@ -75,7 +75,10 @@ public class SettingsActivity extends AppCompatActivity {
     private void logout() {
         if(UserLogIn.clear(this)){
             Toast.makeText(this,"Logout success", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LogInActivity.class));
+            Intent intent = new Intent(this, LogInActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
             finish();
         }
     }

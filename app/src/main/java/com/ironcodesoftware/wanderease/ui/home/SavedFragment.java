@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,13 +26,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.ironcodesoftware.wanderease.BuildConfig;
 import com.ironcodesoftware.wanderease.MainActivity;
 import com.ironcodesoftware.wanderease.R;
 import com.ironcodesoftware.wanderease.model.HttpClient;
 import com.ironcodesoftware.wanderease.model.UserLogIn;
-import com.ironcodesoftware.wanderease.model.adaper.MyOrderItemAdapter;
 import com.ironcodesoftware.wanderease.model.adaper.WatchlistItemAdapter;
 import com.ironcodesoftware.wanderease.ui.home.search.SingleProductActivity;
 
@@ -67,11 +64,11 @@ public class SavedFragment extends Fragment {
             getActivity().finish();
         }
 
-        loadCart(view);
+        loadSavedItems(view);
         setupItemTouchHelper(view);
     }
 
-    private void loadCart(View view) {
+    private void loadSavedItems(View view) {
         setLoading(view);
         RecyclerView recyclerView = view.findViewById(R.id.watchlist_recyclerView);
         recyclerView.setVisibility(View.VISIBLE);
