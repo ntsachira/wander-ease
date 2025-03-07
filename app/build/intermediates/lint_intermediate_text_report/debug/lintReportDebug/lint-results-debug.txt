@@ -1,0 +1,208 @@
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\layout\intro_slider_item.xml:15: Warning: Attribute clipToOutline is only used in API level 31 and higher (current min is 24) [UnusedAttribute]
+        android:clipToOutline="true"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\java\com\ironcodesoftware\wanderease\SplashActivity.java:12: Warning: The application should not provide its own launch screen [CustomSplashScreen]
+public class SplashActivity extends AppCompatActivity {
+             ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "CustomSplashScreen":
+   Starting in Android 12 (API 31+), the application's Launch Screen is
+   provided by the system and the application should not create its own,
+   otherwise the user will see two splashscreens. Please check the
+   SplashScreen class to check how the Splash Screen can be controlled and
+   customized.
+
+   https://developer.android.com/guide/topics/ui/splash-screen
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\gradle\libs.versions.toml:2: Warning: A newer version of com.android.application than 8.7.3 is available: 8.8.0 [AndroidGradlePluginVersion]
+agp = "8.7.3"
+      ~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\gradle\libs.versions.toml:2: Warning: A newer version of com.android.application than 8.7.3 is available: 8.8.0 [AndroidGradlePluginVersion]
+agp = "8.7.3"
+      ~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\gradle\libs.versions.toml:2: Warning: A newer version of com.android.application than 8.7.3 is available: 8.8.0 [AndroidGradlePluginVersion]
+agp = "8.7.3"
+      ~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\build.gradle.kts:61: Warning: A newer version of com.google.firebase:firebase-bom than 33.8.0 is available: 33.9.0 [GradleDependency]
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\AndroidManifest.xml:25: Warning: Expecting android:screenOrientation="unspecified" or "fullSensor" for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices [LockedOrientationActivity]
+            android:screenOrientation="portrait"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\AndroidManifest.xml:35: Warning: Expecting android:screenOrientation="unspecified" or "fullSensor" for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices [LockedOrientationActivity]
+            android:screenOrientation="portrait"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LockedOrientationActivity":
+   The <activity> element should not be locked to any orientation so that
+   users can take advantage of the multi-window environments and larger
+   screens available on Android. To fix the issue, consider declaring the
+   corresponding activity element with `screenOrientation="unspecified"`or
+   fullSensor attribute.
+
+   https://developer.android.com/topic/arc/window-management
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\AndroidManifest.xml:25: Warning: Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed. [DiscouragedApi]
+            android:screenOrientation="portrait"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\AndroidManifest.xml:35: Warning: Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed. [DiscouragedApi]
+            android:screenOrientation="portrait"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "DiscouragedApi":
+   Discouraged APIs are allowed and are not deprecated, but they may be unfit
+   for common use (e.g. due to slow performance or subtle behavior).
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\values\colors.xml:3: Warning: The resource R.color.black appears to be unused [UnusedResources]
+    <color name="black">#FF000000</color>
+           ~~~~~~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\ic_launcher_background.xml:2: Warning: The resource R.drawable.ic_launcher_background appears to be unused [UnusedResources]
+<vector
+^
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\ic_launcher_foreground.xml:1: Warning: The resource R.drawable.ic_launcher_foreground appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\values\strings.xml:5: Warning: The resource R.string.splash appears to be unused [UnusedResources]
+    <string name="splash">userLog.ser</string>
+            ~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\mipmap-anydpi-v26\ic_launcher.xml:2: Warning: The application adaptive icon is missing a monochrome tag [MonochromeLauncherIcon]
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+^
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\mipmap-anydpi-v26\ic_launcher_round.xml:2: Warning: The application adaptive roundIcon is missing a monochrome tag [MonochromeLauncherIcon]
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+^
+
+   Explanation for issues of type "MonochromeLauncherIcon":
+   If android:roundIcon and android:icon are both in your manifest, you must
+   either remove the reference to android:roundIcon if it is not needed; or,
+   supply the monochrome icon in the drawable defined by the android:roundIcon
+   and android:icon attribute.
+
+   For example, if android:roundIcon and android:icon are both in the
+   manifest, a launcher might choose to use android:roundIcon over
+   android:icon to display the adaptive app icon. Therefore, your themed
+   application iconwill not show if your monochrome attribute is not also
+   specified in android:roundIcon.
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\be_partner.jpg: Warning: Found bitmap drawable res/drawable/be_partner.jpg in densityless folder [IconLocation]
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\product_explore.webp: Warning: Found bitmap drawable res/drawable/product_explore.webp in densityless folder [IconLocation]
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\splash.png: Warning: Found bitmap drawable res/drawable/splash.png in densityless folder [IconLocation]
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\tour_guide_booking.jpg: Warning: Found bitmap drawable res/drawable/tour_guide_booking.jpg in densityless folder [IconLocation]
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\drawable\vehicle_rental.jpg: Warning: Found bitmap drawable res/drawable/vehicle_rental.jpg in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\build.gradle.kts:61: Warning: Use version catalog instead [UseTomlInstead]
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\build.gradle.kts:62: Warning: Use version catalog instead [UseTomlInstead]
+    implementation("com.google.firebase:firebase-firestore")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseTomlInstead":
+   If your project is using a libs.versions.toml file, you should place all
+   Gradle dependencies in the TOML file. This lint check looks for version
+   declarations outside of the TOML file and suggests moving them (and in the
+   IDE, provides a quickfix to performing the operation automatically).
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\layout\activity_main.xml:40: Warning: Missing contentDescription attribute on image [ContentDescription]
+    <ImageView
+     ~~~~~~~~~
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\layout\intro_slider_item.xml:22: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+C:\Users\Sachira Jayawardana\Documents\AndroidStudioProjects\WanderEase2\app\src\main\res\layout\intro_slider_item.xml:37: Warning: Hardcoded string "TextView", should use @string resource [HardcodedText]
+            android:text="TextView"
+            ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 26 warnings

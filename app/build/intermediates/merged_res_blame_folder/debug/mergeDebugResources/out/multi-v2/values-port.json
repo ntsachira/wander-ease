@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.ironcodesoftware.wanderease.app-mergeDebugResources-49:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\caches\\8.10.2\\transforms\\c8a7b35965e60846872fe82b7a784c41\\transformed\\appcompat-1.7.0\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+[
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/font_londrina_sketch_regular.ttf.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/font/londrina_sketch_regular.ttf"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/layout_activity_splash.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_login_header_background.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/login_header_background.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_tour_guide_booking.jpg.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/tour_guide_booking.jpg"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_be_partner.jpg.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/be_partner.jpg"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_splash.png.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/splash.png"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_baseline_arrow_right.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/baseline_arrow_right.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/layout_intro_slider_item.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/layout/intro_slider_item.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_vehicle_rental.jpg.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/vehicle_rental.jpg"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/layout_activity_log_in.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/layout/activity_log_in.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/layout_activity_main.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_intro_gradient_background.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/intro_gradient_background.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_round_corners.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/round_corners.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/layout_activity_home.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/layout/activity_home.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/xml_data_extraction_rules.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/drawable_product_explore.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/drawable/product_explore.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/xml_backup_rules.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-release-36:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-37:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]

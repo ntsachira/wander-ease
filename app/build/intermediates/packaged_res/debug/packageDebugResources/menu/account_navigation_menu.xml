@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/account_orders"
+            android:icon="@drawable/ic_orders_box"
+            android:title="@string/account_menu_orders" />
+        <item
+            android:id="@+id/account_reviews"
+            android:icon="@drawable/ic_review_24"
+            android:title="@string/account_menu_reviews" />
+        <item
+            android:id="@+id/account_messages"
+            android:icon="@drawable/ic_messages"
+            android:title="@string/account_menu_messages" />
+        <item
+            android:id="@+id/account_help"
+            android:icon="@drawable/ic_help_center"
+            android:title="@string/account_menu_help" />
+    </group>
+</menu>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="incidents">
+
+    <incident
+        id="AndroidGradlePluginVersion"
+        severity="warning"
+        message="A newer version of com.android.application than 8.7.3 is available: 8.8.0">
+        <fix-replace
+            description="Change to 8.8.0"
+            family="Update versions"
+            oldString="8.7.3"
+            replacement="8.8.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/AndroidStudioProjects/WanderEase2/gradle/libs.versions.toml"
+            line="2"
+            column="7"
+            startOffset="17"
+            endLine="2"
+            endColumn="14"
+            endOffset="24"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.firebase:firebase-bom than 33.8.0 is available: 33.9.0">
+        <fix-replace
+            description="Change to 33.9.0"
+            family="Update versions"
+            oldString="33.8.0"
+            replacement="33.9.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="61"
+            column="20"
+            startOffset="1623"
+            endLine="61"
+            endColumn="71"
+            endOffset="1674"/>
+    </incident>
+
+    <incident
+        id="DiscouragedApi"
+        severity="warning"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
+            line="25"
+            column="13"
+            startOffset="964"
+            endLine="25"
+            endColumn="49"
+            endOffset="1000"/>
+    </incident>
+
+    <incident
+        id="DiscouragedApi"
+        severity="warning"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
+            line="35"
+            column="13"
+            startOffset="1401"
+            endLine="35"
+            endColumn="49"
+            endOffset="1437"/>
+    </incident>
+
+    <incident
+        id="MonochromeLauncherIcon"
+        severity="warning"
+        message="The application adaptive icon is missing a monochrome tag">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/mipmap-anydpi-v26/ic_launcher.xml"
+            line="2"
+            column="1"
+            startOffset="40"
+            endLine="5"
+            endColumn="17"
+            endOffset="269"/>
+    </incident>
+
+    <incident
+        id="MonochromeLauncherIcon"
+        severity="warning"
+        message="The application adaptive roundIcon is missing a monochrome tag">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/mipmap-anydpi-v26/ic_launcher_round.xml"
+            line="2"
+            column="1"
+            startOffset="40"
+            endLine="5"
+            endColumn="17"
+            endOffset="269"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/be_partner.jpg` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/be_partner.jpg"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/product_explore.webp` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/product_explore.webp"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/splash.png` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/splash.png"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/tour_guide_booking.jpg` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/tour_guide_booking.jpg"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/vehicle_rental.jpg` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/vehicle_rental.jpg"/>
+    </incident>
+
+    <incident
+        id="UseTomlInstead"
+        severity="warning"
+        message="Use version catalog instead">
+        <fix-composite
+            description="Replace with new library catalog declaration for google-firebase-bom"
+            robot="true">
+            <fix-replace
+                description="Replace with firebaseBomVersion = &quot;33.8.0&quot;..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="firebaseBomVersion = &quot;33.8.0&quot;&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/Documents/AndroidStudioProjects/WanderEase2/gradle/libs.versions.toml"
+                    startOffset="25"
+                    endOffset="25"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with google-firebase-bom = { module = &quot;com.google.firebase:firebase-bom&quot;, version.ref = &quot;firebaseBomVersion&quot; }..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="google-firebase-bom = { module = &quot;com.google.firebase:firebase-bom&quot;, version.ref = &quot;firebaseBomVersion&quot; }&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/Documents/AndroidStudioProjects/WanderEase2/gradle/libs.versions.toml"
+                    startOffset="214"
+                    endOffset="214"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with libs.google.firebase.bom"
+                robot="true"
+                replacement="libs.google.firebase.bom"
+                priority="0">
+                <range
+                    file="${:app*projectDir}/build.gradle.kts"
+                    startOffset="1623"
+                    endOffset="1674"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="61"
+            column="20"
+            startOffset="1623"
+            endLine="61"
+            endColumn="71"
+            endOffset="1674"/>
+    </incident>
+
+    <incident
+        id="UseTomlInstead"
+        severity="warning"
+        message="Use version catalog instead">
+        <fix-composite
+            description="Replace with new library catalog declaration for google-firebase-firestore"
+            robot="true">
+            <fix-replace
+                description="Replace with google-firebase-firestore = { module = &quot;com.google.firebase:firebase-firestore&quot; }..."
+                robot="true"
+                oldString="_lint_insert_begin_"
+                replacement="google-firebase-firestore = { module = &quot;com.google.firebase:firebase-firestore&quot; }&#xA;"
+                priority="0">
+                <range
+                    file="$HOME/Documents/AndroidStudioProjects/WanderEase2/gradle/libs.versions.toml"
+                    startOffset="214"
+                    endOffset="214"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with libs.google.firebase.firestore"
+                robot="true"
+                replacement="libs.google.firebase.firestore"
+                priority="0">
+                <range
+                    file="${:app*projectDir}/build.gradle.kts"
+                    startOffset="1695"
+                    endOffset="1735"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="62"
+            column="20"
+            startOffset="1695"
+            endLine="62"
+            endColumn="60"
+            endOffset="1735"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="40"
+            column="6"
+            startOffset="1525"
+            endLine="40"
+            endColumn="15"
+            endOffset="1534"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/intro_slider_item.xml"
+            line="22"
+            column="10"
+            startOffset="924"
+            endLine="22"
+            endColumn="19"
+            endOffset="933"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;TextView&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/intro_slider_item.xml"
+            line="37"
+            column="13"
+            startOffset="1563"
+            endLine="37"
+            endColumn="36"
+            endOffset="1586"/>
+    </incident>
+
+</incidents>

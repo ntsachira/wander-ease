@@ -1,0 +1,722 @@
+[
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_home.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_edit_square.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_edit_square.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_pick_pin.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\pick_pin.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_splash.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_splash.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_settings_gear_options_icon.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\settings_gear_options_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_partner_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\partner_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_messages.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_messages.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_saved.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_saved.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_dashboard_card_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\dashboard_card_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_keyboard_arrow_left_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_keyboard_arrow_left_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_home_maps_location_placeholder_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\home_maps_location_placeholder_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_completed_orders.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_completed_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_whatsapp_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\whatsapp_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_settings.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_cart_item_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\cart_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_menu_icon.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\menu_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_pin_navigation_marker_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\pin_navigation_marker_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_account_navigation_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\account_navigation_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_keyboard_arrow_right_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_keyboard_arrow_right_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_search_icon.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\search_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_order_product_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\order_product_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_image_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\image_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_menu_icon_black.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\menu_icon_black.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_vehicle_new.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_vehicle_new.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_log_in.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_log_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_user_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\user_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_watchlist_item_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\watchlist_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_cart.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_location.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\location.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_product_explore.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\product_explore.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_delivery_active.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_delivery_active.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_booking_item_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\booking_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_analytics.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_analytics.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_login.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_vehicle_rental.jpg.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\vehicle_rental.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_product_not_found.jpeg.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\product_not_found.jpeg"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_people_alt_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_people_alt_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_pending_actions_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_pending_actions_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_circle_notifications.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_circle_notifications.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_admin.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_rental.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_rental.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_loading_dialog.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\loading_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_product.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_product.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_round_coner_padding_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\round_coner_padding_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_single_product.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_single_product.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\anim_load_rotate.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\anim\\load_rotate.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\anim_slide_down.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\anim\\slide_down.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_notifications_none_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_notifications_none_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_product_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\product_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_completed_order_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\completed_order_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_cog_icon.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\cog_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_alternate_email_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_alternate_email_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_login_header_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\login_header_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_empty_image.jpg.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\empty_image.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_spinner_popup_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\spinner_popup_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_search.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_checkout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_checkout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_single_spinner_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\single_spinner_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_policies.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_policies.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_chevron_right_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_chevron_right_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\font_londrina_sketch_regular.ttf.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\font\\londrina_sketch_regular.ttf"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_saved.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_saved.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_my_orders.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_my_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_partner_toolbar_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\partner_toolbar_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_message_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\message_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_box_empty_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\box_empty_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_booking.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_booking.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_spinner_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\spinner_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_partner_product_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\partner_product_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_product_list.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_product_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_alert_bell_notification.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\alert_bell_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.ironcodesoftware.wanderease.app-debug-51:/layout_watchlist_item_layout.xml.flat",
+        "source": "com.ironcodesoftware.wanderease.app-main-53:/layout/watchlist_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_admin_navigation_header.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\admin_navigation_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_vehicle_item_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\vehicle_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_message.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_sign_up.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_guide_list.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_guide_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_be_partner.jpg.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\be_partner.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_cart_icon_bordered.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\cart_icon_bordered.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_dashboard.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_product_review.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_product_review.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_delivery.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_delivery.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_admin_navigation_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\admin_navigation_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_tour_guide_card_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\tour_guide_card_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_to_assign.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_to_assign.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_tour_guide.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_tour_guide.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_arrow_right.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_arrow_right.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_account_navigation_header.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\account_navigation_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_explore.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_explore.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_product_confirmation.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_product_confirmation.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_service.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_service.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_error.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_error.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_delivery_new_task.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_delivery_new_task.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_arrow_drop_down_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_arrow_drop_down_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_account.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_account.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_user_management.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_user_management.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_home_bottom_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\home_bottom_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_product.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_product.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_category.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_payment_success.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_payment_success.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_help.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_help.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_delivery_location.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_delivery_location.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\anim_load_blink.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\anim\\load_blink.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_partner_navigation_header.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\partner_navigation_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_rounded_border_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\rounded_border_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_product_card_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\product_card_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_round_corners.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\round_corners.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_profile_card_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\profile_card_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_delivery_dining_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_delivery_dining_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_delivery_bottom_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\delivery_bottom_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_intro_slider_item.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\intro_slider_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_order.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_order.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_partner.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_partner.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_favorite_border.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_favorite_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_analytics_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_analytics_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_user.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_intro_gradient_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\intro_gradient_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_avatar_default_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\avatar_default_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_delivery_completed_task.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_delivery_completed_task.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_attach_money_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_attach_money_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_baseline_dehaze_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\baseline_dehaze_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_vehicle_rental.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_vehicle_rental.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_messages.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_messages.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_single_vehicle.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_single_vehicle.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_orders_box.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_orders_box.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_booking.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_booking.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_review_24.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_review_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_female_person_icon.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\female_person_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_vehicle_booking_dialog_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\vehicle_booking_dialog_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_to_receive.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_to_receive.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_dashboard.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_dashboard.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_delivery_task_view.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_delivery_task_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_info_circle_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\info_circle_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_tour_guide_booking.jpg.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\tour_guide_booking.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_tree.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\tree.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_help.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_help.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_help_center.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_help_center.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_spinner.gif.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\spinner.gif"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_warning_shield_icon.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\warning_shield_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_completed_orders.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_completed_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout-land_activity_single_product.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout-land\\activity_single_product.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_new_courier.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_new_courier.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_car_rental.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_car_rental.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_delivery_management.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_delivery_management.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_admin_delivery_completed.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_admin_delivery_completed.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_to_review.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_to_review.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_new_orders.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_new_orders.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_background_simple.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\background_simple.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_guide_new.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_guide_new.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_admin_settings.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_admin_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_guide.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_guide.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\menu_parner_services_bottom_menu.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\menu\\parner_services_bottom_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_product_quantity_update_dialog_layout.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\product_quantity_update_dialog_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_product_tab.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_product_tab.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_ic_account.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\ic_account.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\drawable_splash.png.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\drawable\\splash.png"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-debug-51:\\layout_fragment_partner_vehicles_list.xml.flat",
+        "source": "C:\\Users\\Sachira Jayawardana\\.gradle\\daemon\\8.10.2\\com.ironcodesoftware.wanderease.app-main-53:\\layout\\fragment_partner_vehicles_list.xml"
+    }
+]

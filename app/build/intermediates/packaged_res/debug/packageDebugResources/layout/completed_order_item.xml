@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/background_simple"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/completed_order_status_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="order status"
+        android:textAlignment="textEnd"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/completed_order_orderID_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/completed_order_item_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completed_order_status_textView" />
+
+    <TextView
+        android:id="@+id/completed_order_Item_count_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="total items"
+        app:layout_constraintEnd_toStartOf="@+id/completed_order_total_amount_textView"
+        app:layout_constraintTop_toBottomOf="@+id/completed_order_item_recyclerView" />
+
+    <TextView
+        android:id="@+id/completed_order_total_amount_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="total amount"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completed_order_item_recyclerView" />
+
+    <TextView
+        android:id="@+id/completed_order_orderID_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="order Id"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/completed_order_status_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/my_order_item_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="text"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completed_order_item_recyclerView"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="partial_results">
+    <map id="UnsafeIntentLaunch">
+            <map id="unprotected">
+                <entry
+                    name="com.ironcodesoftware.wanderease.SplashActivity"
+                    boolean="true"/>
+            </map>
+    </map>
+    <map id="UnusedResources">
+        <location id="R.color.black"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
+            line="3"
+            column="12"
+            startOffset="62"
+            endLine="3"
+            endColumn="24"
+            endOffset="74"/>
+        <location id="R.drawable.ic_launcher_background"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_launcher_background.xml"
+            line="2"
+            column="1"
+            startOffset="40"
+            endLine="74"
+            endColumn="10"
+            endOffset="4939"/>
+        <location id="R.drawable.ic_launcher_foreground"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_launcher_foreground.xml"
+            line="1"
+            column="1"
+            startOffset="0"
+            endLine="30"
+            endColumn="10"
+            endOffset="1702"/>
+        <location id="R.string.splash"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="5"
+            column="13"
+            startOffset="194"
+            endLine="5"
+            endColumn="26"
+            endOffset="207"/>
+        <entry
+            name="model"
+            string="color[primary(U),white(U),ic_launcher_background(U),black(D),highlight(U)],drawable[baseline_arrow_right(U),be_partner(U),ic_launcher_background(D),ic_launcher_foreground(D),ic_launcher_foreground_1(E),intro_gradient_background(U),login_header_background(U),product_explore(U),round_corners(U),splash(U),tour_guide_booking(U),vehicle_rental(U)],font[londrina_sketch_regular(R)],id[main(U),textView3(D),textView(U),textView2(U),imageView2(U),main_viewPager(U),main_button_next(U),main_button_getStarted(U),intro_slide_imageView(U),intro_slider_textView(U)],layout[activity_home(U),activity_log_in(U),activity_main(U),activity_splash(U),intro_slider_item(U)],mipmap[ic_launcher(U),ic_launcher_round(U),ic_launcher_foreground(U)],string[app_name(U),main_subtext(U),main_next(U),main_getStarted(U),app_package(U),user_log(U),splash(D),main_returningUser(U),main_explore_products(U),main_rent_vehicles(U),main_book_guides(U),main_be_partner(U)],style[Theme_WanderEase(U),Theme_WanderEase_Splash(U),Base_Theme_WanderEase(U),Theme_Material3_Light_NoActionBar(R)],xml[data_extraction_rules(U),backup_rules(U)];8^9,a^0,b^0,1d^b^11^24^1,1e^11^24^0^25^16^14^23^15^26^5^27,20^d^c^a^1,21^2^23,22^2^23,30^32,31^33^e,32^33^0^4;;;"/>
+    </map>
+
+</incidents>

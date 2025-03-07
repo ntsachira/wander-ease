@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="highlight">#59009688</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="primary">#009688</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">Wander Ease</string>
+    <string name="app_package">com.ironcodesoftware.wanderease</string>
+    <string name="gcm_defaultSenderId" translatable="false">854580460667</string>
+    <string name="google_api_key" translatable="false">AIzaSyCZlwwfnoYRJ1enGSZn7zAW-JHRbaevTqs</string>
+    <string name="google_app_id" translatable="false">1:854580460667:android:8321dc3234460faa1836de</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCZlwwfnoYRJ1enGSZn7zAW-JHRbaevTqs</string>
+    <string name="google_storage_bucket" translatable="false">app-25-f721f.firebasestorage.app</string>
+    <string name="main_be_partner">Join Our Partner Program</string>
+    <string name="main_book_guides">Plan Your Travels with Tour Guides</string>
+    <string name="main_explore_products">Explore Your Favourite Shopping Items in the South of Sri Lanka</string>
+    <string name="main_getStarted">Get Started</string>
+    <string name="main_next">Next</string>
+    <string name="main_rent_vehicles">Rent Vehicles for Easy Travels</string>
+    <string name="main_returningUser">ReturningUser</string>
+    <string name="main_subtext">Enhance your travelling Experience in Sri Lanka</string>
+    <string name="project_id" translatable="false">app-25-f721f</string>
+    <string name="splash">userLog.ser</string>
+    <string name="user_log">userLog.ser</string>
+    <style name="Base.Theme.WanderEase" parent="Theme.Material3.Light.NoActionBar">
+        
+         <item name="colorPrimary">@color/primary</item> 
+         <item name="colorSecondary">@color/primary</item> 
+         <item name="android:textColorHighlight">@color/highlight</item>
+    </style>
+    <style name="Theme.WanderEase" parent="Base.Theme.WanderEase"/>
+    <style name="Theme.WanderEase.Splash" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+</resources>
